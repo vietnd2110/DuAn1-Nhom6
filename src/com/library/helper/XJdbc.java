@@ -11,7 +11,7 @@ public class XJdbc {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTV";
     private static String user = "sa";
-    private static String pass = "quang";
+    private static String pass = "songlong";
     
     static {
         try {
