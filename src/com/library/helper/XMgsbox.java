@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author LENOVO
  */
-public class XMsgbox {
+public class XMgsbox {
     public static void alert(Component parent, String message) {
         JOptionPane.showMessageDialog(parent, message,
                 "Thư Viện Đại Học Hà Nội - Hanoi University Library", JOptionPane.INFORMATION_MESSAGE);
