@@ -5,7 +5,7 @@
  */
 package com.library.helper;
 
-import Xhelper.XMgsbox;
+import com.library.helper.XMsgbox;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import java.text.ParseException;
@@ -31,7 +31,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải có 1-20 kí tự\nchữ hoa, thường không dấu hoặc số.");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải có 1-20 kí tự\nchữ hoa, thường không dấu hoặc số.");
             return false;
         }
     }
@@ -48,7 +48,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải có đúng 7 kí tự\nchữ thường, chữ hoa hoặc số");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải có đúng 7 kí tự\nchữ thường, chữ hoa hoặc số");
             return false;
         }
     }
@@ -61,7 +61,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải có từ 3-16 kí tự.");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải có từ 3-16 kí tự.");
             return false;
         }
     }
@@ -106,7 +106,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng dd/MM/yyyy");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng dd/MM/yyyy");
             return false;
         }
     }
@@ -121,7 +121,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải là tên tiếng việt hoặc không đấu\ntừ 3-25 kí tự");
             return false;
         }
     }
@@ -136,7 +136,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải từ 3-255 kí tự.");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải từ 3-255 kí tự.");
             return false;
         }
     }
@@ -151,7 +151,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " phải gồm 10 số\nđúng các đầu số của nhà mạng.");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " phải gồm 10 số\nđúng các đầu số của nhà mạng.");
             return false;
         }
     }
@@ -164,7 +164,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng");
+            XMsgbox.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng");
             return false;
         }
     }
@@ -176,7 +176,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            XMsgbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
@@ -187,7 +187,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            XMsgbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
@@ -198,7 +198,7 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
+            XMsgbox.alert(txt.getRootPane(), "Không được để trống " + txt.getName());
             return false;
         }
     }
