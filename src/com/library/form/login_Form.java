@@ -1,12 +1,77 @@
 package com.library.form;
+
+import com.library.dao.KhachHangDAO;
+import com.library.dao.NhanVienDAO;
+import com.library.entity.KhachHang;
+import com.library.entity.NhanVien;
+import com.library.helper.XAuther;
+import com.library.helper.XImages;
+import com.library.helper.XMgsbox;
+import static java.awt.Color.red;
+import static java.awt.Color.white;
+import javax.swing.JOptionPane;
+
 public class login_Form extends javax.swing.JFrame {
+
+    NhanVienDAO dao = new NhanVienDAO();
+    KhachHangDAO daoKH = new KhachHangDAO();
 
     public login_Form() {
         initComponents();
-        setLocationRelativeTo(null);
+        init();
     }
 
- 
+    void init() {
+        setIconImage(XImages.getAppIcon());
+        setLocationRelativeTo(null);
+        setTitle("Thư Viện Đại Học Hà Nội - Hanoi University Library");
+    }
+
+    void login() {
+        String manv = txtMaTK.getText();
+        String matKhau = new String(txtMatKhau.getPassword());
+        try {
+            NhanVien user = dao.selectByID(manv);
+            KhachHang user2 = daoKH.selectByID(manv);
+            if (user != null) {    //nếu manv đúng
+                String matKhau2 = user.getMatKhau();
+                boolean trangThai = user.getTrangThai();
+                if (matKhau.equals(matKhau2)) {  //nếu mật khẩu đúng
+                    if (trangThai == false) { // check trạng thái tài khoản
+                        XMgsbox.alert(this, "Tài khoản này đã bị khóa");
+                    } else {
+                        XAuther.USER = user;
+                        XMgsbox.alert(this, "Đăng nhập thành công!");
+//                        main_form_QL mainQL = new main_form_QL();
+//                        mainQL.setVisible(true);
+//                        this.dispose();
+                    }
+                } else {
+                    XMgsbox.alert(this, "Sai mật khẩu!");
+                }
+            } else if (user2 != null) {    //nếu maKH đúng
+                String matKhau3 = user2.getMatKhau();
+                boolean trangThai2 = user2.getTrangThai();
+                if (matKhau.equals(matKhau3)) {  //nếu mật khẩu đúng
+                    if (trangThai2 == false) { // check trạng thái tài khoản
+                        XMgsbox.alert(this, "Tài khoản này đã bị khóa");
+                    } else {
+                        XAuther.UserKH = user2;
+                        XMgsbox.alert(this, "Đăng nhập thành công!");
+//                        main_form_KH mainKH = new main_form_KH();
+//                        mainKH.setVisible(true);
+//                        this.dispose();
+                    }
+                } else {
+                    XMgsbox.alert(this, "Sai mật khẩu!");
+                }
+            } else {
+                XMgsbox.alert(this, "Sai tên đăng nhập!");
+            }
+        } catch (Exception e) {
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -131,11 +196,26 @@ public class login_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-    
+        txtMaTK.setBackground(white);
+        txtMatKhau.setBackground(white);
+        if (txtMaTK.getText().trim().length() > 0) {
+            if (txtMatKhau.getPassword().length > 0) {
+                this.login();
+            } else {
+                txtMatKhau.setBackground(red);
+                XMgsbox.alert(this, "Không được để trống mật khẩu");
+            }
+        } else {
+            txtMaTK.setBackground(red);
+            XMgsbox.alert(this, "Không được để trống tên đăng nhập");
+        }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
-
+        int q = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không ?", "Thoát", JOptionPane.YES_NO_OPTION);
+        if (q == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
