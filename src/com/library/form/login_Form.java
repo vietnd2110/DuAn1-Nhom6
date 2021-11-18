@@ -42,9 +42,9 @@ public class login_Form extends javax.swing.JFrame {
                     } else {
                         XAuther.USER = user;
                         XMgsbox.alert(this, "Đăng nhập thành công!");
-//                        main_form_QL mainQL = new main_form_QL();
-//                        mainQL.setVisible(true);
-//                        this.dispose();
+                        main_form_QL mainQL = new main_form_QL();
+                        mainQL.setVisible(true);
+                        this.dispose();
                     }
                 } else {
                     XMgsbox.alert(this, "Sai mật khẩu!");
@@ -58,9 +58,9 @@ public class login_Form extends javax.swing.JFrame {
                     } else {
                         XAuther.UserKH = user2;
                         XMgsbox.alert(this, "Đăng nhập thành công!");
-//                        main_form_KH mainKH = new main_form_KH();
-//                        mainKH.setVisible(true);
-//                        this.dispose();
+                        main_form_KH mainKH = new main_form_KH();
+                        mainKH.setVisible(true);
+                        this.dispose();
                     }
                 } else {
                     XMgsbox.alert(this, "Sai mật khẩu!");
