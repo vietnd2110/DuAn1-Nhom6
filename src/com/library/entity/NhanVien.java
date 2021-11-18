@@ -26,6 +26,10 @@ public class NhanVien {
     public NhanVien() {
     }
 
+    public NhanVien(String maNV) {
+        this.maNV = maNV;
+    }
+    
     public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, Date ngaySinh, String Sdt, String email, String diaChi, String vaiTro, boolean trangThai) {
         this.maNV = maNV;
         this.tenNV = tenNV;
