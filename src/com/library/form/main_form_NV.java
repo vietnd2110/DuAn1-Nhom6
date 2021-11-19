@@ -7,7 +7,7 @@ package com.library.form;
 
 import com.library.helper.XCheck;
 import com.library.helper.XDate;
-import com.library.helper.XMsgbox;
+import com.library.helper.XMgsbox;
 import com.library.helper.XImages;
 import com.library.dao.NhanVienDAO;
 import com.library.entity.NhanVien;
@@ -61,7 +61,7 @@ public class main_form_NV extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            XMsgbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -100,7 +100,7 @@ public class main_form_NV extends javax.swing.JFrame {
             return true;
         } else {
             txt.setBackground(pink);
-            XMsgbox.alert(this, txt.getName() + " đã tồn tại.");
+            XMgsbox.alert(this, txt.getName() + " đã tồn tại.");
             return false;
         }
     }
@@ -132,7 +132,7 @@ public class main_form_NV extends javax.swing.JFrame {
                 this.setForm(nv);   //điền thông tin dt nhanVien lên form
             }
         } catch (Exception e) {
-            XMsgbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -145,9 +145,9 @@ public class main_form_NV extends javax.swing.JFrame {
             dao.insert(nv);
             this.fillToTable();    //cập nhật lại bảng nv
             this.clear();   // xóa trắng form
-            XMsgbox.alert(this, "Thêm mới thành công!");
+            XMgsbox.alert(this, "Thêm mới thành công!");
         } catch (Exception e) {
-            XMsgbox.alert(this, "Thêm mới thất bại!");
+            XMgsbox.alert(this, "Thêm mới thất bại!");
         }
     }
 
@@ -159,9 +159,9 @@ public class main_form_NV extends javax.swing.JFrame {
             dao.update(nv);     //cập nhật nhân viên theo maNV
             this.fillToTable(); //điền tt mới vào bảng
             this.clear();
-            XMsgbox.alert(this, "Cập nhật thành công!");
+            XMgsbox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
-            XMsgbox.alert(this, "Cập nhật thất bại!");
+            XMgsbox.alert(this, "Cập nhật thất bại!");
         }
     }
 

@@ -8,10 +8,10 @@ package com.library.helper;
 import java.sql.*;
 
 public class XJdbc {
-    private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTV";
-    private static String user = "sa";
-    private static String pass = "songlong";
+    private static String driver = "com.mysql.jdbc.Driver";
+    private static String url = "jdbc:mysql://localhost:3306/qltv";
+    private static String user = "root";
+    private static String pass = "130602";
     
     static {
         try {
