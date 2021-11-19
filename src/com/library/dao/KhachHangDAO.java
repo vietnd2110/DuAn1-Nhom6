@@ -22,6 +22,7 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
     final String update_SQL = "update KhachHang set tenKH = ?, matKhau = ?, gioiTinh = ?, NgaySinh = ?, SDT = ?, email = ?, diaChi = ?, maNV = ?, trangThai = ? where maKH = ?";
     final String select_All_SQL = "select * from KhachHang";
     final String select_ByID_SQL = "select * from KhachHang where maKH = ?";
+    final String select_BySdt = "select * from KhachHang where SDT = ?";
 
     @Override
     public void insert(KhachHang entity) {
@@ -74,4 +75,15 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
         }
         return listKH;
     } 
+    public List<KhachHang> selectByMakh(String key){
+        return selectBySQL(select_ByID_SQL, key);
+    }
+    
+    public KhachHang selectBySdt(String key){
+        List<KhachHang> list = selectBySQL(select_BySdt, key);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
 }
