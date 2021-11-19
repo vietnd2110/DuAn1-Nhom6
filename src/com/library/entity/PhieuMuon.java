@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class PhieuMuon {
-   private String maPm;
+   private int maPm;
    private KhachHang kh;
    private NhanVien nv;
    private Date ngayMuon;
@@ -16,11 +16,11 @@ public class PhieuMuon {
     public PhieuMuon() {
     }
 
-    public PhieuMuon(String maPm) {
+    public PhieuMuon(int maPm) {
         this.maPm = maPm;
     }
 
-    public PhieuMuon(String maPm, KhachHang kh, NhanVien nv, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai) {
+    public PhieuMuon(int maPm, KhachHang kh, NhanVien nv, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai) {
         this.maPm = maPm;
         this.kh = kh;
         this.nv = nv;
@@ -30,11 +30,11 @@ public class PhieuMuon {
         this.trangThai = trangThai;
     }
 
-    public String getMaPm() {
+    public int getMaPm() {
         return maPm;
     }
 
-    public void setMaPm(String maPm) {
+    public void setMaPm(int maPm) {
         this.maPm = maPm;
     }
 
@@ -85,7 +85,4 @@ public class PhieuMuon {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-   
-   
-    
 }
