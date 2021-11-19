@@ -13,7 +13,6 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, String>{
 
     final String INSERT_SQL="insert into CTPHIEUMUON values(?,?,?,?,?)";
     final String UPDATE_SQL="update CTPHIEUMUON set MASACH=?,TINHTRANGSACH=?,TIENPHAT=?,NGAYTHUCTRA=? where MAPM=?";
-    final String DELETE_SQL="delete from CTPHIEUMUON where MAPM=?"; 
     final String SELECT_ALL_SQL="select *from CTPHIEUMUON";
     final String SELECT_BY_ID_SQL="select *from CTPHIEUMUON where MAPM=?"; 
     
@@ -52,7 +51,7 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, String>{
             ResultSet rs=XJdbc.query(sql, args);
             while (rs.next()) {                
                 CTPhieuMuon c=new CTPhieuMuon();
-                c.setPm(new PhieuMuon(rs.getString(1)));
+                c.setPm(new PhieuMuon(rs.getInt(1)));
                 c.setMaSach(rs.getString(2));
                 c.setTinhTrangSach(rs.getString(3));
                 c.setTienPhat(rs.getFloat(4));
