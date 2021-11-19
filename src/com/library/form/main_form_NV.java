@@ -7,12 +7,14 @@ package com.library.form;
 
 import com.library.helper.XCheck;
 import com.library.helper.XDate;
-import com.library.helper.XMsgbox;
+import com.library.helper.XMgsbox;
 import com.library.helper.XImages;
 import com.library.dao.NhanVienDAO;
+import com.library.entity.KhachHang;
 import com.library.entity.NhanVien;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -20,8 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class main_form_NV extends javax.swing.JFrame {
 
     DefaultTableModel mol = new DefaultTableModel();
-    NhanVienDAO dao = new NhanVienDAO();
+    NhanVienDAO dao;
     int index;
+    NhanVien nv;
 
     public main_form_NV() {
         initComponents();
@@ -38,6 +41,9 @@ public class main_form_NV extends javax.swing.JFrame {
         setIconImage(XImages.getAppIcon());
         setLocationRelativeTo(null);
         setTitle("Thư Viện Đại Học Hà Nội - Hanoi University Library");
+        dao = new NhanVienDAO();
+        nv = new NhanVien();
+        fillToTable();
     }
 
     void fillToTable() {
@@ -61,7 +67,7 @@ public class main_form_NV extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            XMsgbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -100,7 +106,7 @@ public class main_form_NV extends javax.swing.JFrame {
             return true;
         } else {
             txt.setBackground(pink);
-            XMsgbox.alert(this, txt.getName() + " đã tồn tại.");
+            XMgsbox.alert(this, txt.getName() + " đã tồn tại.");
             return false;
         }
     }
@@ -132,7 +138,7 @@ public class main_form_NV extends javax.swing.JFrame {
                 this.setForm(nv);   //điền thông tin dt nhanVien lên form
             }
         } catch (Exception e) {
-            XMsgbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -145,9 +151,9 @@ public class main_form_NV extends javax.swing.JFrame {
             dao.insert(nv);
             this.fillToTable();    //cập nhật lại bảng nv
             this.clear();   // xóa trắng form
-            XMsgbox.alert(this, "Thêm mới thành công!");
+            XMgsbox.alert(this, "Thêm mới thành công!");
         } catch (Exception e) {
-            XMsgbox.alert(this, "Thêm mới thất bại!");
+            XMgsbox.alert(this, "Thêm mới thất bại!");
         }
     }
 
@@ -159,9 +165,9 @@ public class main_form_NV extends javax.swing.JFrame {
             dao.update(nv);     //cập nhật nhân viên theo maNV
             this.fillToTable(); //điền tt mới vào bảng
             this.clear();
-            XMsgbox.alert(this, "Cập nhật thành công!");
+            XMgsbox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
-            XMsgbox.alert(this, "Cập nhật thất bại!");
+            XMgsbox.alert(this, "Cập nhật thất bại!");
         }
     }
 
@@ -547,9 +553,9 @@ public class main_form_NV extends javax.swing.JFrame {
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
         this.index = tblNhanVien.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
-            if (this.index >= 0) {
-                this.edit();
-            }
+        if (this.index >= 0) {
+            this.edit();
+        }
     }//GEN-LAST:event_tblNhanVienMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -559,7 +565,14 @@ public class main_form_NV extends javax.swing.JFrame {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        
+        String timkiem = txtTimKiem.getText();
+        NhanVien nv = dao.selectByID(timkiem);
+        if (nv != null) {
+            setForm(nv);
+            XMgsbox.alert(this, "Đã tìm thấy");
+        } else if (nv == null) {
+            XMgsbox.alert(this, "Không có nhân viên bạn cần tìm");
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
