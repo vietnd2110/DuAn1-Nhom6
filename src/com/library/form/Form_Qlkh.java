@@ -542,7 +542,7 @@ public class Form_Qlkh extends javax.swing.JFrame {
             loadTableTk();
             txtTimKiem.setText("");
         } else {
-            XMgsbox.alert(this, "Mã khách cần tìm không có !");
+            XMgsbox.alert(this, "Mã khách cần tìm không có ");
              txtTimKiem.setText("");
         }
     }//GEN-LAST:event_btntimKiemActionPerformed
