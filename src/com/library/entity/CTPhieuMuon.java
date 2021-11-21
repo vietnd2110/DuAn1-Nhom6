@@ -4,7 +4,7 @@ package com.library.entity;
 import java.util.Date;
 
 public class CTPhieuMuon {
-    private PhieuMuon pm;
+    private int maPM;
     private String maSach;
     private Date ngayThucTra;
     private float tienPhat;
@@ -14,22 +14,22 @@ public class CTPhieuMuon {
     public CTPhieuMuon() {
     }
 
-    public CTPhieuMuon(PhieuMuon pm, String maSach, Date ngayThucTra, String tinhTrangSach, float tienPhat) {
-        this.pm = pm;
+    public CTPhieuMuon(int maPM, String maSach, Date ngayThucTra, float tienPhat, String tinhTrangSach) {
+        this.maPM = maPM;
         this.maSach = maSach;
         this.ngayThucTra = ngayThucTra;
-        this.tinhTrangSach = tinhTrangSach;
         this.tienPhat = tienPhat;
+        this.tinhTrangSach = tinhTrangSach;
     }
 
-    public PhieuMuon getPm() {
-        return pm;
+    public int getMaPM() {
+        return maPM;
     }
 
-    public void setPm(PhieuMuon pm) {
-        this.pm = pm;
+    public void setMaPM(int maPM) {
+        this.maPM = maPM;
     }
-
+    
     public String getMaSach() {
         return maSach;
     }

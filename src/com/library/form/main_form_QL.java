@@ -5,9 +5,9 @@
  */
 package com.library.form;
 
-
 import com.library.helper.XAuther;
 import com.library.helper.XImages;
+import com.library.helper.XMgsbox;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 public class main_form_QL extends javax.swing.JFrame {
-
 
     public main_form_QL() {
         initComponents();
@@ -356,7 +354,12 @@ public class main_form_QL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu1ActionPerformed
-
+        if (XAuther.isManager()) {
+            main_form_QLNV nv = new main_form_QLNV();
+            nv.setVisible(true);
+        } else {
+            XMgsbox.alert(this, "Bạn không có quyền vào mục này!");
+        }
     }//GEN-LAST:event_mnu1ActionPerformed
 
     private void mniDoiMkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMkActionPerformed
@@ -380,32 +383,37 @@ public class main_form_QL extends javax.swing.JFrame {
         int y = JOptionPane.showConfirmDialog(
                 this, "Bạn có muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
 
-        if (y == JOptionPane.YES_OPTION) {
-            this.dispose();
+        if (y == JOptionPane.YES_OPTION) {           
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
             login_Form l = new login_Form();
             l.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void mnu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu2ActionPerformed
-
+        form_Qlkh kh = new form_Qlkh();
+        kh.setVisible(true);
     }//GEN-LAST:event_mnu2ActionPerformed
 
     private void mniPmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPmActionPerformed
-
+        ql_muonTraSach_form qlmt = new ql_muonTraSach_form();
+        qlmt.setVisible(true);
     }//GEN-LAST:event_mniPmActionPerformed
 
     private void mniSachTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachTaiLieuActionPerformed
-
+        ql_sach_tai_lieu qlS = new ql_sach_tai_lieu();
+        qlS.setVisible(true);
     }//GEN-LAST:event_mniSachTaiLieuActionPerformed
 
     private void btnSachTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachTaiLieuActionPerformed
-
+        ql_sach_tai_lieu qlS = new ql_sach_tai_lieu();
+        qlS.setVisible(true);
     }//GEN-LAST:event_btnSachTaiLieuActionPerformed
 
     private void btnMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuonTraSachActionPerformed
-
+        ql_muonTraSach_form qlmt = new ql_muonTraSach_form();
+        qlmt.setVisible(true);
     }//GEN-LAST:event_btnMuonTraSachActionPerformed
 
     private void mniThongKeMuonTsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongKeMuonTsActionPerformed
@@ -439,13 +447,17 @@ public class main_form_QL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_form_QL.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_form_QL.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_form_QL.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(main_form_QL.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

@@ -288,11 +288,11 @@ public class main_form_KH extends javax.swing.JFrame {
         int y = JOptionPane.showConfirmDialog(
                 this, "Bạn có muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
 
-        if (y == JOptionPane.YES_OPTION) {
-            this.dispose();
+        if (y == JOptionPane.YES_OPTION) {          
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
             login_Form l = new login_Form();
             l.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_mniDxActionPerformed
 
