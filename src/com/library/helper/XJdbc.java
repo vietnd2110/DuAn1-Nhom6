@@ -6,6 +6,8 @@
 package com.library.helper;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class XJdbc {
     private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -19,6 +21,17 @@ public class XJdbc {
         } catch (Exception e) {
             
         }    
+    }
+    
+    public static Connection getConnection() {
+        try {
+            Class.forName(driver);
+            String dbUrl = url;
+            return DriverManager.getConnection(dbUrl,user,pass);
+        } catch (Exception ex) {
+            Logger.getLogger(XJdbc.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
     public static PreparedStatement getStm(String sql, Object... args) throws SQLException {

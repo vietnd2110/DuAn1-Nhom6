@@ -6,28 +6,26 @@ import java.util.Date;
 
 public class PhieuMuon {
    private int maPm;
-   private KhachHang kh;
-   private NhanVien nv;
+   private String maKH;
+   private String maNV;
    private Date ngayMuon;
    private Date ngayTra;
    private float soTienCoc;
    private String trangThai;
+   private int soLuongMuon;
 
     public PhieuMuon() {
     }
 
-    public PhieuMuon(int maPm) {
+    public PhieuMuon(int maPm, String maKH, String maNV, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai, int soLuongMuon) {
         this.maPm = maPm;
-    }
-
-    public PhieuMuon(int maPm, KhachHang kh, NhanVien nv, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai) {
-        this.maPm = maPm;
-        this.kh = kh;
-        this.nv = nv;
+        this.maKH = maKH;
+        this.maNV = maNV;
         this.ngayMuon = ngayMuon;
         this.ngayTra = ngayTra;
         this.soTienCoc = soTienCoc;
         this.trangThai = trangThai;
+        this.soLuongMuon = soLuongMuon;
     }
 
     public int getMaPm() {
@@ -38,20 +36,20 @@ public class PhieuMuon {
         this.maPm = maPm;
     }
 
-    public KhachHang getKh() {
-        return kh;
+    public String getMaKH() {
+        return maKH;
     }
 
-    public void setKh(KhachHang kh) {
-        this.kh = kh;
+    public String getMaNV() {
+        return maNV;
     }
 
-    public NhanVien getNv() {
-        return nv;
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
     }
 
-    public void setNv(NhanVien nv) {
-        this.nv = nv;
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
     }
 
     public Date getNgayMuon() {
@@ -85,4 +83,18 @@ public class PhieuMuon {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
+
+    public int getSoLuongMuon() {
+        return soLuongMuon;
+    }
+
+    public void setSoLuongMuon(int soLuongMuon) {
+        this.soLuongMuon = soLuongMuon;
+    }
+
+    @Override
+    public String toString() {
+        return this.maPm + "";
+    }
+    
 }
