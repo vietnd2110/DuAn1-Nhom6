@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Sach {
     private String maSach;
-    private String maTL;
+    private TheLoai tl;
     private String nXB;
     private String tenSach;
     private String noiDat;
@@ -15,9 +15,9 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(String maSach, String maTL, String nXB, String tenSach, String noiDat, double giaTien, String tacGia, Date namXB) {
+    public Sach(String maSach, TheLoai tl, String nXB, String tenSach, String noiDat, double giaTien, String tacGia, Date namXB) {
         this.maSach = maSach;
-        this.maTL = maTL;
+        this.tl = tl;
         this.nXB = nXB;
         this.tenSach = tenSach;
         this.noiDat = noiDat;
@@ -34,12 +34,12 @@ public class Sach {
         this.maSach = maSach;
     }
 
-    public String getMaTL() {
-        return maTL;
+    public TheLoai getTl() {
+        return tl;
     }
 
-    public void setMaTL(String maTL) {
-        this.maTL = maTL;
+    public void setTl(TheLoai tl) {
+        this.tl = tl;
     }
 
     public String getnXB() {
@@ -89,7 +89,7 @@ public class Sach {
     public void setNamXB(Date namXB) {
         this.namXB = namXB;
     }
-    
-    
-    
+
+   
+   
 }

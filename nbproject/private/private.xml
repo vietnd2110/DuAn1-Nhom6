@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Lenovo/OneDrive/Documents/GitHub/DuAn1-Nhom6/src/com/library/form/DoiMatKhau_form.java</file>
-            <file>file:/C:/Users/Lenovo/OneDrive/Documents/GitHub/DuAn1-Nhom6/src/com/library/helper/XCheck.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/form/ql_sach_tai_lieu.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/helper/XJdbc.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/entity/Sach.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/entity/NhanVien.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/dao/SachDAO.java</file>
+            <file>file:/C:/Users/manh%20truong/Documents/GitHub/DuAn1-Nhom6/src/com/library/dao/theLoaiDAO.java</file>
         </group>
     </open-files>
 </project-private>
