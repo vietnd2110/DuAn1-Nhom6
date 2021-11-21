@@ -70,4 +70,16 @@ public class XJdbc {
         }
         return null;
     }
+    public static Connection ketNoi() {
+        try {
+            String user="sa";
+            String pass="songlong";
+            String url="jdbc:sqlserver://localhost:1433;databaseName=QLTV";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection con=DriverManager.getConnection(url, user, pass);
+            return con;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
 }

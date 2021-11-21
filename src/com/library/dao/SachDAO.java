@@ -2,6 +2,9 @@ package com.library.dao;
 
 import com.library.helper.XJdbc;
 import com.library.entity.Sach;
+import com.library.entity.TheLoai;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,14 +18,14 @@ public class SachDAO extends LibraryDAO<Sach, String>{
     
     @Override
     public void insert(Sach entity) {
-        XJdbc.update(insert_SQL, entity.getMaSach(), entity.getMaTL(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
+        XJdbc.update(insert_SQL, entity.getMaSach(), entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
                     entity.getGiaTien(), entity.getTacGia(), entity.getNamXB());
     }
 
     @Override
     public void update(Sach entity) {
-       XJdbc.update(update_SQL, entity.getMaSach(), entity.getMaTL(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                    entity.getGiaTien(), entity.getTacGia(), entity.getNamXB());
+       XJdbc.update(update_SQL, entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
+                    entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getMaSach());
     }
 
     @Override
@@ -53,12 +56,38 @@ public class SachDAO extends LibraryDAO<Sach, String>{
                 Double giaTien = rs.getDouble(6);
                 String tacGia = rs.getString(7);
                 Date namXB = rs.getDate(8);
-                listSach.add(new Sach(maSach, maTL, nXB, tenSach, noiDat, giaTien, tacGia, namXB));
+                listSach.add(new Sach(maSach, new TheLoai(maTL, ""), nXB, tenSach, noiDat, giaTien, tacGia, namXB));
             }
         } catch (Exception e) {
         }
         return listSach;
         
+    }
+     public Sach findByName(String id){
+        try {
+            Connection con;
+            con=XJdbc.ketNoi();
+            String select_nameBook="select *From sach where tensach like ?";
+            PreparedStatement pstm=con.prepareStatement(select_nameBook);
+            pstm.setString(1, "%"+id+"%");
+            ResultSet rs=pstm.executeQuery();
+            while (rs.next()) {                
+                Sach s=new Sach();
+                s.setMaSach(rs.getString(1));
+                s.setTl(new TheLoai(rs.getString(2), ""));
+                s.setnXB(rs.getString(3));
+                s.setTenSach(rs.getString(4));
+                s.setNoiDat(rs.getString(5));
+                s.setGiaTien(rs.getFloat(6));
+                s.setTacGia(rs.getString(7));
+                s.setNamXB(rs.getDate(8));
+                return s;
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
     
