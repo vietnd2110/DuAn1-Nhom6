@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -83,6 +84,18 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         pm.setTrangThai(cboTrangThai.getSelectedItem() + "");
         return pm;
     }
+    
+    PhieuMuon getFormSuaPM() {
+        PhieuMuon pm = new PhieuMuon();
+        pm.setMaKH(txtMaKH.getText());
+        pm.setMaNV(txtMaNV.getText());
+        pm.setNgayMuon(XDate.toDate(txtNgayMuon.getText()));
+        pm.setNgayTra(XDate.toDate(txtNgayTra.getText()));
+        pm.setSoTienCoc(Float.parseFloat(txtSoTienCoc.getText()));
+        pm.setTrangThai(cboTrangThai.getSelectedItem() + "");
+        pm.setMaPm(Integer.parseInt(txtMaPM.getText()));
+        return pm;
+    }
 
     void setTrangPM() {
         txtMaPM.setBackground(Color.white);
@@ -124,7 +137,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
     }
 
     void updatePM() {
-        PhieuMuon pm = getFormPM();
+        PhieuMuon pm = getFormSuaPM();
         try {
             daoPM.update(pm);
             this.fillToTablePM();    //cập nhật lại bảng pm

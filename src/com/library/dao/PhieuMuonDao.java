@@ -11,7 +11,7 @@ import java.util.List;
 public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
 
     final String INSERT_SQL = "INSERT INTO PHIEUMUON(MAKH,MANV,NGAYMUON,NGAYTRA,SOTIENCOC,TRANGTHAI, SOLUONGMUON)VALUES(?, ?, ?, ?, ?, ?, ?)";
-    final String UPDATE_SQL = "update PHIEUMUON set MAKH = ?, MANV = ?, NGAYMUON = ?, NGAYTRA = ?, SOTIENCOC = ?, TRANGTHAI = ? where MAPM = ?";
+    final String UPDATE_SQL = "update PHIEUMUON set MAKH=?, MANV=?, NGAYMUON=?, NGAYTRA=?, SOTIENCOC=?, TRANGTHAI=? where MAPM=?";
     final String SELECT_ALL_SQL = "select *from PHIEUMUON";
     final String SELECT_BY_ID_SQL = "select *from PHIEUMUON where MAPM=?";
     final String update_SoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON + 1 where MAPM = ?";
@@ -25,8 +25,7 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
 
     @Override
     public void update(PhieuMuon pm) {
-        XJdbc.update(UPDATE_SQL, pm.getMaKH(), pm.getMaNV(), pm.getNgayMuon(), pm.getNgayTra(),
-                pm.getSoTienCoc(), pm.getTrangThai(), pm.getMaPm());
+        XJdbc.update(UPDATE_SQL, pm.getMaKH(), pm.getMaNV(), pm.getNgayMuon(), pm.getNgayTra(), pm.getSoTienCoc(), pm.getTrangThai(), pm.getMaPm());
     }
 
     @Override
