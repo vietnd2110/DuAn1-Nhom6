@@ -25,7 +25,8 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
 
     @Override
     public void update(PhieuMuon pm) {
-        XJdbc.update(UPDATE_SQL, pm.getMaKH(), pm.getMaNV(), pm.getNgayMuon(), pm.getNgayTra(), pm.getSoTienCoc(), pm.getTrangThai(), pm.getMaPm());
+        XJdbc.update(UPDATE_SQL, pm.getMaKH(), pm.getMaNV(), pm.getNgayMuon(), pm.getNgayTra(), 
+                pm.getSoTienCoc(), pm.getTrangThai(), pm.getMaPm());
     }
 
     @Override
