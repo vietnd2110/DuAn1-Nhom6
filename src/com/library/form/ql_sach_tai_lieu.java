@@ -501,7 +501,7 @@ public class ql_sach_tai_lieu extends javax.swing.JFrame {
             if (code!=null && x.getMaSach().equalsIgnoreCase(code)) {
                 row=i;
             }
-            mol.addRow(new Object[]{x.getMaSach(),x.getTl().getMaTl(),x.getTenSach(),x.getNoiDat(),
+            mol.addRow(new Object[]{x.getMaSach(),x.getTl().getMaTl(),x.getnXB(),x.getTenSach(),x.getNoiDat(),
             x.getGiaTien(),x.getTacGia(),formatDate(x.getNamXB())});
            i++;
         }
