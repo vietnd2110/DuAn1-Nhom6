@@ -36,18 +36,18 @@ public class ThongKeDao {
     
     public List<Object[]> getSachMuonTraSach(String trangThai ){
         String sql = "{CALL  SACHMUON_TRASACH(?)}";
-        String cols[] = {"Mã Sách","Tên Sách","Thể Loại","Tác Giả","Năm XB","NXB","Ngày Mượn","Số Lượng Mượn"};
-        return getListArray(sql, cols);
+        String cols[] = {"Makh","TENKH","GIOITINH","SDT","MASACH","TENSACH","NGAYMUON","NGAYTRA"};
+        return getListArray(sql, cols, trangThai);
     }
      public List<Object[]> getSachMuonTheoNgay(int ngay ){
         String sql = "{CALL  SACHMUON_THEONGAY(?)}";
-        String cols[] = {"Mã Sách","Tên Sách","Thể Loại","Tác Giả","Năm XB","NXB","Ngày Mượn","Số Lượng Mượn"};
-        return getListArray(sql, cols);
+        String cols[] = {"MASACH","TENSACH","TENTL","TACGIA","NAMXB","NXB","NGAYMUON","NGAYTRA"};
+        return getListArray(sql, cols, ngay);
     }
       public List<Object[]> getTienPhatTheoThang(int thang ){
         String sql = "{CALL  TIENPHAT_THEOTHANG(?)}";
-        String cols[] = {"Mã Kh","Tên kh","Giới Tính","Ngày Sinh","Sdt","Tiền Phạt"};
-        return getListArray(sql, cols);
+        String cols[] = {"MAKH","TENKH","GIOITINH","MASACH","TENSACH","NGAYMUON","NGAYTRA","NGAYTHUCTRA","TINHTRANGSACH","TIENPHAT"};
+        return getListArray(sql, cols, thang);
     }
     
 }
