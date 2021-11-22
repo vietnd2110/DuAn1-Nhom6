@@ -103,7 +103,7 @@ public class main_form_QL extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
+                .addContainerGap(232, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(217, 217, 217))
         );
@@ -209,7 +209,7 @@ public class main_form_QL extends javax.swing.JFrame {
         jMenu1.setText("Hệ thống");
         jMenu1.setMargin(new java.awt.Insets(0, 10, 0, 10));
 
-        mniDx.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDx.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         mniDx.setBackground(new java.awt.Color(102, 102, 102));
         mniDx.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_exit_36px_2 1.png"))); // NOI18N
@@ -222,7 +222,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         jMenu1.add(mniDx);
 
-        mniDoiMk.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDoiMk.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mniDoiMk.setBackground(new java.awt.Color(102, 102, 102));
         mniDoiMk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDoiMk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_change_45px 1.png"))); // NOI18N
@@ -242,7 +242,7 @@ public class main_form_QL extends javax.swing.JFrame {
         mn1.setText("Quản Lý");
         mn1.setMargin(new java.awt.Insets(0, 12, 0, 12));
 
-        mnu1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mnu1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_MASK));
         mnu1.setBackground(new java.awt.Color(255, 102, 204));
         mnu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mnu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_people_36px 1.png"))); // NOI18N
@@ -256,7 +256,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         mn1.add(mnu1);
 
-        mnu2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mnu2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.SHIFT_MASK));
         mnu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mnu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_microsoft_people_36px 1.png"))); // NOI18N
         mnu2.setText("Khách Hàng");
@@ -268,7 +268,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         mn1.add(mnu2);
 
-        mniPm.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniPm.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, java.awt.event.InputEvent.SHIFT_MASK));
         mniPm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniPm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_user_manual_36px 1.png"))); // NOI18N
         mniPm.setText("Mượn, trả sách");
@@ -280,7 +280,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         mn1.add(mniPm);
 
-        mniSachTaiLieu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniSachTaiLieu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_MASK));
         mniSachTaiLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniSachTaiLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_tasks_36px 1.png"))); // NOI18N
         mniSachTaiLieu.setText("Sách tài liệu");
@@ -297,7 +297,7 @@ public class main_form_QL extends javax.swing.JFrame {
         jMenu3.setText("Thống kê");
         jMenu3.setMargin(new java.awt.Insets(0, 10, 0, 10));
 
-        mniThongKeMuonTs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniThongKeMuonTs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, java.awt.event.InputEvent.SHIFT_MASK));
         mniThongKeMuonTs.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniThongKeMuonTs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_reading_36px_1 1.png"))); // NOI18N
         mniThongKeMuonTs.setText("Mượn trả sách");
@@ -309,7 +309,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         jMenu3.add(mniThongKeMuonTs);
 
-        mniSachMuonTheoDays.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniSachMuonTheoDays.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, java.awt.event.InputEvent.SHIFT_MASK));
         mniSachMuonTheoDays.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniSachMuonTheoDays.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_book_36px_2 1.png"))); // NOI18N
         mniSachMuonTheoDays.setText("Sách mượn theo ngày");
@@ -321,7 +321,7 @@ public class main_form_QL extends javax.swing.JFrame {
         });
         jMenu3.add(mniSachMuonTheoDays);
 
-        mniTTphat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniTTphat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, java.awt.event.InputEvent.SHIFT_MASK));
         mniTTphat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniTTphat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_money_circulation_36px 1.png"))); // NOI18N
         mniTTphat.setText("Tổng tiền phạt theo tháng");

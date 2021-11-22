@@ -33,10 +33,10 @@ public class loading_Form extends javax.swing.JFrame {
         prgr.setForeground(new java.awt.Color(255, 255, 255));
         prgr.setStringPainted(true);
 
-        panel1.setBackground(new java.awt.Color(214, 188, 191));
+        panel1.setBackground(new java.awt.Color(237, 231, 223));
 
-        jLabel1.setBackground(new java.awt.Color(197, 163, 218));
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
+        jLabel1.setBackground(new java.awt.Color(237, 231, 223));
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 30)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/android-chrome-192x192.png"))); // NOI18N
         jLabel1.setText("Thư viện Đại học Hà Nội - Ha Noi University Library");
 
@@ -47,7 +47,7 @@ public class loading_Form extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

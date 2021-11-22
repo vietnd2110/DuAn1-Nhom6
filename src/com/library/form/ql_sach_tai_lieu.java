@@ -104,14 +104,14 @@ public class ql_sach_tai_lieu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(245, 233, 196));
+        jPanel1.setBackground(new java.awt.Color(238, 232, 171));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 25)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_books_36px_2 1.png"))); // NOI18N
         jLabel1.setText("Quản lý sách tài liệu");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jPanel2.setBackground(new java.awt.Color(245, 194, 136));
+        jPanel2.setBackground(new java.awt.Color(230, 202, 133));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnFind.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N

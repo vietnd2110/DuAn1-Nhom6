@@ -233,7 +233,7 @@ public class main_form_QLNV extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(201, 193, 141));
+        jPanel1.setBackground(new java.awt.Color(238, 232, 171));
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 25)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,7 +241,7 @@ public class main_form_QLNV extends javax.swing.JFrame {
         jLabel1.setText("Quản lý Nhân Viên");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jPanel2.setBackground(new java.awt.Color(212, 181, 142));
+        jPanel2.setBackground(new java.awt.Color(230, 202, 133));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnTimKiem.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
@@ -254,6 +254,7 @@ public class main_form_QLNV extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tìm kiếm");
 
@@ -282,35 +283,27 @@ public class main_form_QLNV extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mã NV");
 
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tên NV");
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Mật khẩu");
 
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Giới tính");
 
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("SDT");
 
         jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Email");
 
         jLabel9.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Địa chỉ");
 
         jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Vai trò");
 
         btnThem.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
@@ -366,11 +359,9 @@ public class main_form_QLNV extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Ngày sinh");
 
         jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Trạng thái");
 
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt Động", "Không Hoạt Động" }));
