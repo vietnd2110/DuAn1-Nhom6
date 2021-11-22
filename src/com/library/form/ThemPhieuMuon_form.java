@@ -26,13 +26,17 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
     int index;
     int check = 1;
     public Connection conn = XJdbc.getConnection();
-
+     //dùng after để so sánh ngày mượnn bé hơn ngày trả 
+    /*ví dụ if ngaymuon.after(ngaytra){
+        //do code here }
+    */
     public ThemPhieuMuon_form() {
         initComponents();
         init();
         fillToTablePM();
         btnSuaPM.setEnabled(false);
-        txtMaNV.setText(XAuther.USER.getMaNV());
+//        txtMaNV.setText(XAuther.USER.getMaNV());
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -219,29 +223,29 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
         jLabel1.setText("Thêm Phiếu Mượn");
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(238, 232, 171));
 
         txtMaPM.setEnabled(false);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel7.setText("Tiền Cọc");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel8.setText("Trạng Thái");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setText("Mã PM");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel3.setText("Mã KH");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel4.setText("Mã NV");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel5.setText("Ngày Mượn");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel6.setText("Ngày Trả");
 
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa Duyệt", "Chưa Trả", "Đã Trả" }));
@@ -264,7 +268,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblBangPM);
 
-        btnThemPM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnThemPM.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnThemPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
         btnThemPM.setText("Thêm");
         btnThemPM.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +277,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
             }
         });
 
-        btnSuaPM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSuaPM.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnSuaPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Edit.png"))); // NOI18N
         btnSuaPM.setText("Sửa");
         btnSuaPM.addActionListener(new java.awt.event.ActionListener() {

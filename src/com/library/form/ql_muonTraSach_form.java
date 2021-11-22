@@ -271,9 +271,9 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         jLabel1.setText("Quản lý mượn, trả sách");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jPanel1.setBackground(new java.awt.Color(181, 179, 92));
+        jPanel1.setBackground(new java.awt.Color(238, 232, 171));
 
-        jPanel3.setBackground(new java.awt.Color(155, 154, 46));
+        jPanel3.setBackground(new java.awt.Color(230, 202, 133));
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -363,26 +363,21 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
         tabs.addTab("Phiếu mượn", jPanel1);
 
-        panel.setBackground(new java.awt.Color(181, 179, 92));
+        panel.setBackground(new java.awt.Color(238, 232, 171));
 
         jLabel10.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Mã PM");
 
         jLabel11.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Mã sách");
 
         jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Ngày thực trả");
 
         jLabel13.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Tình trạng sách");
 
         jLabel14.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Tiền phạt");
 
         cboTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Binh Thường", "Rách Sách", "Mất Sách" }));
