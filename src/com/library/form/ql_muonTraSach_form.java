@@ -119,9 +119,9 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         CTPhieuMuon ctpm = new CTPhieuMuon();
         ctpm.setMaPM(Integer.parseInt(txtMaPM.getText()));
         ctpm.setMaSach(txtMaSach.getText());
-        ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));
         ctpm.setTinhTrangSach(cboTinhTrang.getSelectedItem() + "");
         ctpm.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
+        ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));       
         return ctpm;
     }
 
@@ -167,7 +167,8 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
             this.fillToTableCTPM();    //cập nhật lại bảng pm
             XMgsbox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
-            XMgsbox.alert(this, "Cập nhật thất bại!");
+            //XMgsbox.alert(this, "Cập nhật thất bại!");
+            e.printStackTrace();
         }
     }
 
@@ -533,10 +534,8 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
     private void btnThemCTPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTPMActionPerformed
         // TODO add your handling code here:
-        if (XCheck.checkNullText(txtMaSach)
-                && XCheck.checkNullText(txtNgayThucTra)) {
-            if (XCheck.checkMaNV(txtMaSach)
-                    && XCheck.checkDate(txtNgayThucTra)) {
+        if (XCheck.checkNullText(txtMaSach)) {
+            if (XCheck.checkMaNV(txtMaSach)) {
                 if (checkSoLuongMuonWithCTPM(txtMaPM.getText()) == true) {
                     daoPM.updateSLMuon(txtMaPM.getText());
                     insertCTPM();
@@ -570,8 +569,9 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         txtMaPM.setText(tblBangCTPM.getValueAt(selectedRow, 1).toString());
         txtMaSach.setText(tblBangCTPM.getValueAt(selectedRow, 2).toString());
         txtNgayThucTra.setText(tblBangCTPM.getValueAt(selectedRow, 3).toString());
-        txtTienPhat.setText(tblBangCTPM.getValueAt(selectedRow, 4).toString());
-        cboTinhTrang.setSelectedItem(tblBangCTPM.getValueAt(selectedRow, 5).toString());
+        cboTinhTrang.setSelectedItem(tblBangCTPM.getValueAt(selectedRow, 4).toString());
+        txtTienPhat.setText(tblBangCTPM.getValueAt(selectedRow, 5).toString());
+        
     }//GEN-LAST:event_tblBangCTPMMouseClicked
 
     private void btnTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraSachActionPerformed
