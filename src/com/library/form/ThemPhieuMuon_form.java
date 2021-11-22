@@ -1,6 +1,5 @@
 package com.library.form;
 
-
 import com.library.dao.PhieuMuonDao;
 import com.library.entity.PhieuMuon;
 import com.library.helper.XAuther;
@@ -27,16 +26,17 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
     int index;
     int check = 1;
     public Connection conn = XJdbc.getConnection();
-     //dùng after để so sánh ngày mượnn bé hơn ngày trả 
+    //dùng after để so sánh ngày mượnn bé hơn ngày trả 
+
     /*ví dụ if ngaymuon.after(ngaytra){
         //do code here }
-    */
+     */
     public ThemPhieuMuon_form() {
         initComponents();
         init();
         fillToTablePM();
         btnSuaPM.setEnabled(false);
-//        txtMaNV.setText(XAuther.USER.getMaNV());
+        txtMaNV.setText(XAuther.USER.getMaNV());
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -88,7 +88,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         pm.setTrangThai(cboTrangThai.getSelectedItem() + "");
         return pm;
     }
-    
+
     PhieuMuon getFormSuaPM() {
         PhieuMuon pm = new PhieuMuon();
         pm.setMaKH(txtMaKH.getText());
