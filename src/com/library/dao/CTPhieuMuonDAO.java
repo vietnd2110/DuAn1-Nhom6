@@ -15,7 +15,7 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
     final String UPDATE_SQL = "update CTPHIEUMUON set TINHTRANGSACH=?,TIENPHAT=?,NGAYTHUCTRA=? where MAPM=? and MASACH=?";
     final String SELECT_ALL_SQL = "select *from CTPHIEUMUON";
     final String SELECT_BY_ID_SQL = "select *from CTPHIEUMUON where MAPM=?";
-    final String delete_SQL = "delete from CTPHIEUMUON where MASACH = ?";
+    final String delete_SQL = "delete from CTPHIEUMUON where MAPM=? and MASACH=?";
     final String SELECT_BY_MaSach = "select *from CTPHIEUMUON where MASACH=?";
 
     @Override
@@ -67,8 +67,8 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
         return selectBySQL(SELECT_BY_ID_SQL, maPM);
     }
     
-    public void TraSach(String maSach) {
-        XJdbc.update(delete_SQL, maSach);
+    public void TraSach(Integer maPM, String maSach) {
+        XJdbc.update(delete_SQL, maPM, maSach);
     }
     
 }

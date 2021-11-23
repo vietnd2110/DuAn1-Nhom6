@@ -16,6 +16,7 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
     final String SELECT_BY_ID_SQL = "select *from PHIEUMUON where MAPM=?";
     final String update_SoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON + 1 where MAPM = ?";
     final String update_TruSoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON - 1 where MAPM = ?";
+    final String update_TrangThai  = "update PHIEUMUON set TRANGTHAI=? where MAPM=?";
 
     @Override
     public void insert(PhieuMuon pm) {
@@ -77,6 +78,10 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
     
     public List<PhieuMuon> timKiemPM(String maPM) {
         return selectBySQL(SELECT_BY_ID_SQL, maPM);
+    }
+    
+    public void updateTrangThai(PhieuMuon pm) {
+        XJdbc.update(update_TrangThai, pm.getTrangThai(), pm.getMaPm());
     }
 
 }

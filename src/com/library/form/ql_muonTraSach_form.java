@@ -10,14 +10,9 @@ import com.library.helper.XImages;
 import com.library.helper.XJdbc;
 import com.library.helper.XMgsbox;
 import java.awt.Color;
-import static java.awt.Color.pink;
-import static java.awt.Color.white;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import javax.swing.JTextField;
 
 public class ql_muonTraSach_form extends javax.swing.JFrame {
 
@@ -47,7 +42,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         }
         //logo
         init();
-        fillToTablePM();
+        fillToTablePM();       
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -121,7 +116,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         ctpm.setMaSach(txtMaSach.getText());
         ctpm.setTinhTrangSach(cboTinhTrang.getSelectedItem() + "");
         ctpm.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
-        ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));       
+        ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));
         return ctpm;
     }
 
@@ -167,8 +162,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
             this.fillToTableCTPM();    //cập nhật lại bảng pm
             XMgsbox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
-            //XMgsbox.alert(this, "Cập nhật thất bại!");
-            e.printStackTrace();
+            XMgsbox.alert(this, "Cập nhật thất bại!");
         }
     }
 
@@ -190,10 +184,46 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         return true;
     }
 
+    public boolean checkSoLuongMuonTraSach(String maPM) {
+        String sql = "select SOLUONGMUON from PHIEUMUON, KHACHHANG where PHIEUMUON.MAKH = KHACHHANG.MAKH and MAPM like '%" + maPM + "%'";
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int result = Integer.parseInt(rs.getString("SOLUONGMUON"));
+                if (result == 0) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return false;
+    }
+
+//    public boolean checkTrangThai(String maPM) {
+//        String sql = "select TRANGTHAI from PHIEUMUON where MAPM like '%" + maPM + "%'";
+//        try {
+//            Statement statement = conn.createStatement();
+//            ResultSet rs = statement.executeQuery(sql);
+//            while (rs.next()) {
+//                String result = rs.getString("TRANGTHAI");
+//                if (result.equalsIgnoreCase("Đã Trả")) {
+//                    return true;
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//
+//        }
+//        return false;
+//    }
     void TraSach() {
         try {
             String maSach = txtMaSach.getText();
-            daoCTPM.TraSach(maSach);
+            Integer maPM = Integer.parseInt(txtMaPM.getText());
+            daoCTPM.TraSach(maPM, maSach);
             fillToTableCTPM();
             XMgsbox.alert(this, "Trả Sách Thành Công");
         } catch (Exception e) {
@@ -216,6 +246,22 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
                 pm.getSoTienCoc(),
                 pm.getTrangThai(),};
             model.addRow(row);
+        }
+    }
+
+    PhieuMuon getFormPM() {
+        PhieuMuon pm = new PhieuMuon();
+        pm.setTrangThai("Đã Trả");
+        pm.setMaPm(Integer.parseInt(txtMaPM.getText()));
+        return pm;
+    }
+
+    void updateTrangThai() {
+        PhieuMuon pm = getFormPM();
+        try {
+            daoPM.updateTrangThai(pm);
+            fillToTablePM();
+        } catch (Exception e) {
         }
     }
 
@@ -382,6 +428,14 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         jLabel14.setText("Tiền phạt");
 
         cboTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Binh Thường", "Rách Sách", "Mất Sách" }));
+        cboTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTinhTrangActionPerformed(evt);
+            }
+        });
+
+        txtTienPhat.setText("0.0");
+        txtTienPhat.setEnabled(false);
 
         btnThemCTPM.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnThemCTPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
@@ -522,8 +576,8 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
     private void tblBangPMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangPMMouseClicked
         // TODO add your handling code here:
+        this.index = tblBangPM.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
         if (evt.getClickCount() == 1) {
-            this.index = tblBangPM.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
             if (this.index >= 0) {
                 this.editPM();
                 tabs.setSelectedIndex(1);
@@ -571,15 +625,18 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         txtNgayThucTra.setText(tblBangCTPM.getValueAt(selectedRow, 3).toString());
         cboTinhTrang.setSelectedItem(tblBangCTPM.getValueAt(selectedRow, 4).toString());
         txtTienPhat.setText(tblBangCTPM.getValueAt(selectedRow, 5).toString());
-        
+
     }//GEN-LAST:event_tblBangCTPMMouseClicked
 
     private void btnTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraSachActionPerformed
         // TODO add your handling code here:
         int index = tblBangCTPM.getSelectedRow();
         if (index >= 0) {
-                TraSach();
-                daoPM.updateTruSLMuon(txtMaPM.getText());
+            TraSach();
+            daoPM.updateTruSLMuon(txtMaPM.getText());
+            if (checkSoLuongMuonTraSach(txtMaPM.getText()) == true) {
+                updateTrangThai();
+            }
         } else {
             XMgsbox.alert(this, "Bạn phải chọn sách trươc khí trả");
         }
@@ -601,6 +658,11 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void cboTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhTrangActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboTinhTrangActionPerformed
 
     /**
      * @param args the command line arguments
