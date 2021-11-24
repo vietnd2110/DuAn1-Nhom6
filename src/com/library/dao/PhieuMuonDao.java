@@ -78,5 +78,24 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
     public List<PhieuMuon> timKiemPM(String maPM) {
         return selectBySQL(SELECT_BY_ID_SQL, maPM);
     }
+    public List<Integer> selectDays(){
+        String sql="select distinct DAY(ngaymuon) from PHIEUMUON";
+        List<Integer> list=new ArrayList<>();
+
+        try {
+            ResultSet rs=XJdbc.query(sql);
+            while (rs.next()) {                
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+        //        for (int i = 1; i <= 31; i++) {
+//            list.add(i);
+//        }
+//         return list;
+    }
 
 }
