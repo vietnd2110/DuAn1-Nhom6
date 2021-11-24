@@ -170,7 +170,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
     }
 
     private boolean checkSoLuongMuon(String maKH) {
-        String sql = "SELECT SOLUONGMUON FROM PHIEUMUON WHERE MAKH like '%" + maKH + "%'";
+        String sql = "SELECT SOLUONGMUON FROM KHACHHANG WHERE MAKH like '%" + maKH + "%'";
         try {
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);

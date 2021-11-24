@@ -1,6 +1,7 @@
 package com.library.form;
 
 import com.library.dao.CTPhieuMuonDAO;
+import com.library.dao.KhachHangDAO;
 import com.library.dao.PhieuMuonDao;
 import com.library.entity.CTPhieuMuon;
 import com.library.entity.PhieuMuon;
@@ -20,6 +21,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     DefaultTableModel mol_2 = new DefaultTableModel();
     PhieuMuonDao daoPM = new PhieuMuonDao();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
+    KhachHangDAO daoKH = new KhachHangDAO();
     int index;
     int check = 1;
     public Connection conn = XJdbc.getConnection();
@@ -100,6 +102,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
     void setFormPM(PhieuMuon pm) {
         txtMaPM.setText(pm.getMaPm() + "");
+        txtMaKH.setText(pm.getMaKH());
     }
 
     void setFormCTPM(CTPhieuMuon ctpm) {
@@ -201,24 +204,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         }
         return false;
     }
-
-//    public boolean checkTrangThai(String maPM) {
-//        String sql = "select TRANGTHAI from PHIEUMUON where MAPM like '%" + maPM + "%'";
-//        try {
-//            Statement statement = conn.createStatement();
-//            ResultSet rs = statement.executeQuery(sql);
-//            while (rs.next()) {
-//                String result = rs.getString("TRANGTHAI");
-//                if (result.equalsIgnoreCase("Đã Trả")) {
-//                    return true;
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//
-//        }
-//        return false;
-//    }
+    
     void TraSach() {
         try {
             String maSach = txtMaSach.getText();
@@ -297,6 +283,8 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         tblBangCTPM = new javax.swing.JTable();
         btnTraSach = new javax.swing.JButton();
         txtMaPM = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtMaKH = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -481,6 +469,11 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
         txtMaPM.setEnabled(false);
 
+        jLabel15.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel15.setText("Mã Khách Hàng");
+
+        txtMaKH.setEnabled(false);
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -506,11 +499,14 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
                                 .addGap(74, 74, 74)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
-                                    .addComponent(jLabel14))
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15))
                                 .addGap(64, 64, 64)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cboTinhTrang, 0, 229, Short.MAX_VALUE)
-                                    .addComponent(txtTienPhat)))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cboTinhTrang, 0, 229, Short.MAX_VALUE)
+                                        .addComponent(txtTienPhat))))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addComponent(btnThemCTPM, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,7 +514,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
                                 .addComponent(btnSuaCTPM, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(btnTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 70, Short.MAX_VALUE)))
+                        .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -539,7 +535,9 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtNgayThucTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgayThucTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemCTPM)
@@ -600,7 +598,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         if (XCheck.checkNullText(txtMaSach)) {
             if (XCheck.checkMaNV(txtMaSach)) {
                 if (checkSoLuongMuonWithCTPM(txtMaPM.getText()) == true) {
-                    daoPM.updateSLMuon(txtMaPM.getText());
+                    daoKH.updateSLMuon(txtMaKH.getText());
                     insertCTPM();
                 } else {
                     XMgsbox.alert(this, "Mỗi Khách Hàng Chỉ Được Mượn Tối Đa 3 Quyển Sách");
@@ -642,7 +640,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         int index = tblBangCTPM.getSelectedRow();
         if (index >= 0) {
             TraSach();
-            daoPM.updateTruSLMuon(txtMaPM.getText());
+            daoKH.updateTruSLMuon(txtMaKH.getText());
             if (checkSoLuongMuonTraSach(txtMaPM.getText()) == true) {
                 updateTrangThai();
             }
@@ -721,6 +719,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -732,6 +731,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblBangCTPM;
     private javax.swing.JTable tblBangPM;
+    private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaPM;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtNgayThucTra;

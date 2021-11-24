@@ -18,16 +18,14 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
     final String UPDATE_SQL = "update PHIEUMUON set MAKH=?, MANV=?, NGAYMUON=?, NGAYTRA=?, SOTIENCOC=?, TRANGTHAI=? where MAPM=?";
     final String SELECT_ALL_SQL = "select *from PHIEUMUON";
     final String SELECT_BY_ID_SQL = "select *from PHIEUMUON where MAPM=?";
-    final String update_SoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON + 1 where MAPM = ?";
-    final String update_TruSoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON - 1 where MAPM = ?";
     final String update_TrangThai  = "update PHIEUMUON set TRANGTHAI=? where MAPM=?";
     final String Select_Top1_MaPM = "select top 1 MAPM from PHIEUMUON order by MAPM desc";
-    final String update_SoLuongMuon2 = "update PHIEUMUON set SOLUONGMUON =  ? where MAPM = ?";
+    
 
     @Override
     public void insert(PhieuMuon pm) {
         XJdbc.update(INSERT_SQL, pm.getMaKH(), pm.getMaNV(), pm.getNgayMuon(), pm.getNgayTra(),
-                pm.getSoTienCoc(), pm.getTrangThai(), pm.getSoLuongMuon());
+                pm.getSoTienCoc(), pm.getTrangThai());
     }
 
     @Override
@@ -64,22 +62,13 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
                 pm.setNgayMuon(rs.getDate("NGAYMUON"));
                 pm.setNgayTra(rs.getDate("NGAYTRA"));
                 pm.setSoTienCoc(rs.getFloat("SOTIENCOC"));
-                pm.setTrangThai(rs.getString("TrangThai"));
-                pm.setSoLuongMuon(rs.getInt("SOLUONGMUON"));
+                pm.setTrangThai(rs.getString("TrangThai"));                
                 list.add(pm);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
-    }
-
-    public void updateSLMuon(String maPM) {
-        XJdbc.update(update_SoLuongMuon, maPM);
-    }
-    
-    public void updateTruSLMuon(String maPM) {
-        XJdbc.update(update_TruSoLuongMuon, maPM);
     }
     
     public List<PhieuMuon> timKiemPM(String maPM) {
@@ -105,8 +94,4 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
         }
         return null;
     } 
-    
-    public void updateSLMuon2(PhieuMuon pm) {
-        XJdbc.update(update_SoLuongMuon2, pm.getSoLuongMuon(), pm.getMaPm());
-    }
 }
