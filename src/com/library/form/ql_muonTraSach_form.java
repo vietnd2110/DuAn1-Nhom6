@@ -201,24 +201,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         }
         return false;
     }
-
-//    public boolean checkTrangThai(String maPM) {
-//        String sql = "select TRANGTHAI from PHIEUMUON where MAPM like '%" + maPM + "%'";
-//        try {
-//            Statement statement = conn.createStatement();
-//            ResultSet rs = statement.executeQuery(sql);
-//            while (rs.next()) {
-//                String result = rs.getString("TRANGTHAI");
-//                if (result.equalsIgnoreCase("Đã Trả")) {
-//                    return true;
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//
-//        }
-//        return false;
-//    }
+    
     void TraSach() {
         try {
             String maSach = txtMaSach.getText();

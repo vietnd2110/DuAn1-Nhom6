@@ -10,22 +10,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SachDAO extends LibraryDAO<Sach, String>{
+public class SachDAO extends LibraryDAO<Sach, String> {
+
     final String insert_SQL = "insert into SACH (MaSach, MaTL, NXB, TenSach, NoiDat, GiaTien, TacGia, NamXB) values (?, ?, ?, ?, ?, ?, ?, ?)";
     final String update_SQL = "update SACH set MaTL = ?, NXB = ?, TenSach = ?, NoiDat = ?, GiaTien = ?, TacGia = ?, NamXB = ? where MaSach = ?";
     final String select_All_SQL = "select * from SACH";
     final String select_ByID_SQL = "select * from SACH where MaSach = ?";
-    
+    final String select_ByMaTL = "select * from SACH where MaTL = ?";
+
     @Override
     public void insert(Sach entity) {
         XJdbc.update(insert_SQL, entity.getMaSach(), entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                    entity.getGiaTien(), entity.getTacGia(), entity.getNamXB());
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB());
     }
 
     @Override
     public void update(Sach entity) {
-       XJdbc.update(update_SQL, entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                    entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getMaSach());
+        XJdbc.update(update_SQL, entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(), entity.getMaSach());
     }
 
     @Override
@@ -35,7 +37,7 @@ public class SachDAO extends LibraryDAO<Sach, String>{
 
     @Override
     public Sach selectByID(String id) {
-          List<Sach> list = selectBySQL(select_ByID_SQL, id);
+        List<Sach> list = selectBySQL(select_ByID_SQL, id);
         if (list.isEmpty()) {
             return null;
         }
@@ -44,10 +46,10 @@ public class SachDAO extends LibraryDAO<Sach, String>{
 
     @Override
     public List<Sach> selectBySQL(String sql, Object... args) {
-         List<Sach> listSach = new ArrayList<>();
+        List<Sach> listSach = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 String maSach = rs.getString(1);
                 String maTL = rs.getString(2);
                 String nXB = rs.getString(3);
@@ -61,18 +63,19 @@ public class SachDAO extends LibraryDAO<Sach, String>{
         } catch (Exception e) {
         }
         return listSach;
-        
+
     }
-     public Sach findByName(String id){
+
+    public Sach findByName(String id) {
         try {
             Connection con;
-            con=XJdbc.ketNoi();
-            String select_nameBook="select *From sach where tensach like ?";
-            PreparedStatement pstm=con.prepareStatement(select_nameBook);
-            pstm.setString(1, "%"+id+"%");
-            ResultSet rs=pstm.executeQuery();
-            while (rs.next()) {                
-                Sach s=new Sach();
+            con = XJdbc.ketNoi();
+            String select_nameBook = "select *From sach where tensach like ?";
+            PreparedStatement pstm = con.prepareStatement(select_nameBook);
+            pstm.setString(1, "%" + id + "%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Sach s = new Sach();
                 s.setMaSach(rs.getString(1));
                 s.setTl(new TheLoai(rs.getString(2), ""));
                 s.setnXB(rs.getString(3));
@@ -83,12 +86,15 @@ public class SachDAO extends LibraryDAO<Sach, String>{
                 s.setNamXB(rs.getDate(8));
                 return s;
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    
+
+    public List<Sach> selectByMaTL(String maTL) {
+        return selectBySQL(select_ByMaTL, maTL);
+    }
+
 }
