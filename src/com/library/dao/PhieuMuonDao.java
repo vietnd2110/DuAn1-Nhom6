@@ -4,7 +4,11 @@ import com.library.entity.KhachHang;
 import com.library.entity.NhanVien;
 import com.library.entity.PhieuMuon;
 import com.library.helper.XJdbc;
+import com.library.helper.XMgsbox;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
     final String update_SoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON + 1 where MAPM = ?";
     final String update_TruSoLuongMuon = "update PHIEUMUON set SOLUONGMUON = SOLUONGMUON - 1 where MAPM = ?";
     final String update_TrangThai  = "update PHIEUMUON set TRANGTHAI=? where MAPM=?";
+    final String Select_Top1_MaPM = "select top 1 MAPM from PHIEUMUON order by MAPM desc";
+    final String update_SoLuongMuon2 = "update PHIEUMUON set SOLUONGMUON =  ? where MAPM = ?";
 
     @Override
     public void insert(PhieuMuon pm) {
@@ -84,4 +90,23 @@ public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
         XJdbc.update(update_TrangThai, pm.getTrangThai(), pm.getMaPm());
     }
 
+    public String selectTopMaPM() {
+        Connection con = XJdbc.getConnection();
+        String sql = Select_Top1_MaPM;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getString("MAPM");
+            
+        } catch (SQLException ex) {
+            XMgsbox.alert(null, "Lỗi Truy Vấn Dữ Liệu");
+            ex.printStackTrace();
+        }
+        return null;
+    } 
+    
+    public void updateSLMuon2(PhieuMuon pm) {
+        XJdbc.update(update_SoLuongMuon2, pm.getSoLuongMuon(), pm.getMaPm());
+    }
 }

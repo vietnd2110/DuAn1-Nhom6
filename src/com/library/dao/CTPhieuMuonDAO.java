@@ -16,7 +16,6 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
     final String SELECT_ALL_SQL = "select *from CTPHIEUMUON";
     final String SELECT_BY_ID_SQL = "select *from CTPHIEUMUON where MAPM=?";
     final String delete_SQL = "delete from CTPHIEUMUON where MAPM=? and MASACH=?";
-    final String SELECT_BY_MaSach = "select *from CTPHIEUMUON where MASACH=?";
 
     @Override
     public void insert(CTPhieuMuon ctpm) {

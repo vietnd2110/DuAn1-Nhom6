@@ -10,30 +10,31 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class XJdbc {
-   private static String driver = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://localhost:3306/qltv";
-    private static String user = "root";
-    private static String pass = "130602";
-    
+
+    private static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTV";
+    private static String user = "sa";
+    private static String pass = "songlong";
+
     static {
         try {
             Class.forName(driver);
         } catch (Exception e) {
-            
-        }    
+
+        }
     }
-    
+
     public static Connection getConnection() {
         try {
             Class.forName(driver);
             String dbUrl = url;
-            return DriverManager.getConnection(dbUrl,user,pass);
+            return DriverManager.getConnection(dbUrl, user, pass);
         } catch (Exception ex) {
             Logger.getLogger(XJdbc.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
-    
+
     public static PreparedStatement getStm(String sql, Object... args) throws SQLException {
         Connection con = DriverManager.getConnection(url, user, pass);
         PreparedStatement pstm = null;
@@ -42,26 +43,26 @@ public class XJdbc {
         } else {
             pstm = con.prepareStatement(sql);
         }
-        
+
         for (int i = 0; i < args.length; i++) {
             pstm.setObject(i + 1, args[i]);
         }
         return pstm;
     }
-    
+
     public static void update(String sql, Object... args) {
         try {
-            PreparedStatement pstmt= getStm(sql, args);
-            try{
+            PreparedStatement pstmt = getStm(sql, args);
+            try {
                 pstmt.executeUpdate();
-            }finally{
-                pstmt.getConnection().close();    
+            } finally {
+                pstmt.getConnection().close();
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public static ResultSet query(String sql, Object... args) {
         try {
             PreparedStatement pstm = getStm(sql, args);
@@ -70,7 +71,7 @@ public class XJdbc {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static Object value(String sql, Object... args) {
         try {
             ResultSet rs = query(sql, args);
@@ -83,13 +84,14 @@ public class XJdbc {
         }
         return null;
     }
+
     public static Connection ketNoi() {
         try {
-            String user="sa";
-            String pass="songlong";
-            String url="jdbc:sqlserver://localhost:1433;databaseName=QLTV";
+            String user = "sa";
+            String pass = "songlong";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTV";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection con=DriverManager.getConnection(url, user, pass);
+            Connection con = DriverManager.getConnection(url, user, pass);
             return con;
         } catch (Exception e) {
             throw new RuntimeException();
