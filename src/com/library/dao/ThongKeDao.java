@@ -40,8 +40,8 @@ public class ThongKeDao {
         return getListArray(sql, cols, trangThai);
     }
      public List<Object[]> getSachMuonTheoNgay(int ngay ){
-        String sql = "{CALL  SACHMUON_THEONGAY(?)}";
-        String cols[] = {"MASACH","TENSACH","TENTL","TACGIA","NAMXB","NXB","NGAYMUON","NGAYTRA"};
+        String sql = "{CALL  sp_muonsachTheoNgay(?)}";
+        String cols[] = {"MASACH","TENSACH","TENTL","TACGIA","NAMXB","NXB","NGAYMUON","NGAYTRA","SOLUONGMUON"};
         return getListArray(sql, cols, ngay);
     }
       public List<Object[]> getTienPhatTheoThang(int thang ){
