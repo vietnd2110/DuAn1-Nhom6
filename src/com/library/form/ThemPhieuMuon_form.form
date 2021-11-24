@@ -255,7 +255,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="Ch&#x1b0;a Duy&#x1ec7;t"/>
                 <StringItem index="1" value="Ch&#x1b0;a Tr&#x1ea3;"/>
-                <StringItem index="2" value="&#x110;&#xe3; Tr&#x1ea3;"/>
+                <StringItem index="2" value=" "/>
               </StringArray>
             </Property>
           </Properties>
