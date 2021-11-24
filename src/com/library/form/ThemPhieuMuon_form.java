@@ -261,7 +261,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel6.setText("Ngày Trả");
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa Duyệt", "Chưa Trả", "Đã Trả" }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa Duyệt", "Chưa Trả", " " }));
 
         tblBangPM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

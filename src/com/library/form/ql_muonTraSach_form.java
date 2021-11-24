@@ -42,7 +42,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         }
         //logo
         init();
-        fillToTablePM();       
+        fillToTablePM();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -575,13 +575,22 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblBangPMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangPMMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
         this.index = tblBangPM.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
-        if (evt.getClickCount() == 1) {
-            if (this.index >= 0) {
-                this.editPM();
-                tabs.setSelectedIndex(1);
-                fillToTableCTPM();
+        String click = tblBangPM.getValueAt(index, 6) + "";
+        if (click.equalsIgnoreCase("Đã Trả")) {
+            XMgsbox.alert(this, "Khách Hàng này đã trả sách mời tạo Phiếu Mượn khác để tiếp tục mượn sách");
+            return;
+        } else  if (click.equalsIgnoreCase("Chưa Duyệt")){
+            XMgsbox.alert(this, "Phiếu Mượn phải được nhân viên phê duyệt mới được mượn sách");
+            return;
+        } else {           
+            if (evt.getClickCount() == 1) {
+                if (this.index >= 0) {
+                    this.editPM();
+                    tabs.setSelectedIndex(1);
+                    fillToTableCTPM();
+                }
             }
         }
     }//GEN-LAST:event_tblBangPMMouseClicked
@@ -661,7 +670,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
     private void cboTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhTrangActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_cboTinhTrangActionPerformed
 
     /**
