@@ -131,6 +131,7 @@ public class form_Qlkh extends javax.swing.JFrame {
         kh.setDiaChi(txtDiaChi.getText());
         kh.setMaNV(txtManv.getText());
         kh.setTrangThai(cbxTrangThai.getSelectedIndex() == 0);
+        kh.setSoLuongMuon(Integer.parseInt("0"));
 
         return kh;
     }

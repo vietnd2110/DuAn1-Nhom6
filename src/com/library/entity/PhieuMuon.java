@@ -12,12 +12,12 @@ public class PhieuMuon {
    private Date ngayTra;
    private float soTienCoc;
    private String trangThai;
-   private int soLuongMuon;
+   
 
     public PhieuMuon() {
     }
 
-    public PhieuMuon(int maPm, String maKH, String maNV, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai, int soLuongMuon) {
+    public PhieuMuon(int maPm, String maKH, String maNV, Date ngayMuon, Date ngayTra, float soTienCoc, String trangThai) {
         this.maPm = maPm;
         this.maKH = maKH;
         this.maNV = maNV;
@@ -25,7 +25,6 @@ public class PhieuMuon {
         this.ngayTra = ngayTra;
         this.soTienCoc = soTienCoc;
         this.trangThai = trangThai;
-        this.soLuongMuon = soLuongMuon;
     }
 
     public int getMaPm() {
@@ -82,14 +81,6 @@ public class PhieuMuon {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
-    }
-
-    public int getSoLuongMuon() {
-        return soLuongMuon;
-    }
-
-    public void setSoLuongMuon(int soLuongMuon) {
-        this.soLuongMuon = soLuongMuon;
     }
 
     @Override

@@ -222,14 +222,6 @@ public class form_MuonSach extends javax.swing.JFrame {
         return true;
     }
 
-    void updateSLMuon() {
-        PhieuMuon pm = new PhieuMuon();
-        String maPM = daoPM.selectTopMaPM();
-        pm.setMaPm(Integer.parseInt(maPM));
-        pm.setSoLuongMuon(Integer.parseInt(lblTongMuon.getText()));
-        daoPM.updateSLMuon2(pm);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -486,12 +478,13 @@ public class form_MuonSach extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(btnXoa)
-                    .addComponent(jLabel8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTongMuon, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGioiHan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblGioiHan, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(btnXoa)
+                        .addComponent(jLabel8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addGap(20, 20, 20)
@@ -624,7 +617,6 @@ public class form_MuonSach extends javax.swing.JFrame {
                                 ctpm.setTinhTrangSach("Bình Thường");
                                 daoCTPM.insert(ctpm);
                             }
-                            updateSLMuon(); // phần này cần fix lại
                             gioiHan -= rowCount;
                             lblGioiHan.setText(String.valueOf(gioiHan));
                             XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
