@@ -25,7 +25,7 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
     final String select_BySdt = "select * from KhachHang where SDT = ?";
     final String update_SoLuongMuon = "update KHACHHANG set SOLUONGMUON = SOLUONGMUON + 1 where MAKH = ?";
     final String update_TruSoLuongMuon = "update KHACHHANG set SOLUONGMUON = SOLUONGMUON - 1 where MAKH = ?";
-    final String update_SoLuongMuon2 = "update KHACHHANG set SOLUONGMUON =  ? where KH = ?";
+    final String update_SoLuongMuon2 = "update KHACHHANG set SOLUONGMUON =  ? where MAKH = ?";
 
     @Override
     public void insert(KhachHang entity) {
@@ -91,12 +91,12 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
         return list.get(0);
     }
     
-    public void updateSLMuon(String maPM) {
-        XJdbc.update(update_SoLuongMuon, maPM);
+    public void updateSLMuon(String maKH) {
+        XJdbc.update(update_SoLuongMuon, maKH);
     }
     
-    public void updateTruSLMuon(String maPM) {
-        XJdbc.update(update_TruSoLuongMuon, maPM);
+    public void updateTruSLMuon(String maKH) {
+        XJdbc.update(update_TruSoLuongMuon, maKH);
     }
     
     public void updateSLMuon2(KhachHang kh) {
