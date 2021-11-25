@@ -15,7 +15,6 @@ import java.util.Date;
  */
 public class XDate {
     public static final SimpleDateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
-    public static final SimpleDateFormat DATE_FORMATER2 = new SimpleDateFormat("yyyy-MM-dd");
 
     //chuuyển String sang Date
     /*
@@ -32,20 +31,6 @@ public class XDate {
                 return XDate.now();
             }
             return DATE_FORMATER.parse(date);
-        } catch (ParseException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-    
-    public static Date toDate2(String date, String... pattern) {
-        try {
-            if (pattern.length > 0) {
-                DATE_FORMATER2.applyPattern(pattern[0]);
-            }
-            if (date == null) {
-                return XDate.now();
-            }
-            return DATE_FORMATER2.parse(date);
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }

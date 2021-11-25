@@ -1,10 +1,12 @@
 package com.library.form;
 
 import com.library.dao.CTPhieuMuonDAO;
+import com.library.dao.KhachHangDAO;
 import com.library.dao.PhieuMuonDao;
 import com.library.dao.SachDAO;
 import com.library.dao.theLoaiDAO;
 import com.library.entity.CTPhieuMuon;
+import com.library.entity.KhachHang;
 import com.library.entity.PhieuMuon;
 import com.library.entity.Sach;
 import com.library.entity.TheLoai;
@@ -20,6 +22,7 @@ import static java.awt.Color.white;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -38,9 +41,9 @@ public class form_MuonSach extends javax.swing.JFrame {
     PhieuMuonDao daoPM = new PhieuMuonDao();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
     theLoaiDAO daoTL = new theLoaiDAO();
+    KhachHangDAO daoKH = new KhachHangDAO();
     int tongMuon = 0;
     int gioiHan;
-    int soluongmuon;
     Sach sachChon;
     int index;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -49,7 +52,7 @@ public class form_MuonSach extends javax.swing.JFrame {
 
     public form_MuonSach() {
         initComponents();
-        gioiHan = 3 - soluongmuon;
+        gioiHan = 3 - XAuther.UserKH.getSoLuongMuon();
 
         // bảng 1
         mol.setColumnCount(0);
@@ -131,7 +134,7 @@ public class form_MuonSach extends javax.swing.JFrame {
                     sa.getTenSach(),
                     sa.getTacGia(),
                     sa.getTl(),
-                    sa.getNamXB(),
+                    XDate.toString(sa.getNamXB()),
                     sa.getnXB(),
                     sa.getGiaTien(),
                     sa.getNoiDat()
@@ -176,7 +179,7 @@ public class form_MuonSach extends javax.swing.JFrame {
                 sa.getTenSach(),
                 sa.getTacGia(),
                 sa.getTl(),
-                sa.getNamXB(),
+                XDate.toString(sa.getNamXB()),
                 sa.getnXB(),
                 sa.getGiaTien(),
                 sa.getNoiDat()
@@ -204,6 +207,19 @@ public class form_MuonSach extends javax.swing.JFrame {
         }
     }
 
+    public boolean checkNgayTra(JTextField txt, JTextField txt2) {
+        txt.setBackground(white);
+        LocalDate date = LocalDate.parse(txt.getText());
+        LocalDate date2 = LocalDate.parse(txt2.getText());
+        if (date2.isBefore(date)) {
+            txt2.setBackground(pink);
+            XMgsbox.alert(this, "Ngày Trả không được nhỏ hơn Ngày Mượn");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public boolean checkSoLuongMuon(String maKH) {
         String sql = "select SOLUONGMUON from PHIEUMUON, KHACHHANG where MAKH like '%" + maKH + "%'";
         try {
@@ -220,6 +236,23 @@ public class form_MuonSach extends javax.swing.JFrame {
 
         }
         return true;
+    }
+
+    KhachHang getForm() {
+        KhachHang kh = new KhachHang();
+        kh.setMaKH(XAuther.UserKH.getMaKH());
+        kh.setSoLuongMuon(XAuther.UserKH.getSoLuongMuon() + Integer.parseInt(lblTongMuon.getText()));
+        return kh;
+    }
+
+    void updateSLMuon() {
+        KhachHang kh = getForm();
+        try {
+            daoKH.updateSLMuon2(kh);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -563,7 +596,7 @@ public class form_MuonSach extends javax.swing.JFrame {
         sa.setTenSach(tblBangSach.getValueAt(index, 1) + "");
         sa.setTacGia(tblBangSach.getValueAt(index, 2) + "");
         sa.setTl((TheLoai) tblBangSach.getValueAt(index, 3));
-        sa.setNamXB(XDate.toDate2(tblBangSach.getValueAt(index, 4) + ""));
+        sa.setNamXB(XDate.toDate(tblBangSach.getValueAt(index, 4) + ""));
         sa.setnXB(tblBangSach.getValueAt(index, 5) + "");
         sa.setGiaTien(Float.parseFloat(tblBangSach.getValueAt(index, 6) + ""));
         sa.setNoiDat(tblBangSach.getValueAt(index, 7) + "");
@@ -585,46 +618,49 @@ public class form_MuonSach extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (XCheck.checkNullText(txtNgayTra)) {
             if (XCheck.checkDate(txtNgayTra)) {
-                if (check14Ngay(txtNgayMuon, txtNgayTra)) {
-                    if (tongMuon == 0) {
-                        XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
-                    } else if (tongMuon > gioiHan) {
-                        if (gioiHan == 0) {
+                if (check14Ngay(txtNgayMuon, txtNgayTra) == true) {
+                    if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
+                        if (tongMuon == 0) {
                             XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                        } else if (tongMuon > gioiHan) {
+                            if (gioiHan == 0) {
+                                XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                            } else {
+                                XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép! Vui Lòng Xóa Bớt Sách Để Mượn");
+                            }
                         } else {
-                            XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép! Vui Lòng Xóa Bớt Sách Để Mượn");
-                        }
-                    } else {
-                        String maPM = daoPM.selectTopMaPM();
-                        if (checkSoLuongMuon(XAuther.UserKH.getMaKH()) == true) {
+                            String maPM = daoPM.selectTopMaPM();
+                            if (checkSoLuongMuon(XAuther.UserKH.getMaKH()) == true) {
 //              Thêm mới một phiếu mượn
-                            PhieuMuon pm = new PhieuMuon();
-                            pm.setMaKH(XAuther.UserKH.getMaKH());
-                            pm.setMaNV(null);
-                            pm.setNgayMuon(XDate.toDate(txtNgayMuon.getText()));
-                            pm.setNgayTra(XDate.toDate(txtNgayTra.getText()));
-                            pm.setSoTienCoc(Float.parseFloat("0.0"));
-                            pm.setTrangThai("Chưa Duyệt");
-                            daoPM.insert(pm);
+                                PhieuMuon pm = new PhieuMuon();
+                                pm.setMaKH(XAuther.UserKH.getMaKH());
+                                pm.setMaNV(null);
+                                pm.setNgayMuon(XDate.toDate(txtNgayMuon.getText()));
+                                pm.setNgayTra(XDate.toDate(txtNgayTra.getText()));
+                                pm.setSoTienCoc(Float.parseFloat("0.0"));
+                                pm.setTrangThai("Chưa Duyệt");
+                                daoPM.insert(pm);
 
 //              Thêm các sách vào chi tiết phiếu mượn
-                            int rowCount = tblBangSachMuon.getRowCount();
-                            String maPM2 = daoPM.selectTopMaPM();
-                            for (int i = 0; i < rowCount; i++) {
-                                CTPhieuMuon ctpm = new CTPhieuMuon();
-                                ctpm.setMaPM(Integer.parseInt(maPM2));
-                                ctpm.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
-                                ctpm.setTinhTrangSach("Bình Thường");
-                                daoCTPM.insert(ctpm);
+                                int rowCount = tblBangSachMuon.getRowCount();
+                                String maPM2 = daoPM.selectTopMaPM();
+                                for (int i = 0; i < rowCount; i++) {
+                                    CTPhieuMuon ctpm = new CTPhieuMuon();
+                                    ctpm.setMaPM(Integer.parseInt(maPM2));
+                                    ctpm.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
+                                    ctpm.setTinhTrangSach("Bình Thường");
+                                    daoCTPM.insert(ctpm);
+                                }
+                                updateSLMuon();
+                                gioiHan -= rowCount;
+                                lblGioiHan.setText(String.valueOf(gioiHan));
+                                XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
+                                mol2.setRowCount(0);
+                                txtNgayTra.setText("");
+                                setTongMuon();
+                            } else {
+                                XMgsbox.alert(this, "Bạn Đã Mượn Tối Đa 3 Quyển Sách");
                             }
-                            gioiHan -= rowCount;
-                            lblGioiHan.setText(String.valueOf(gioiHan));
-                            XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
-                            mol2.setRowCount(0);
-                            txtNgayTra.setText("");
-                            setTongMuon();
-                        } else {
-                            XMgsbox.alert(this, "Bạn Đã Mượn Tối Đa 3 Quyển Sách");
                         }
                     }
                 }

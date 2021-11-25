@@ -27,7 +27,6 @@ public class main_form_KH extends javax.swing.JFrame {
     public main_form_KH() {
         initComponents();
         //set màu cho menu item
-        setColor(mniSachTaiLieu);
         setColor(mniMuonTraSach);
         setColor(mniDx);
         setColor(mniDoiMk);
@@ -70,7 +69,6 @@ public class main_form_KH extends javax.swing.JFrame {
         mniDx = new javax.swing.JMenuItem();
         mniDoiMk = new javax.swing.JMenuItem();
         mn1 = new javax.swing.JMenu();
-        mniSachTaiLieu = new javax.swing.JMenuItem();
         mniMuonTraSach = new javax.swing.JMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
@@ -215,22 +213,7 @@ public class main_form_KH extends javax.swing.JFrame {
         mn1.setText("Thông tin");
         mn1.setMargin(new java.awt.Insets(0, 10, 0, 10));
 
-        mniSachTaiLieu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        mniSachTaiLieu.setBackground(new java.awt.Color(255, 102, 204));
-        mniSachTaiLieu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        mniSachTaiLieu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/open-book.png"))); // NOI18N
-        mniSachTaiLieu.setText("Sách tài liệu");
-        mniSachTaiLieu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        mniSachTaiLieu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        mniSachTaiLieu.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        mniSachTaiLieu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSachTaiLieuActionPerformed(evt);
-            }
-        });
-        mn1.add(mniSachTaiLieu);
-
-        mniMuonTraSach.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniMuonTraSach.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         mniMuonTraSach.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniMuonTraSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_important_book_36px_2 1.png"))); // NOI18N
         mniMuonTraSach.setText("Mượn sách");
@@ -263,10 +246,6 @@ public class main_form_KH extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mniSachTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachTaiLieuActionPerformed
-
-    }//GEN-LAST:event_mniSachTaiLieuActionPerformed
-
     private void mniDoiMkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMkActionPerformed
         DoiMatKhau_form dmk = new DoiMatKhau_form();
         dmk.setVisible(true);
@@ -276,11 +255,11 @@ public class main_form_KH extends javax.swing.JFrame {
         int y = JOptionPane.showConfirmDialog(
                 this, "Bạn có muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
 
-        if (y == JOptionPane.YES_OPTION) {
-            this.dispose();
+        if (y == JOptionPane.YES_OPTION) {           
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
             login_Form l = new login_Form();
             l.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_bntDangXuatActionPerformed
 
@@ -288,7 +267,7 @@ public class main_form_KH extends javax.swing.JFrame {
         int y = JOptionPane.showConfirmDialog(
                 this, "Bạn có muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
 
-        if (y == JOptionPane.YES_OPTION) {          
+        if (y == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
             login_Form l = new login_Form();
             l.setVisible(true);
@@ -297,11 +276,13 @@ public class main_form_KH extends javax.swing.JFrame {
     }//GEN-LAST:event_mniDxActionPerformed
 
     private void mniMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMuonTraSachActionPerformed
-
+        form_MuonSach fs = new form_MuonSach();
+        fs.setVisible(true);
     }//GEN-LAST:event_mniMuonTraSachActionPerformed
 
     private void btnTTmuonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTmuonSachActionPerformed
-
+        form_MuonSach fs = new form_MuonSach();
+        fs.setVisible(true);
     }//GEN-LAST:event_btnTTmuonSachActionPerformed
 
     void setColor(JMenuItem item) {
@@ -364,6 +345,5 @@ public class main_form_KH extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniDoiMk;
     private javax.swing.JMenuItem mniDx;
     private javax.swing.JMenuItem mniMuonTraSach;
-    private javax.swing.JMenuItem mniSachTaiLieu;
     // End of variables declaration//GEN-END:variables
 }
