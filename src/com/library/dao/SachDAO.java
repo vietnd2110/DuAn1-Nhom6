@@ -17,6 +17,7 @@ public class SachDAO extends LibraryDAO<Sach, String> {
     final String select_All_SQL = "select * from SACH";
     final String select_ByID_SQL = "select * from SACH where MaSach = ?";
     final String select_ByMaTL = "select * from SACH where MaTL = ?";
+    final String select_ByTenSach = "select * from SACH where TenSach = ?";
 
     @Override
     public void insert(Sach entity) {
@@ -97,4 +98,7 @@ public class SachDAO extends LibraryDAO<Sach, String> {
         return selectBySQL(select_ByMaTL, maTL);
     }
 
+    public List<Sach> timKiemSach(String tenSach) {
+        return selectBySQL(select_ByTenSach, tenSach);
+    }
 }

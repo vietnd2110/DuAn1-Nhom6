@@ -255,6 +255,26 @@ public class form_MuonSach extends javax.swing.JFrame {
 
     }
 
+    void loadTableTk() {
+        DefaultTableModel model = (DefaultTableModel) tblBangSach.getModel();
+        model.setRowCount(0);
+        String timkiem = txtTimKiem.getText();
+        List<Sach> list = daoSA.timKiemSach(timkiem);
+        for (Sach sa : list) {
+            Object[] row = {
+                sa.getMaSach(),
+                sa.getTenSach(),
+                sa.getTacGia(),
+                sa.getTl(),
+                XDate.toString(sa.getNamXB()),
+                sa.getnXB(),
+                sa.getGiaTien(),
+                sa.getNoiDat()
+            };
+            model.addRow(row);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -306,6 +326,11 @@ public class form_MuonSach extends javax.swing.JFrame {
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_search_28px 1.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setText("Thể loại:");
@@ -616,50 +641,54 @@ public class form_MuonSach extends javax.swing.JFrame {
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
-        if (XCheck.checkNullText(txtNgayTra)) {
-            if (XCheck.checkDate(txtNgayTra)) {
-                if (check14Ngay(txtNgayMuon, txtNgayTra) == true) {
-                    if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
-                        if (tongMuon == 0) {
-                            XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
-                        } else if (tongMuon > gioiHan) {
-                            if (gioiHan == 0) {
+        if (tblBangSachMuon.getRowCount() == 0) {
+            XMgsbox.alert(this, "Bạng Sách Mượn Đang Trống! Vui lòng mượn sách để xác nhận mượn");
+        } else {
+            if (XCheck.checkNullText(txtNgayTra)) {
+                if (XCheck.checkDate(txtNgayTra)) {
+                    if (check14Ngay(txtNgayMuon, txtNgayTra) == true) {
+                        if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
+                            if (tongMuon == 0) {
                                 XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                            } else if (tongMuon > gioiHan) {
+                                if (gioiHan == 0) {
+                                    XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                                } else {
+                                    XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép! Vui Lòng Xóa Bớt Sách Để Mượn");
+                                }
                             } else {
-                                XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép! Vui Lòng Xóa Bớt Sách Để Mượn");
-                            }
-                        } else {
-                            String maPM = daoPM.selectTopMaPM();
-                            if (checkSoLuongMuon(XAuther.UserKH.getMaKH()) == true) {
+                                String maPM = daoPM.selectTopMaPM();
+                                if (checkSoLuongMuon(XAuther.UserKH.getMaKH()) == true) {
 //              Thêm mới một phiếu mượn
-                                PhieuMuon pm = new PhieuMuon();
-                                pm.setMaKH(XAuther.UserKH.getMaKH());
-                                pm.setMaNV(null);
-                                pm.setNgayMuon(XDate.toDate(txtNgayMuon.getText()));
-                                pm.setNgayTra(XDate.toDate(txtNgayTra.getText()));
-                                pm.setSoTienCoc(Float.parseFloat("0.0"));
-                                pm.setTrangThai("Chưa Duyệt");
-                                daoPM.insert(pm);
+                                    PhieuMuon pm = new PhieuMuon();
+                                    pm.setMaKH(XAuther.UserKH.getMaKH());
+                                    pm.setMaNV(null);
+                                    pm.setNgayMuon(XDate.toDate(txtNgayMuon.getText()));
+                                    pm.setNgayTra(XDate.toDate(txtNgayTra.getText()));
+                                    pm.setSoTienCoc(Float.parseFloat("0.0"));
+                                    pm.setTrangThai("Chưa Duyệt");
+                                    daoPM.insert(pm);
 
 //              Thêm các sách vào chi tiết phiếu mượn
-                                int rowCount = tblBangSachMuon.getRowCount();
-                                String maPM2 = daoPM.selectTopMaPM();
-                                for (int i = 0; i < rowCount; i++) {
-                                    CTPhieuMuon ctpm = new CTPhieuMuon();
-                                    ctpm.setMaPM(Integer.parseInt(maPM2));
-                                    ctpm.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
-                                    ctpm.setTinhTrangSach("Bình Thường");
-                                    daoCTPM.insert(ctpm);
+                                    int rowCount = tblBangSachMuon.getRowCount();
+                                    String maPM2 = daoPM.selectTopMaPM();
+                                    for (int i = 0; i < rowCount; i++) {
+                                        CTPhieuMuon ctpm = new CTPhieuMuon();
+                                        ctpm.setMaPM(Integer.parseInt(maPM2));
+                                        ctpm.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
+                                        ctpm.setTinhTrangSach("Bình Thường");
+                                        daoCTPM.insert(ctpm);
+                                    }
+                                    updateSLMuon();
+                                    gioiHan -= rowCount;
+                                    lblGioiHan.setText(String.valueOf(gioiHan));
+                                    XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
+                                    mol2.setRowCount(0);
+                                    txtNgayTra.setText("");
+                                    setTongMuon();
+                                } else {
+                                    XMgsbox.alert(this, "Bạn Đã Mượn Tối Đa 3 Quyển Sách");
                                 }
-                                updateSLMuon();
-                                gioiHan -= rowCount;
-                                lblGioiHan.setText(String.valueOf(gioiHan));
-                                XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
-                                mol2.setRowCount(0);
-                                txtNgayTra.setText("");
-                                setTongMuon();
-                            } else {
-                                XMgsbox.alert(this, "Bạn Đã Mượn Tối Đa 3 Quyển Sách");
                             }
                         }
                     }
@@ -667,6 +696,23 @@ public class form_MuonSach extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        String timkiem = txtTimKiem.getText();
+        List<Sach> listPM = daoSA.timKiemSach(timkiem);
+        if (timkiem.equals("")) {
+            XMgsbox.alert(this, "Bạn chưa nhập tên Sách cần tìm kiếm");
+        } else {
+            if (!listPM.isEmpty()) {
+                loadTableTk();
+                txtTimKiem.setText("");
+            } else {
+                XMgsbox.alert(this, "Sách bạn cần tìm không tồn tại");
+                txtTimKiem.setText("");
+            }
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
