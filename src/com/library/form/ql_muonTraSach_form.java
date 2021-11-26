@@ -423,7 +423,6 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         });
 
         txtTienPhat.setText("0.0");
-        txtTienPhat.setEnabled(false);
 
         btnThemCTPM.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnThemCTPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
