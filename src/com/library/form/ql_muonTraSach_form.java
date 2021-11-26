@@ -14,6 +14,8 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ql_muonTraSach_form extends javax.swing.JFrame {
 
@@ -25,6 +27,8 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     int index;
     int check = 1;
     public Connection conn = XJdbc.getConnection();
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDateTime now = LocalDateTime.now();
 
     public ql_muonTraSach_form() {
         initComponents();
@@ -42,6 +46,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
         for (String x : col2) {
             mol_2.addColumn(x);
         }
+        txtNgayThucTra.setText(dtf.format(now));
         //logo
         init();
         fillToTablePM();
