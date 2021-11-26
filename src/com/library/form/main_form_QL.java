@@ -21,15 +21,6 @@ public class main_form_QL extends javax.swing.JFrame {
 
     public main_form_QL() {
         initComponents();
-        setColor(mnu1);
-        setColor(mnu2);
-        setColor(mniDx);
-        setColor(mniDoiMk);
-        setColor(mniPm);
-        setColor(mniSachMuonTheoDays);
-        setColor(mniSachTaiLieu);
-        setColor(mniTTphat);
-        setColor(mniThongKeMuonTs);
         init();
     }
 
@@ -383,7 +374,7 @@ public class main_form_QL extends javax.swing.JFrame {
         int y = JOptionPane.showConfirmDialog(
                 this, "Bạn có muốn đăng xuất không ?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
 
-        if (y == JOptionPane.YES_OPTION) {           
+        if (y == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
             login_Form l = new login_Form();
             l.setVisible(true);
@@ -417,21 +408,23 @@ public class main_form_QL extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMuonTraSachActionPerformed
 
     private void mniThongKeMuonTsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongKeMuonTsActionPerformed
-
+        thongKe_SachTheoNgay_form tks = new thongKe_SachTheoNgay_form();
+        tks.setVisible(true);
     }//GEN-LAST:event_mniThongKeMuonTsActionPerformed
 
     private void mniSachMuonTheoDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachMuonTheoDaysActionPerformed
-
+        thongKe_SachTheoNgay_form tks = new thongKe_SachTheoNgay_form();
+        tks.setVisible(true);
     }//GEN-LAST:event_mniSachMuonTheoDaysActionPerformed
 
     private void mniTTphatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTTphatActionPerformed
-
+        if (XAuther.isManager()) {
+            ThongKeTienPhat tkt = new ThongKeTienPhat();
+            tkt.setVisible(true);
+        } else {
+            XMgsbox.alert(this, "Bạn không có quyền vào phần này");
+        }
     }//GEN-LAST:event_mniTTphatActionPerformed
-
-    void setColor(JMenuItem item) {
-        item.setOpaque(true);
-        item.setBackground(Color.gray);
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
