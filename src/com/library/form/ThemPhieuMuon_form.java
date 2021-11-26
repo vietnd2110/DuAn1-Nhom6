@@ -14,6 +14,8 @@ import static java.awt.Color.white;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,18 +28,16 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
     int index;
     int check = 1;
     public Connection conn = XJdbc.getConnection();
-    //dùng after để so sánh ngày mượnn bé hơn ngày trả 
-
-    /*ví dụ if ngaymuon.after(ngaytra){
-        //do code here }
-     */
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDateTime now = LocalDateTime.now();
+    
     public ThemPhieuMuon_form() {
         initComponents();
         init();
         fillToTablePM();
         btnSuaPM.setEnabled(false);
         txtMaNV.setText(XAuther.USER.getMaNV());
-
+        txtNgayMuon.setText(dtf.format(now));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
