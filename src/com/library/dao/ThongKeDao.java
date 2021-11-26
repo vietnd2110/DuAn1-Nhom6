@@ -41,7 +41,7 @@ public class ThongKeDao {
     }
      public List<Object[]> getSachMuonTheoNgay(int ngay ){
         String sql = "{CALL  sp_muonsachTheoNgay(?)}";
-        String cols[] = {"MASACH","TENSACH","TENTL","TACGIA","NAMXB","NXB","NGAYMUON","NGAYTRA","SOLUONGMUON"};
+        String cols[] = {"MASACH","TENSACH","TENTL","TACGIA","NAMXB","NXB","NGAYMUON","NGAYTRA"};
         return getListArray(sql, cols, ngay);
     }
       public List<Object[]> getTienPhatTheoThang(int thang ){

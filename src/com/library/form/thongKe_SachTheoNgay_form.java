@@ -55,7 +55,7 @@ public class thongKe_SachTheoNgay_form extends javax.swing.JFrame {
     }
      void loadColumn(){
         DefaultTableModel mol=(DefaultTableModel) tblThongKeMuonSach.getModel();
-        String []col={"Mã Sách","Tên Sách","Thể loại","Tác giả","Năm XB","Nhà Xb",("Ngày mượn"),"Ngày trả","Số lượng"};
+        String []col={"Mã Sách","Tên Sách","Thể loại","Tác giả","Năm XB","Nhà Xb",("Ngày mượn"),"Ngày trả"};
         for (String x : col) {
             mol.addColumn(x);
         } 
