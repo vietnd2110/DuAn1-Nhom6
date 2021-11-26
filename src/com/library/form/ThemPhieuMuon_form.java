@@ -205,6 +205,19 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         }
     }
 
+    public boolean checkNgayTra(JTextField txt, JTextField txt2) {
+        txt.setBackground(white);
+        Date date = XDate.toDate(txt.getText());
+        Date date2 = XDate.toDate(txt2.getText());
+        if (date.after(date2)) {
+            txt2.setBackground(pink);
+            XMgsbox.alert(this, "Ngày Trả không được nhỏ hơn Ngày Mượn");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,7 +274,7 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel6.setText("Ngày Trả");
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa Duyệt", "Chưa Trả", " " }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa Duyệt", "Chưa Trả" }));
 
         tblBangPM.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -421,9 +434,11 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
                     && XCheck.checkDate(txtNgayTra)) {
                 if (check14Ngay(txtNgayMuon, txtNgayTra)) {
                     if (checkSoLuongMuon(txtMaKH.getText()) == true) {
-                        insertPM();
-                    } else {
-                        XMgsbox.alert(this, "Khách Hàng Này Đã Mượn Tối Đa 3 Cuốn Sách");
+                        if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
+                            insertPM();
+                        } else {
+                            XMgsbox.alert(this, "Khách Hàng Này Đã Mượn Tối Đa 3 Cuốn Sách");
+                        }
                     }
                 }
             }
@@ -440,9 +455,11 @@ public class ThemPhieuMuon_form extends javax.swing.JFrame {
                     && XCheck.checkDate(txtNgayMuon)
                     && XCheck.checkDate(txtNgayTra)) {
                 if (check14Ngay(txtNgayMuon, txtNgayTra)) {
-                    checkDL();
-                    if (check == 1) {
-                        this.updatePM();
+                    if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
+                        checkDL();
+                        if (check == 1) {
+                            this.updatePM();
+                        }
                     }
                 }
             }

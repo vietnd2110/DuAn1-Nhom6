@@ -26,12 +26,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.xml.crypto.Data;
 
 public class form_MuonSach extends javax.swing.JFrame {
 
@@ -209,9 +211,9 @@ public class form_MuonSach extends javax.swing.JFrame {
 
     public boolean checkNgayTra(JTextField txt, JTextField txt2) {
         txt.setBackground(white);
-        LocalDate date = LocalDate.parse(txt.getText());
-        LocalDate date2 = LocalDate.parse(txt2.getText());
-        if (date2.isBefore(date)) {
+        Date date = XDate.toDate(txt.getText());
+        Date date2 = XDate.toDate(txt2.getText());
+        if (date.after(date2)) {
             txt2.setBackground(pink);
             XMgsbox.alert(this, "Ngày Trả không được nhỏ hơn Ngày Mượn");
             return false;
