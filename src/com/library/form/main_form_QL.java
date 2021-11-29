@@ -131,6 +131,11 @@ public class main_form_QL extends javax.swing.JFrame {
         btnThongKeMuonTra.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThongKeMuonTra.setMargin(new java.awt.Insets(2, 25, 2, 25));
         btnThongKeMuonTra.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThongKeMuonTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeMuonTraActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnThongKeMuonTra);
         jToolBar1.add(jSeparator2);
 
@@ -419,12 +424,18 @@ public class main_form_QL extends javax.swing.JFrame {
 
     private void mniTTphatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTTphatActionPerformed
         if (XAuther.isManager()) {
+            XMgsbox.alert(this, "Bạn không có quyền vào phần này");
+        } else {
             ThongKeTienPhat tkt = new ThongKeTienPhat();
             tkt.setVisible(true);
-        } else {
-            XMgsbox.alert(this, "Bạn không có quyền vào phần này");
         }
     }//GEN-LAST:event_mniTTphatActionPerformed
+
+    private void btnThongKeMuonTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeMuonTraActionPerformed
+        // TODO add your handling code here:
+        thongKe_MuonTraSach_form tkemuontra = new thongKe_MuonTraSach_form();
+        tkemuontra.setVisible(true);
+    }//GEN-LAST:event_btnThongKeMuonTraActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
