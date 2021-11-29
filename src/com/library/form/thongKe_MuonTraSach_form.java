@@ -97,13 +97,15 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(218, 245, 213));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
             }
         });
 
+        cboTrangThai.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
+        cboTrangThai.setForeground(new java.awt.Color(255, 255, 255));
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboTrangThai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +114,7 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Trạng thái");
 
         tblThongKeMuonSach.setModel(new javax.swing.table.DefaultTableModel(
@@ -125,6 +128,7 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblThongKeMuonSach);
 
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_microsoft_people_36px 1.png"))); // NOI18N
         jLabel1.setText("Thống kê mượn trả sách");
@@ -141,22 +145,22 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
+                        .addGap(208, 208, 208)
                         .addComponent(jLabel2)
-                        .addGap(61, 61, 61)
-                        .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(192, Short.MAX_VALUE))
+                        .addGap(56, 56, 56)
+                        .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

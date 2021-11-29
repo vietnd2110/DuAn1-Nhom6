@@ -82,10 +82,11 @@ public class ThongKeTienPhat extends javax.swing.JFrame {
         tblThongKe = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         cbxThang = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(87, 130, 104));
+        jPanel1.setBackground(new java.awt.Color(173, 172, 245));
 
         tblThongKe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblThongKe.setModel(new javax.swing.table.DefaultTableModel(
@@ -98,21 +99,25 @@ public class ThongKeTienPhat extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblThongKe);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_money_circulation_36px 1.png"))); // NOI18N
-        jLabel1.setText("THỐNG KÊ TIỀN PHẠT THEO THÁNG");
+        jLabel1.setText("Thống kê tiền phạt theo tháng");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         cbxThang.setBackground(new java.awt.Color(51, 51, 255));
-        cbxThang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cbxThang.setFont(new java.awt.Font("Bahnschrift", 1, 12)); // NOI18N
         cbxThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbxThang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxThangActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 19)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Chọn tháng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,12 +127,14 @@ public class ThongKeTienPhat extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(204, 204, 204)
+                        .addComponent(jLabel2)
+                        .addGap(57, 57, 57)
+                        .addComponent(cbxThang, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(317, 317, 317)
-                        .addComponent(cbxThang, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(321, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +142,9 @@ public class ThongKeTienPhat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
-                .addComponent(cbxThang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbxThang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -197,6 +206,7 @@ public class ThongKeTienPhat extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxThang;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblThongKe;
