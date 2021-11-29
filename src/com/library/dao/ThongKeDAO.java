@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author LENOVO
  */
-public class ThongKeDao {
+public class ThongKeDAO {
     
     private List<Object[]> getListArray(String sql, String [] cols, Object...args){
         try {

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhieuMuonDao extends LibraryDAO<PhieuMuon, Integer> {
+public class PhieuMuonDAO extends LibraryDAO<PhieuMuon, Integer> {
 
     final String INSERT_SQL = "INSERT INTO PHIEUMUON(MAKH,MANV,NGAYMUON,NGAYTRA,SOTIENCOC,TRANGTHAI)VALUES(?, ?, ?, ?, ?, ?)";
     final String UPDATE_SQL = "update PHIEUMUON set MAKH=?, MANV=?, NGAYMUON=?, NGAYTRA=?, SOTIENCOC=?, TRANGTHAI=? where MAPM=?";

@@ -1,8 +1,8 @@
-package com.library.form;
+package com.library.form.quanli;
 
 import com.library.dao.CTPhieuMuonDAO;
 import com.library.dao.KhachHangDAO;
-import com.library.dao.PhieuMuonDao;
+import com.library.dao.PhieuMuonDAO;
 import com.library.entity.CTPhieuMuon;
 import com.library.entity.PhieuMuon;
 import com.library.helper.XCheck;
@@ -18,11 +18,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ql_muonTraSach_form extends javax.swing.JFrame {
+public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
     DefaultTableModel mol = new DefaultTableModel();
     DefaultTableModel mol_2 = new DefaultTableModel();
-    PhieuMuonDao daoPM = new PhieuMuonDao();
+    PhieuMuonDAO daoPM = new PhieuMuonDAO();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
     int index;
@@ -31,7 +31,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDateTime now = LocalDateTime.now();
 
-    public ql_muonTraSach_form() {
+    public form_quanli_QuanLiMuonTraSach() {
         initComponents();
         //table 1
         mol.setColumnCount(0);
@@ -611,7 +611,7 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
 
     private void btnThemPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPMActionPerformed
         // TODO add your handling code here:
-        ThemPhieuMuon_form themPM = new ThemPhieuMuon_form();
+        form_quanli_ThemPhieuMuon themPM = new form_quanli_ThemPhieuMuon();
         themPM.setVisible(true);
     }//GEN-LAST:event_btnThemPMActionPerformed
 
@@ -679,20 +679,21 @@ public class ql_muonTraSach_form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ql_muonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiMuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ql_muonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiMuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ql_muonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiMuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ql_muonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiMuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ql_muonTraSach_form().setVisible(true);
+                new form_quanli_QuanLiMuonTraSach().setVisible(true);
             }
         });
     }

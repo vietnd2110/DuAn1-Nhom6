@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.library.form;
+package com.library.form.quanli;
 
 import com.library.helper.XCheck;
 import com.library.helper.XDate;
@@ -19,14 +19,14 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class main_form_QLNV extends javax.swing.JFrame {
+public class form_quanli_MainFormQLNhanVien extends javax.swing.JFrame {
 
     DefaultTableModel mol = new DefaultTableModel();
     NhanVienDAO dao;
     int index;
     NhanVien nv;
 
-    public main_form_QLNV() {
+    public form_quanli_MainFormQLNhanVien() {
         initComponents();
         init();
         mol = (DefaultTableModel) tblNhanVien.getModel();
@@ -583,14 +583,46 @@ public class main_form_QLNV extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main_form_QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQLNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main_form_QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQLNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main_form_QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQLNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main_form_QLNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQLNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -627,7 +659,7 @@ public class main_form_QLNV extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main_form_QLNV().setVisible(true);
+                new form_quanli_MainFormQLNhanVien().setVisible(true);
             }
         });
     }

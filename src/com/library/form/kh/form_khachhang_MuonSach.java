@@ -1,8 +1,8 @@
-package com.library.form;
+package com.library.form.kh;
 
 import com.library.dao.CTPhieuMuonDAO;
 import com.library.dao.KhachHangDAO;
-import com.library.dao.PhieuMuonDao;
+import com.library.dao.PhieuMuonDAO;
 import com.library.dao.SachDAO;
 import com.library.dao.theLoaiDAO;
 import com.library.entity.CTPhieuMuon;
@@ -35,12 +35,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.xml.crypto.Data;
 
-public class form_MuonSach extends javax.swing.JFrame {
+public class form_khachhang_MuonSach extends javax.swing.JFrame {
 
     DefaultTableModel mol = new DefaultTableModel();
     DefaultTableModel mol2 = new DefaultTableModel();
     SachDAO daoSA = new SachDAO();
-    PhieuMuonDao daoPM = new PhieuMuonDao();
+    PhieuMuonDAO daoPM = new PhieuMuonDAO();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
     theLoaiDAO daoTL = new theLoaiDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
@@ -52,7 +52,7 @@ public class form_MuonSach extends javax.swing.JFrame {
     LocalDateTime now = LocalDateTime.now();
     public Connection conn = XJdbc.getConnection();
 
-    public form_MuonSach() {
+    public form_khachhang_MuonSach() {
         initComponents();
         gioiHan = 3 - XAuther.UserKH.getSoLuongMuon();
 
@@ -733,25 +733,27 @@ public class form_MuonSach extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(form_MuonSach.class
+            java.util.logging.Logger.getLogger(form_khachhang_MuonSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(form_MuonSach.class
+            java.util.logging.Logger.getLogger(form_khachhang_MuonSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(form_MuonSach.class
+            java.util.logging.Logger.getLogger(form_khachhang_MuonSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(form_MuonSach.class
+            java.util.logging.Logger.getLogger(form_khachhang_MuonSach.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new form_MuonSach().setVisible(true);
+                new form_khachhang_MuonSach().setVisible(true);
             }
         });
     }

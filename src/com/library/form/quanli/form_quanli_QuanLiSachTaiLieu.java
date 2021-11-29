@@ -1,5 +1,5 @@
 
-package com.library.form;
+package com.library.form.quanli;
 
 import com.library.dao.SachDAO;
 import com.library.dao.theLoaiDAO;
@@ -20,7 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 
-public class ql_sach_tai_lieu extends javax.swing.JFrame {
+public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
 
     DefaultTableModel mol=new DefaultTableModel();
     DefaultComboBoxModel<TheLoai> cbo_model=new DefaultComboBoxModel<>();
@@ -29,7 +29,7 @@ public class ql_sach_tai_lieu extends javax.swing.JFrame {
     theLoaiDAO tlDao=new theLoaiDAO();
     int index;
    
-    public ql_sach_tai_lieu() {
+    public form_quanli_QuanLiSachTaiLieu() {
         initComponents();
         setLocationRelativeTo(null);
         cboMaTl.removeAllItems();
@@ -406,7 +406,7 @@ public class ql_sach_tai_lieu extends javax.swing.JFrame {
                    int row= fillToTable(s.getMaSach());
                    tblSach.setRowSelectionInterval(row, row);
                } catch (ParseException ex) {
-                   Logger.getLogger(ql_sach_tai_lieu.class.getName()).log(Level.SEVERE, null, ex);
+                   Logger.getLogger(form_quanli_QuanLiSachTaiLieu.class.getName()).log(Level.SEVERE, null, ex);
                }
             
                
@@ -470,18 +470,18 @@ public class ql_sach_tai_lieu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ql_sach_tai_lieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiSachTaiLieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ql_sach_tai_lieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiSachTaiLieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ql_sach_tai_lieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiSachTaiLieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ql_sach_tai_lieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_quanli_QuanLiSachTaiLieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ql_sach_tai_lieu().setVisible(true);
+                new form_quanli_QuanLiSachTaiLieu().setVisible(true);
             }
         });
     }

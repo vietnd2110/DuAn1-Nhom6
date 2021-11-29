@@ -1,7 +1,7 @@
-package com.library.form;
+package com.library.form.thongke;
 
-import com.library.dao.PhieuMuonDao;
-import com.library.dao.ThongKeDao;
+import com.library.dao.PhieuMuonDAO;
+import com.library.dao.ThongKeDAO;
 import com.library.helper.XImages;
 import com.library.helper.XJdbc;
 import java.awt.Image;
@@ -14,16 +14,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
-public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
+public class form_thongke_MuonTraSach extends javax.swing.JFrame {
 
-    ThongKeDao dao = new ThongKeDao();
-    PhieuMuonDao pmDao = new PhieuMuonDao();
+    ThongKeDAO dao = new ThongKeDAO();
+    PhieuMuonDAO pmDao = new PhieuMuonDAO();
     SimpleDateFormat spd = new SimpleDateFormat("dd-MM-yyyy");
     Connection con;
     DefaultTableModel mol = new DefaultTableModel();
     DefaultComboBoxModel cbo_model;
 
-    public thongKe_MuonTraSach_form() {
+    public form_thongke_MuonTraSach() {
         initComponents();
         setTitle("Libray management");
         setLocationRelativeTo(null);
@@ -90,7 +90,6 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         cboTrangThai = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblThongKeMuonSach = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -112,10 +111,6 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
                 cboTrangThaiActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Trạng thái");
 
         tblThongKeMuonSach.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,11 +140,9 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel2)
-                        .addGap(56, 56, 56)
+                        .addGap(282, 282, 282)
                         .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,10 +150,8 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -172,7 +163,10 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -201,14 +195,22 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(thongKe_MuonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_thongke_MuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(thongKe_MuonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_thongke_MuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(thongKe_MuonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_thongke_MuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(thongKe_MuonTraSach_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_thongke_MuonTraSach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -221,7 +223,7 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new thongKe_MuonTraSach_form().setVisible(true);
+                new form_thongke_MuonTraSach().setVisible(true);
             }
         });
     }
@@ -229,7 +231,6 @@ public class thongKe_MuonTraSach_form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblThongKeMuonSach;

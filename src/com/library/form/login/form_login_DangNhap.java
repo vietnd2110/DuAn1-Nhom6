@@ -1,9 +1,11 @@
-package com.library.form;
+package com.library.form.login;
 
+import com.library.form.quanli.form_quanli_MainFormQuanLi;
 import com.library.dao.KhachHangDAO;
 import com.library.dao.NhanVienDAO;
 import com.library.entity.KhachHang;
 import com.library.entity.NhanVien;
+import com.library.form.kh.form_khachhang_MainFormKhachHang;
 import com.library.helper.XAuther;
 import com.library.helper.XImages;
 import com.library.helper.XMgsbox;
@@ -11,12 +13,12 @@ import static java.awt.Color.red;
 import static java.awt.Color.white;
 import javax.swing.JOptionPane;
 
-public class login_Form extends javax.swing.JFrame {
+public class form_login_DangNhap extends javax.swing.JFrame {
 
     NhanVienDAO dao = new NhanVienDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
 
-    public login_Form() {
+    public form_login_DangNhap() {
         initComponents();
         init();
     }
@@ -42,7 +44,7 @@ public class login_Form extends javax.swing.JFrame {
                     } else {
                         XAuther.USER = user;
                         XMgsbox.alert(this, "Đăng nhập thành công!");
-                        main_form_QL mainQL = new main_form_QL();
+                        form_quanli_MainFormQuanLi mainQL = new form_quanli_MainFormQuanLi();
                         mainQL.setVisible(true);
                         this.dispose();
                     }
@@ -58,7 +60,7 @@ public class login_Form extends javax.swing.JFrame {
                     } else {
                         XAuther.UserKH = user2;
                         XMgsbox.alert(this, "Đăng nhập thành công!");
-                        main_form_KH mainKH = new main_form_KH();
+                        form_khachhang_MainFormKhachHang mainKH = new form_khachhang_MainFormKhachHang();
                         mainKH.setVisible(true);
                         this.dispose();
                     }
@@ -235,21 +237,23 @@ public class login_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login_Form().setVisible(true);
+                new form_login_DangNhap().setVisible(true);
             }
         });
     }
