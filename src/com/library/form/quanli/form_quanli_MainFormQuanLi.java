@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.library.form;
+package com.library.form.quanli;
 
+import com.library.form.login.form_login_DoiMatKhau;
+import com.library.form.login.form_login_DangNhap;
+import com.library.form.thongke.form_thongke_MuonTraSach;
+import com.library.form.thongke.form_thongke_SachTheoNgay;
+import com.library.form.thongke.form_thongke_TienPhatTheoThang;
 import com.library.helper.XAuther;
 import com.library.helper.XImages;
 import com.library.helper.XMgsbox;
@@ -17,9 +22,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-public class main_form_QL extends javax.swing.JFrame {
+public class form_quanli_MainFormQuanLi extends javax.swing.JFrame {
 
-    public main_form_QL() {
+    public form_quanli_MainFormQuanLi() {
         initComponents();
         init();
     }
@@ -351,7 +356,7 @@ public class main_form_QL extends javax.swing.JFrame {
 
     private void mnu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu1ActionPerformed
         if (XAuther.isManager()) {
-            main_form_QLNV nv = new main_form_QLNV();
+            form_quanli_MainFormQLNhanVien nv = new form_quanli_MainFormQLNhanVien();
             nv.setVisible(true);
         } else {
             XMgsbox.alert(this, "Bạn không có quyền vào mục này!");
@@ -359,7 +364,7 @@ public class main_form_QL extends javax.swing.JFrame {
     }//GEN-LAST:event_mnu1ActionPerformed
 
     private void mniDoiMkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMkActionPerformed
-        DoiMatKhau_form dmk = new DoiMatKhau_form();
+        form_login_DoiMatKhau dmk = new form_login_DoiMatKhau();
         dmk.setVisible(true);
     }//GEN-LAST:event_mniDoiMkActionPerformed
 
@@ -370,7 +375,7 @@ public class main_form_QL extends javax.swing.JFrame {
         if (y == JOptionPane.YES_OPTION) {
             this.dispose();
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
-            login_Form l = new login_Form();
+            form_login_DangNhap l = new form_login_DangNhap();
             l.setVisible(true);
         }
     }//GEN-LAST:event_mniDxActionPerformed
@@ -381,44 +386,44 @@ public class main_form_QL extends javax.swing.JFrame {
 
         if (y == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
-            login_Form l = new login_Form();
+            form_login_DangNhap l = new form_login_DangNhap();
             l.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     private void mnu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu2ActionPerformed
-        form_Qlkh kh = new form_Qlkh();
+        form_quanli_QuanLiKhachHang kh = new form_quanli_QuanLiKhachHang();
         kh.setVisible(true);
     }//GEN-LAST:event_mnu2ActionPerformed
 
     private void mniPmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPmActionPerformed
-        ql_muonTraSach_form qlmt = new ql_muonTraSach_form();
+        form_quanli_QuanLiMuonTraSach qlmt = new form_quanli_QuanLiMuonTraSach();
         qlmt.setVisible(true);
     }//GEN-LAST:event_mniPmActionPerformed
 
     private void mniSachTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachTaiLieuActionPerformed
-        ql_sach_tai_lieu qlS = new ql_sach_tai_lieu();
+        form_quanli_QuanLiSachTaiLieu qlS = new form_quanli_QuanLiSachTaiLieu();
         qlS.setVisible(true);
     }//GEN-LAST:event_mniSachTaiLieuActionPerformed
 
     private void btnSachTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachTaiLieuActionPerformed
-        ql_sach_tai_lieu qlS = new ql_sach_tai_lieu();
+        form_quanli_QuanLiSachTaiLieu qlS = new form_quanli_QuanLiSachTaiLieu();
         qlS.setVisible(true);
     }//GEN-LAST:event_btnSachTaiLieuActionPerformed
 
     private void btnMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMuonTraSachActionPerformed
-        ql_muonTraSach_form qlmt = new ql_muonTraSach_form();
+        form_quanli_QuanLiMuonTraSach qlmt = new form_quanli_QuanLiMuonTraSach();
         qlmt.setVisible(true);
     }//GEN-LAST:event_btnMuonTraSachActionPerformed
 
     private void mniThongKeMuonTsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongKeMuonTsActionPerformed
-        thongKe_SachTheoNgay_form tks = new thongKe_SachTheoNgay_form();
+        form_thongke_SachTheoNgay tks = new form_thongke_SachTheoNgay();
         tks.setVisible(true);
     }//GEN-LAST:event_mniThongKeMuonTsActionPerformed
 
     private void mniSachMuonTheoDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachMuonTheoDaysActionPerformed
-        thongKe_SachTheoNgay_form tks = new thongKe_SachTheoNgay_form();
+        form_thongke_SachTheoNgay tks = new form_thongke_SachTheoNgay();
         tks.setVisible(true);
     }//GEN-LAST:event_mniSachMuonTheoDaysActionPerformed
 
@@ -426,14 +431,14 @@ public class main_form_QL extends javax.swing.JFrame {
         if (XAuther.isManager()) {
             XMgsbox.alert(this, "Bạn không có quyền vào phần này");
         } else {
-            ThongKeTienPhat tkt = new ThongKeTienPhat();
+            form_thongke_TienPhatTheoThang tkt = new form_thongke_TienPhatTheoThang();
             tkt.setVisible(true);
         }
     }//GEN-LAST:event_mniTTphatActionPerformed
 
     private void btnThongKeMuonTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeMuonTraActionPerformed
         // TODO add your handling code here:
-        thongKe_MuonTraSach_form tkemuontra = new thongKe_MuonTraSach_form();
+        form_thongke_MuonTraSach tkemuontra = new form_thongke_MuonTraSach();
         tkemuontra.setVisible(true);
     }//GEN-LAST:event_btnThongKeMuonTraActionPerformed
 
@@ -451,18 +456,26 @@ public class main_form_QL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQuanLi.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQuanLi.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQuanLi.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main_form_QL.class
+            java.util.logging.Logger.getLogger(form_quanli_MainFormQuanLi.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -475,7 +488,7 @@ public class main_form_QL extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main_form_QL().setVisible(true);
+                new form_quanli_MainFormQuanLi().setVisible(true);
             }
         });
     }

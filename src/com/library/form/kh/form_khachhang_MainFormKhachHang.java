@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.library.form;
+package com.library.form.kh;
 
+import com.library.form.login.form_login_DoiMatKhau;
+import com.library.form.login.form_login_DangNhap;
 import com.library.helper.XImages;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,12 +21,12 @@ import javax.swing.Timer;
  *
  * @author manh truong
  */
-public class main_form_KH extends javax.swing.JFrame {
+public class form_khachhang_MainFormKhachHang extends javax.swing.JFrame {
 
     /**
      * Creates new form form
      */
-    public main_form_KH() {
+    public form_khachhang_MainFormKhachHang() {
         initComponents();
         //set màu cho menu item
         setColor(mniMuonTraSach);
@@ -180,7 +182,7 @@ public class main_form_KH extends javax.swing.JFrame {
         jMenu1.setText("Hệ thống");
         jMenu1.setMargin(new java.awt.Insets(0, 10, 0, 10));
 
-        mniDx.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDx.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         mniDx.setBackground(new java.awt.Color(102, 102, 102));
         mniDx.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_export_45px 1.png"))); // NOI18N
@@ -193,7 +195,7 @@ public class main_form_KH extends javax.swing.JFrame {
         });
         jMenu1.add(mniDx);
 
-        mniDoiMk.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mniDoiMk.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mniDoiMk.setBackground(new java.awt.Color(102, 102, 102));
         mniDoiMk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniDoiMk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_change_45px 1.png"))); // NOI18N
@@ -213,7 +215,7 @@ public class main_form_KH extends javax.swing.JFrame {
         mn1.setText("Thông tin");
         mn1.setMargin(new java.awt.Insets(0, 10, 0, 10));
 
-        mniMuonTraSach.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mniMuonTraSach.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_MASK));
         mniMuonTraSach.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniMuonTraSach.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_important_book_36px_2 1.png"))); // NOI18N
         mniMuonTraSach.setText("Mượn sách");
@@ -247,7 +249,7 @@ public class main_form_KH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniDoiMkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDoiMkActionPerformed
-        DoiMatKhau_form dmk = new DoiMatKhau_form();
+        form_login_DoiMatKhau dmk = new form_login_DoiMatKhau();
         dmk.setVisible(true);
     }//GEN-LAST:event_mniDoiMkActionPerformed
 
@@ -257,7 +259,7 @@ public class main_form_KH extends javax.swing.JFrame {
 
         if (y == JOptionPane.YES_OPTION) {           
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
-            login_Form l = new login_Form();
+            form_login_DangNhap l = new form_login_DangNhap();
             l.setVisible(true);
             this.dispose();
         }
@@ -269,19 +271,19 @@ public class main_form_KH extends javax.swing.JFrame {
 
         if (y == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đăng xuất thành công");
-            login_Form l = new login_Form();
+            form_login_DangNhap l = new form_login_DangNhap();
             l.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_mniDxActionPerformed
 
     private void mniMuonTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMuonTraSachActionPerformed
-        form_MuonSach fs = new form_MuonSach();
+        form_khachhang_MuonSach fs = new form_khachhang_MuonSach();
         fs.setVisible(true);
     }//GEN-LAST:event_mniMuonTraSachActionPerformed
 
     private void btnTTmuonSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTmuonSachActionPerformed
-        form_MuonSach fs = new form_MuonSach();
+        form_khachhang_MuonSach fs = new form_khachhang_MuonSach();
         fs.setVisible(true);
     }//GEN-LAST:event_btnTTmuonSachActionPerformed
 
@@ -304,14 +306,18 @@ public class main_form_KH extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main_form_KH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_khachhang_MainFormKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main_form_KH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_khachhang_MainFormKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main_form_KH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_khachhang_MainFormKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main_form_KH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_khachhang_MainFormKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -320,7 +326,7 @@ public class main_form_KH extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new main_form_KH().setVisible(true);
+                new form_khachhang_MainFormKhachHang().setVisible(true);
             }
         });
     }

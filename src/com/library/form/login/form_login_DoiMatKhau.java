@@ -1,4 +1,4 @@
-package com.library.form;
+package com.library.form.login;
 
 import com.library.dao.KhachHangDAO;
 import com.library.dao.NhanVienDAO;
@@ -9,12 +9,12 @@ import com.library.helper.XMgsbox;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
-public class DoiMatKhau_form extends javax.swing.JFrame {
+public class form_login_DoiMatKhau extends javax.swing.JFrame {
 
     NhanVienDAO dao = new NhanVienDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
 
-    public DoiMatKhau_form() {
+    public form_login_DoiMatKhau() {
         initComponents();
         init();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -231,14 +231,22 @@ public class DoiMatKhau_form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DoiMatKhau_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DoiMatKhau_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DoiMatKhau_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoiMatKhau_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(form_login_DoiMatKhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -251,7 +259,7 @@ public class DoiMatKhau_form extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DoiMatKhau_form().setVisible(true);
+                new form_login_DoiMatKhau().setVisible(true);
             }
         });
     }

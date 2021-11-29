@@ -39,55 +39,39 @@
           <Color blue="ff" green="99" red="99" type="rgb"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanel1MouseClicked"/>
-      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="cboTrangThai" min="-2" pref="223" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="239" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" alignment="0" pref="950" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="cboDaysi" min="-2" pref="297" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cboTrangThai" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="62" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <Component id="cboDaysi" min="-2" pref="33" max="-2" attributes="0"/>
+                  <EmptySpace pref="63" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="377" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JComboBox" name="cboTrangThai">
+        <Component class="javax.swing.JComboBox" name="cboDaysi">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -99,22 +83,11 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboTrangThaiActionPerformed"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboDaysiItemStateChanged"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Bahnschrift" size="15" style="0"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
-          </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -148,9 +121,9 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icon/icons8_microsoft_people_36px 1.png"/>
+              <Image iconType="3" name="/icon/icons8_reading_36px_1 1.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea; m&#x1b0;&#x1ee3;n tr&#x1ea3; s&#xe1;ch"/>
+            <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea; S&#xe1;ch m&#x1b0;&#x1ee3;n theo ng&#xe0;y"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
