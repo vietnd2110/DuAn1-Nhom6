@@ -9,9 +9,12 @@ import com.library.dao.KhachHangDAO;
 import com.library.dao.NhanVienDAO;
 import com.library.entity.KhachHang;
 import com.library.entity.NhanVien;
+import com.library.helper.XCheck;
 import com.library.helper.XDate;
 import com.library.helper.XImages;
 import com.library.helper.XMgsbox;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
 import java.text.SimpleDateFormat;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
@@ -194,24 +198,26 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
 //        }
 //    }
     void loadTableTk() {
-        this.defaultTableModel.setRowCount(0);
+//        this.defaultTableModel.setRowCount(0);
+//        String timkiem = txtTimKiem.getText();
+//        this.listKhachHangs = khachHangDAO.selectByMakh(timkiem);
+//        for (KhachHang kh : listKhachHangs) {
+//            Object r[] = {
+//                kh.getMaKH(),
+//                kh.getTenKH(),
+//                kh.getMatKhau(),
+//                kh.getGioiTinh() ? "Nam" : "Nữ",
+//                XDate.toString(kh.getNgaySinh(), "dd-MM-yyyy"),
+//                kh.getSdt(),
+//                kh.getEmail(),
+//                kh.getDiaChi(),
+//                kh.getMaNV(),
+//                kh.getTrangThai() ? "Hoạt Động" : "Không Hoạt Động"
+//            };
+//            this.defaultTableModel.addRow(r);
+//        }
+
         String timkiem = txtTimKiem.getText();
-        this.listKhachHangs = khachHangDAO.selectByMakh(timkiem);
-        for (KhachHang kh : listKhachHangs) {
-            Object r[] = {
-                kh.getMaKH(),
-                kh.getTenKH(),
-                kh.getMatKhau(),
-                kh.getGioiTinh() ? "Nam" : "Nữ",
-                XDate.toString(kh.getNgaySinh(), "dd-MM-yyyy"),
-                kh.getSdt(),
-                kh.getEmail(),
-                kh.getDiaChi(),
-                kh.getMaNV(),
-                kh.getTrangThai() ? "Hoạt Động" : "Không Hoạt Động"
-            };
-            this.defaultTableModel.addRow(r);
-        }
         KhachHang kh = khachHangDAO.selectByID(timkiem);
         if (kh != null) {
             setForm(kh);
@@ -239,7 +245,27 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
         setTitle("Thư Viện Đại Học Hà Nội - Hanoi University Library");
     }
     
+    public boolean checkTrungMa(JTextField txt) {
+        txt.setBackground(white);
+        if (khachHangDAO.selectByID(txt.getText()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            XMgsbox.alert(this, txt.getName() + " đã tồn tại.");
+            return false;
+        }
+    }
     
+    public boolean checkTrungMaNV(JTextField txt) {
+        txt.setBackground(white);
+        if (nhanVienDAO.selectByID(txt.getText()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            XMgsbox.alert(this, txt.getName() + " đã tồn tại.");
+            return false;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -515,45 +541,76 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        this.checkRong();
-        this.checkDl();
-        if (checkMa()) {
-            this.insert();
+        if (XCheck.checkNullText(txtMakh)
+                && XCheck.checkNullText(txtTenKh)
+                && XCheck.checkNullPass(txtMatKhau)
+                && XCheck.checkNullText(txtNgaySinh)
+                && XCheck.checkNullText(txtSdt)
+                && XCheck.checkNullText(txtEmail)
+                && XCheck.checkNullText(txtDiaChi)
+                && XCheck.checkNullText(txtManv)) {
+            if (XCheck.checkMaNV(txtMakh)
+                    && XCheck.checkName(txtTenKh)
+                    && XCheck.checkPass(txtMatKhau)
+                    && XCheck.checkDate(txtNgaySinh)
+                    && XCheck.checkSDT(txtSdt)
+                    && XCheck.checkEmail(txtEmail)
+                    && XCheck.checkMaNV(txtManv)
+                    && XCheck.checkName(txtDiaChi)){
+                if (checkTrungMa(txtMakh)) {
+                    this.insert();
+                }
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        this.checkRong();
-        this.checkDl();
-        if (check == true) {
-            this.update();
+        if (XCheck.checkNullText(txtMakh)
+                && XCheck.checkNullText(txtTenKh)
+                && XCheck.checkNullPass(txtMatKhau)
+                && XCheck.checkNullText(txtNgaySinh)
+                && XCheck.checkNullText(txtSdt)
+                && XCheck.checkNullText(txtEmail)
+                && XCheck.checkNullText(txtDiaChi)
+                && XCheck.checkNullText(txtManv)
+                ) {
+            if (XCheck.checkMaNV(txtMakh)
+                    && XCheck.checkName(txtTenKh)
+                    && XCheck.checkPass(txtMatKhau)
+                    && XCheck.checkDate(txtNgaySinh)
+                    && XCheck.checkSDT(txtSdt)
+                    && XCheck.checkEmail(txtEmail)
+                    && XCheck.checkName(txtDiaChi)
+                    && XCheck.checkMaNV(txtManv)) {
+               this.update();
+            }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        //       String timkiem = txtTimKiem.getText();
-//       KhachHang kh = khachHangDAO.selectByID(timkiem);
-//       if(timkiem.equalsIgnoreCase("")){
-//           XMgsbox.alert(this, "Ô nhập tìm kiếm đang để trống !");
-//       }
-//       else if(kh == null){
-//           XMgsbox.alert(this, "Không có mã bạn cần tìm !");
-//       }else{
-//           timKiem();
-//       }
-        String timkiem = txtTimKiem.getText();
-        this.listKhachHangs = khachHangDAO.selectByMakh(timkiem);
-        if (timkiem.equalsIgnoreCase("")) {
-            loadTable(null);
-        } else if (!listKhachHangs.isEmpty()) {
-            loadTableTk();
-            txtTimKiem.setText("");
-        } else {
-            XMgsbox.alert(this, "Mã khách cần tìm không có ");
-             txtTimKiem.setText("");
-        }
+               String timkiem = txtTimKiem.getText();
+       KhachHang kh = khachHangDAO.selectByID(timkiem);
+       if(timkiem.equalsIgnoreCase("")){
+           XMgsbox.alert(this, "Ô nhập tìm kiếm đang để trống !");
+       }
+       else if(kh == null){
+           XMgsbox.alert(this, "Không có mã bạn cần tìm !");
+       }else{
+           setForm(kh);
+       }
+
+
+//        String timkiem = txtTimKiem.getText();
+//        this.listKhachHangs = khachHangDAO.selectByMakh(timkiem);
+//        if (timkiem.equalsIgnoreCase("")) {
+//            loadTable(null);
+//        } else if (!listKhachHangs.isEmpty()) {
+//            loadTableTk();
+//            txtTimKiem.setText("");
+//        } else {
+//            XMgsbox.alert(this, "Mã khách cần tìm không có ");
+//             txtTimKiem.setText("");
+//        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void tblQlkhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQlkhMouseClicked
@@ -562,102 +619,7 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
         this.showDetail(index);
     }//GEN-LAST:event_tblQlkhMouseClicked
 
-    
-    void checkRong() {
-        if (txtMakh.getText().isEmpty() || txtTenKh.getText().isEmpty()
-                || new String(txtMatKhau.getPassword()).isEmpty()
-                || txtNgaySinh.getText().isEmpty() || txtSdt.getText().isEmpty()
-                || txtEmail.getText().isEmpty() || txtDiaChi.getText().isEmpty()
-                || txtManv.getText().isEmpty()) {
-            XMgsbox.alert(this, "Không được để trống");
-            return;
-        }
-    }
 
-    boolean checkMa() {
-        String maKh = txtMakh.getText();
-        KhachHang kh = this.khachHangDAO.selectByID(maKh);
-        if (kh != null) {
-            XMgsbox.alert(this, "Mã Khách hàng đã tồn tại");
-            return false;
-        }
-
-        String sdt = txtSdt.getText();
-        KhachHang khach = khachHangDAO.selectBySdt(sdt);
-        if (khach != null) {
-            XMgsbox.alert(this, "Số điện thoại trùng");
-            return false;
-        }else{
-            return true;
-        }
-    }
-
-    void checkDl() {
-        // check manv không tồn tại
-        String manv = txtManv.getText();
-        NhanVien nv = nhanVienDAO.selectByID(manv);
-        if (nv == null) {
-            XMgsbox.alert(this, "Mã Nhân viên không tồn tại");
-            check = false;
-            return;
-        } else {
-            check = true;
-        }
-        // check email
-        String p_email = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$";
-        String email = txtEmail.getText();
-        if (!email.matches(p_email)) {
-            XMgsbox.alert(this, "Email không đúng định dạng");
-            check = false;
-            return;
-        } else {
-            check = true;
-        }
-
-        // check sdt
-        String makhau = new String(txtMatKhau.getPassword());
-        if (makhau.length() < 6) {
-            XMgsbox.alert(this, "Mật khẩu phải lớn hơn 6");
-            check = false;
-            return;
-        } else {
-            check = true;
-        }
-
-        //check ngày sinh
-        String ngaySinh = txtNgaySinh.getText();
-        SimpleDateFormat sdf = new SimpleDateFormat();
-        try {
-            sdf.applyPattern("dd-MM-yyyy");
-            Date ngay = sdf.parse(ngaySinh);
-            check = true;
-        } catch (Exception e) {
-            XMgsbox.alert(this, "Ngày sai định dạng");
-            check = false;
-            return;
-        }
-
-        //check sdt
-        String sdt = txtSdt.getText();
-        String p = "0\\d{9,10}";
-        try {
-            if (!sdt.matches(p)) {
-                XMgsbox.alert(this, "Số điện thoại không đúng đinh dạng");
-                check = false;
-                return;
-            } else {
-                check = true;
-            }
-        } catch (Exception e) {
-            XMgsbox.alert(this, "Lỗi định dạng số điện thoại");
-            check = false;
-            return;
-        }
-
-    }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

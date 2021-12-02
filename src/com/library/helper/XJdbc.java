@@ -15,6 +15,8 @@ public class XJdbc {
     private static String url = "jdbc:sqlserver://localhost:1433;databaseName=QLTV";
     private static String user = "sa";
     private static String pass = "songlong";
+    
+    
 
     static {
         try {
