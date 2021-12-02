@@ -80,7 +80,7 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
                 kh.getTenKH(),
                 kh.getMatKhau(),
                 kh.getGioiTinh() ? "Nam" : "Nữ",
-                XDate.toString(kh.getNgaySinh(), "dd-MM-yyyy"),
+                XDate.toString(kh.getNgaySinh(), "dd/MM/yyyy"),
                 kh.getSdt(),
                 kh.getEmail(),
                 kh.getDiaChi(),
@@ -108,7 +108,7 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
 //        rdoNam.setSelected(kh.getGioiTinh());
 //        rdoNu.setSelected(!kh.getGioiTinh());
 
-        txtNgaySinh.setText(XDate.toString(kh.getNgaySinh(), "dd-MM-yyyy"));
+        txtNgaySinh.setText(XDate.toString(kh.getNgaySinh(), "dd/MM/yyyy"));
         txtSdt.setText(kh.getSdt());
         txtEmail.setText(kh.getEmail());
         txtDiaChi.setText(kh.getDiaChi());
@@ -126,7 +126,7 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
 
         try {
             String ngay = txtNgaySinh.getText();
-            Date date = XDate.toDate(txtNgaySinh.getText(), "dd-MM-yyyy");
+            Date date = XDate.toDate(txtNgaySinh.getText(), "dd/MM/yyyy");
             kh.setNgaySinh(date);
         } catch (Exception e) {
         }
