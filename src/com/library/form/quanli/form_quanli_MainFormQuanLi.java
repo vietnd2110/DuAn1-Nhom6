@@ -355,7 +355,7 @@ public class form_quanli_MainFormQuanLi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu1ActionPerformed
-        if (XAuther.isManager()) {
+        if (XAuther.isManager() == true) {
             form_quanli_MainFormQLNhanVien nv = new form_quanli_MainFormQLNhanVien();
             nv.setVisible(true);
         } else {

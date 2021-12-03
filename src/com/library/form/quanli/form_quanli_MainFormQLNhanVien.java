@@ -61,7 +61,7 @@ public class form_quanli_MainFormQLNhanVien extends javax.swing.JFrame {
                     nv.getSdt(),
                     nv.getEmail(),
                     nv.getDiaChi(),
-                    nv.getVaiTro(),
+                    nv.getVaiTro() ? "Quản Lý" : "Nhân Viên",
                     nv.getTrangThai() ? "Hoạt Động" : "Không Hoạt Động"
                 };
                 model.addRow(row);
@@ -81,7 +81,7 @@ public class form_quanli_MainFormQLNhanVien extends javax.swing.JFrame {
         txtSDT.setText(nv.getSdt());
         txtEmail.setText(nv.getEmail());
         txtDiaChi.setText(nv.getDiaChi());
-        cboVaiTro.setSelectedItem(nv.getVaiTro());
+        cboVaiTro.setSelectedIndex(nv.getVaiTro() ? 1 : 0);
         cboTrangThai.setSelectedItem(nv.getTrangThai());
     }
 
@@ -95,7 +95,7 @@ public class form_quanli_MainFormQLNhanVien extends javax.swing.JFrame {
         nv.setSdt(txtSDT.getText());
         nv.setEmail(txtEmail.getText());
         nv.setDiaChi(txtDiaChi.getText());
-        nv.setVaiTro(cboVaiTro.getSelectedItem() + "");
+        nv.setVaiTro(cboVaiTro.getSelectedIndex() == 1);
         nv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
         return nv;
     }

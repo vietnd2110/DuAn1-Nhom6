@@ -16,7 +16,7 @@ public class NhanVien {
     private String Sdt;
     private String email;
     private String diaChi;
-    private String vaiTro;
+    private boolean vaiTro = false;
     private boolean trangThai;
 
     public NhanVien() {
@@ -26,7 +26,7 @@ public class NhanVien {
         this.maNV = maNV;
     }
     
-    public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, Date ngaySinh, String Sdt, String email, String diaChi, String vaiTro, boolean trangThai) {
+    public NhanVien(String maNV, String tenNV, String matKhau, boolean gioiTinh, Date ngaySinh, String Sdt, String email, String diaChi, boolean vaiTro, boolean trangThai) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.matKhau = matKhau;
@@ -71,7 +71,7 @@ public class NhanVien {
         return diaChi;
     }
 
-    public String getVaiTro() {
+    public boolean getVaiTro() {
         return vaiTro;
     }
 
@@ -111,7 +111,7 @@ public class NhanVien {
         this.diaChi = diaChi;
     }
 
-    public void setVaiTro(String vaiTro) {
+    public void setVaiTro(boolean vaiTro) {
         this.vaiTro = vaiTro;
     }
 
