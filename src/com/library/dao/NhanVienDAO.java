@@ -62,7 +62,7 @@ public class NhanVienDAO extends LibraryDAO<NhanVien, String> {
                 String sdt = rs.getString(6);
                 String email = rs.getString(7);
                 String diaChi = rs.getString(8);
-                String vaiTro = rs.getString(9);
+                boolean vaiTro = rs.getBoolean(9);
                 boolean trangThai = rs.getBoolean(10);
                 
                 listNV.add(new NhanVien(maNV, tenNV, matKhau, gioiTinh, ngaySinh, sdt, email, diaChi, vaiTro, trangThai));

@@ -30,6 +30,6 @@ public class XAuther {
     }
     
     public static boolean isManager() {
-        return XAuther.isLogin() && USER.getVaiTro().equalsIgnoreCase("Quản Lý");
+        return XAuther.isLogin() && USER.getVaiTro();
     }
 }
