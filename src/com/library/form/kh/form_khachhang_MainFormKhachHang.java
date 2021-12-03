@@ -9,8 +9,10 @@ import com.library.form.login.form_login_DoiMatKhau;
 import com.library.form.login.form_login_DangNhap;
 import com.library.helper.XImages;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JMenuItem;
@@ -142,6 +144,11 @@ public class form_khachhang_MainFormKhachHang extends javax.swing.JFrame {
         btnNoiQuy.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNoiQuy.setMargin(new java.awt.Insets(2, 25, 2, 20));
         btnNoiQuy.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNoiQuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoiQuyActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnNoiQuy);
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 16)); // NOI18N
@@ -287,9 +294,22 @@ public class form_khachhang_MainFormKhachHang extends javax.swing.JFrame {
         fs.setVisible(true);
     }//GEN-LAST:event_btnTTmuonSachActionPerformed
 
+    private void btnNoiQuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoiQuyActionPerformed
+        // TODO add your handling code here:
+        openWebsite();
+    }//GEN-LAST:event_btnNoiQuyActionPerformed
+
     void setColor(JMenuItem item) {
         item.setOpaque(true);
-        item.setBackground(Color.gray);
+        item.setBackground(Color.white);
+    }
+    
+    void openWebsite(){
+        try {
+            Desktop.getDesktop().browse(new File("help/noiquy.html").toURI());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy file nội quy");
+        }
     }
 
     public static void main(String args[]) {

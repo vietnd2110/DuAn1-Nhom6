@@ -1,0 +1,38 @@
+body{
+    font-family: Tahoma;
+    font-size: 13px;
+    width: 1000px;
+    margin: 0px auto;
+    color: red;
+    background-image: url(../help/thuvien.png);
+    background-size: contain;
+}
+h1{
+    width: 1000px;
+    text-align: center;
+    height: 60px;
+    clear: left;
+    line-height: 75px;
+}
+
+img{
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 30px; 
+}
+#anh2{
+    margin-left: -6px;
+    margin-bottom: 60px;
+    margin-left: auto;
+}
+#top{
+    background:none;
+    text-align: center;
+    height: 100px;
+    color:red;
+    clear: left;
+    line-height: 94px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
