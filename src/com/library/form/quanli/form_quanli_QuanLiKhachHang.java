@@ -33,13 +33,14 @@ public class form_quanli_QuanLiKhachHang extends javax.swing.JFrame {
     NhanVien nhanVien;
     NhanVienDAO nhanVienDAO;
     
-      int row = 0;
+    int row = 0;
     int index;
     boolean check = true;
    
     public form_quanli_QuanLiKhachHang() {
         initComponents();
         init();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     void grouButton() {
         ButtonGroup bg = new ButtonGroup();

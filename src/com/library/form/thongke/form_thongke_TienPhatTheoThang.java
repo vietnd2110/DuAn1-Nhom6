@@ -24,6 +24,7 @@ public class form_thongke_TienPhatTheoThang extends javax.swing.JFrame {
     public form_thongke_TienPhatTheoThang() {
         initComponents();
         innit();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private void innit(){

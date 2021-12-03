@@ -418,8 +418,8 @@ public class form_quanli_MainFormQuanLi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMuonTraSachActionPerformed
 
     private void mniThongKeMuonTsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThongKeMuonTsActionPerformed
-        form_thongke_SachTheoNgay tks = new form_thongke_SachTheoNgay();
-        tks.setVisible(true);
+       form_thongke_MuonTraSach ts=new form_thongke_MuonTraSach();
+       ts.setVisible(true);
     }//GEN-LAST:event_mniThongKeMuonTsActionPerformed
 
     private void mniSachMuonTheoDaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSachMuonTheoDaysActionPerformed

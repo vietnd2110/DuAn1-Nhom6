@@ -36,7 +36,7 @@ public class form_quanli_ThemPhieuMuon extends javax.swing.JFrame {
         init();
         fillToTablePM();
         btnSuaPM.setEnabled(false);
-        txtMaNV.setText(XAuther.USER.getMaNV());
+//        txtMaNV.setText(XAuther.USER.getMaNV());
         txtNgayMuon.setText(dtf.format(now));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }

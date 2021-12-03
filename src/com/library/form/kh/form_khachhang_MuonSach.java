@@ -54,8 +54,8 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
 
     public form_khachhang_MuonSach() {
         initComponents();
-        gioiHan = 3 - XAuther.UserKH.getSoLuongMuon();
-
+//         gioiHan = 3 - XAuther.UserKH.getSoLuongMuon();
+ 
         // bảng 1
         mol.setColumnCount(0);
         mol = (DefaultTableModel) tblBangSach.getModel();
@@ -76,6 +76,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         fillTableSachMuon();
         lblGioiHan.setText(String.valueOf(gioiHan));
         setTongMuon();
+        
         txtNgayMuon.setText(dtf.format(now));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }

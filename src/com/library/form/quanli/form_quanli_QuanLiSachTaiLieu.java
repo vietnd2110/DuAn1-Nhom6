@@ -436,10 +436,14 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
               Sach s = sDao.findByName(txtFind.getText());
-        if (s == null) {
-            XMgsbox.alert(this, "Không tìm thấy");
-
-        } else {
+        if (txtFind.getText().isEmpty()) {
+            XMgsbox.alert(this, "Không để trống");
+            return;
+        }else if(s==null){
+            XMgsbox.alert(this, "Không tìm thấy ");
+            return;
+        }
+        else {
             XMgsbox.alert(this, "Tìm thấy");
             fillTableForFind();
         }
