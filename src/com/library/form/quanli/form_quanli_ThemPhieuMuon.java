@@ -30,13 +30,13 @@ public class form_quanli_ThemPhieuMuon extends javax.swing.JFrame {
     public Connection conn = XJdbc.getConnection();
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDateTime now = LocalDateTime.now();
-    
+
     public form_quanli_ThemPhieuMuon() {
         initComponents();
         init();
         fillToTablePM();
         btnSuaPM.setEnabled(false);
-//        txtMaNV.setText(XAuther.USER.getMaNV());
+        txtMaNV.setText(XAuther.USER.getMaNV());
         txtNgayMuon.setText(dtf.format(now));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -436,9 +436,9 @@ public class form_quanli_ThemPhieuMuon extends javax.swing.JFrame {
                     if (checkSoLuongMuon(txtMaKH.getText()) == true) {
                         if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
                             insertPM();
-                        } else {
-                            XMgsbox.alert(this, "Khách Hàng Này Đã Mượn Tối Đa 3 Cuốn Sách");
                         }
+                    } else {
+                        XMgsbox.alert(this, "Khách Hàng Này Đã Mượn Tối Đa 3 Cuốn Sách");
                     }
                 }
             }
