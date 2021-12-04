@@ -3,8 +3,10 @@ package com.library.form.quanli;
 import com.library.dao.CTPhieuMuonDAO;
 import com.library.dao.KhachHangDAO;
 import com.library.dao.PhieuMuonDAO;
+import com.library.dao.PhieuTraDAO;
 import com.library.entity.CTPhieuMuon;
 import com.library.entity.PhieuMuon;
+import com.library.entity.PhieuTra;
 import com.library.entity.Sach;
 import com.library.helper.XCheck;
 import com.library.helper.XDate;
@@ -16,7 +18,6 @@ import static java.awt.Color.white;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -26,7 +27,9 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
     DefaultTableModel mol = new DefaultTableModel();
     DefaultTableModel mol_2 = new DefaultTableModel();
+    DefaultTableModel mol3 = new DefaultTableModel();
     PhieuMuonDAO daoPM = new PhieuMuonDAO();
+    PhieuTraDAO daoPT = new PhieuTraDAO();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
     int index;
@@ -52,6 +55,13 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         for (String x : col2) {
             mol_2.addColumn(x);
         }
+
+        mol3.setColumnCount(0);
+        mol3 = (DefaultTableModel) tblBangPhieuTra.getModel();
+        String col3[] = {"STT", "Mã PM", "Mã Sách", "Số Tiền Cọc", "Tiền phạt", "Số Tiền Hoàn Trả", "Số Tiền Thanh Toán"};
+        for (String z : col3) {
+            mol3.addColumn(z);
+        }
         txtNgayThucTra.setText(dtf.format(now));
         //logo
         init();
@@ -65,24 +75,30 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         setTitle("Thư Viện Đại Học Hà Nội - Hanoi University Library");
     }
 
-    void fillToTablePM() {
-        DefaultTableModel model = (DefaultTableModel) tblBangPM.getModel();
+    void fillToTablePTra() {
+        DefaultTableModel model = (DefaultTableModel) tblBangPhieuTra.getModel();
         model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
         try {
-            List<PhieuMuon> listPM = daoPM.selectAll();
-            for (PhieuMuon pm : listPM) {
-                Object[] row = {
-                    pm.getMaPm(),
-                    pm.getMaKH(),
-                    pm.getMaNV(),
-                    XDate.toString(pm.getNgayMuon()),
-                    XDate.toString(pm.getNgayTra()),
-                    pm.getSoTienCoc(),
-                    pm.getTrangThai(),};
-                model.addRow(row);
+            Integer pm = Integer.parseInt(txtMaPM.getText());
+            if (pm != null) {
+                List<PhieuTra> list = daoPT.selectByPM(pm);
+                for (int i = 0; i < list.size(); i++) {
+                    PhieuTra pt = list.get(i);
+                    Object[] row = {
+                        i + 1,
+                        pt.getMaPM(),
+                        pt.getMaSach(),
+                        pt.getSoTienCoc(),
+                        pt.getTienPhat(),
+                        pt.getTienHoanTra(),
+                        pt.getTienThanhToan()
+                    };
+                    model.addRow(row);
+                }
             }
         } catch (Exception e) {
             XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
         }
     }
 
@@ -108,6 +124,28 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
+            e.printStackTrace();
+        }
+    }
+
+    void fillToTablePM() {
+        DefaultTableModel model = (DefaultTableModel) tblBangPM.getModel();
+        model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
+        try {
+            List<PhieuMuon> listPM = daoPM.selectAll();
+            for (PhieuMuon pm : listPM) {
+                Object[] row = {
+                    pm.getMaPm(),
+                    pm.getMaKH(),
+                    pm.getMaNV(),
+                    XDate.toString(pm.getNgayMuon()),
+                    XDate.toString(pm.getNgayTra()),
+                    pm.getSoTienCoc(),
+                    pm.getTrangThai(),};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
         }
     }
 
@@ -115,6 +153,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         txtMaPM.setText(pm.getMaPm() + "");
         txtMaKH.setText(pm.getMaKH());
         txtNgayTra.setText(XDate.toString(pm.getNgayTra()));
+        txtSoTienCoc.setText(pm.getSoTienCoc() + "");
     }
 
     void setFormCTPM(CTPhieuMuon ctpm) {
@@ -130,9 +169,18 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         ctpm.setMaPM(Integer.parseInt(txtMaPM.getText()));
         ctpm.setMaSach(txtMaSach.getText());
         ctpm.setTinhTrangSach(cboTinhTrang.getSelectedItem() + "");
-        ctpm.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
         ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));
+        ctpm.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
         return ctpm;
+    }
+
+    PhieuTra getFormPTra() {
+        PhieuTra pt = new PhieuTra();
+        pt.setMaPM(Integer.parseInt(txtMaPM.getText()));
+        pt.setMaSach(txtMaSach.getText());
+        pt.setSoTienCoc(Float.parseFloat(txtSoTienCoc.getText()));
+        pt.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
+        return pt;
     }
 
     void setTrangCTPM() {
@@ -167,6 +215,26 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             XMgsbox.alert(this, "Thêm mới thành công!");
         } catch (Exception e) {
             XMgsbox.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    void insertPTra() {
+        PhieuTra pt = getFormPTra();
+        try {
+            daoPT.insert(pt);
+            this.fillToTablePTra();//cập nhật lại bảng pt
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void updatePTra() {
+        PhieuTra pt = getFormPTra();
+        try {
+            daoPT.update(pt);
+            this.fillToTablePTra();//cập nhật lại bảng pt
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -281,13 +349,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         txtMaSach = new javax.swing.JTextField();
-        txtNgayThucTra = new javax.swing.JTextField();
-        cboTinhTrang = new javax.swing.JComboBox<>();
-        txtTienPhat = new javax.swing.JTextField();
         btnThemCTPM = new javax.swing.JButton();
         btnSuaCTPM = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -296,8 +358,19 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         txtMaPM = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtMaKH = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtNgayThucTra = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtNgayTra = new javax.swing.JTextField();
+        cboTinhTrang = new javax.swing.JComboBox<>();
+        txtTienPhat = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txtSoTienCoc = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBangPhieuTra = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -409,7 +482,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        tabs.addTab("Phiếu mượn", jPanel1);
+        tabs.addTab("Phiếu Mượn", jPanel1);
 
         panel.setBackground(new java.awt.Color(238, 232, 171));
 
@@ -418,24 +491,6 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel11.setText("Mã sách");
-
-        jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel12.setText("Ngày thực trả");
-
-        jLabel13.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel13.setText("Tình trạng sách");
-
-        jLabel14.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        jLabel14.setText("Tiền phạt");
-
-        cboTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Binh Thường", "Hư Hỏng", "Mất Sách" }));
-        cboTinhTrang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboTinhTrangActionPerformed(evt);
-            }
-        });
-
-        txtTienPhat.setText("0.0");
 
         btnThemCTPM.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         btnThemCTPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Add.png"))); // NOI18N
@@ -486,10 +541,45 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
         txtMaKH.setEnabled(false);
 
+        jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel12.setText("Ngày thực trả");
+
+        txtNgayThucTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayThucTraActionPerformed(evt);
+            }
+        });
+
         jLabel16.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel16.setText("Ngày Trả");
 
         txtNgayTra.setEnabled(false);
+
+        cboTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bình Thường", "Hư Hỏng", "Mất Sách" }));
+        cboTinhTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTinhTrangActionPerformed(evt);
+            }
+        });
+
+        txtTienPhat.setText("0.0");
+        txtTienPhat.setEnabled(false);
+        txtTienPhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienPhatActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel13.setText("Tình trạng sách");
+
+        jLabel14.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel14.setText("Tiền phạt");
+
+        jLabel17.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel17.setText("Số Tiền Cọc");
+
+        txtSoTienCoc.setEnabled(false);
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -499,17 +589,16 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(btnThemCTPM, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnSuaCTPM, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnTraSach, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -517,31 +606,31 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                                         .addGroup(panelLayout.createSequentialGroup()
                                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                                             .addGap(32, 32, 32)))
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel16))
-                                .addGap(56, 56, 56)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel17))
+                                .addGap(44, 44, 44)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(txtNgayThucTra, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtSoTienCoc, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                                        .addComponent(txtMaPM)
+                                        .addComponent(txtMaKH)))
+                                .addGap(62, 62, 62)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel12)
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtMaSach, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                                                .addComponent(txtMaPM))
-                                            .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(74, 74, 74)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13)
                                             .addComponent(jLabel14)
-                                            .addComponent(jLabel15))
-                                        .addGap(64, 64, 64)
+                                            .addComponent(jLabel13))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cboTinhTrang, 0, 229, Short.MAX_VALUE)
-                                                .addComponent(txtTienPhat)))))))
-                        .addGap(0, 69, Short.MAX_VALUE)))
+                                            .addComponent(txtTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtNgayThucTra, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(cboTinhTrang, javax.swing.GroupLayout.Alignment.LEADING, 0, 229, Short.MAX_VALUE)))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLayout.setVerticalGroup(
@@ -550,36 +639,74 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel13)
-                    .addComponent(cboTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMaPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel14)
                     .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(jLabel12)
+                    .addComponent(txtNgayThucTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtNgayThucTra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(txtSoTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemCTPM)
                     .addComponent(btnSuaCTPM)
                     .addComponent(btnTraSach))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        tabs.addTab("Chi tiết phiếu mượn", panel);
+        tabs.addTab("Chi Tiết Phiếu Mượn", panel);
+
+        jPanel2.setBackground(new java.awt.Color(238, 232, 171));
+
+        tblBangPhieuTra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblBangPhieuTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBangPhieuTraMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblBangPhieuTra);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("Phiếu Trả", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -608,8 +735,12 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         this.index = tblBangPM.rowAtPoint(evt.getPoint());//lấy vị trí dòng được chọn
         String click = tblBangPM.getValueAt(index, 6) + "";
         if (click.equalsIgnoreCase("Đã Trả")) {
-            XMgsbox.alert(this, "Khách Hàng này đã trả sách mời tạo Phiếu Mượn khác để tiếp tục mượn sách");
-            return;
+            if (evt.getClickCount() == 1) {
+                if (this.index >= 0) {
+                    tabs.setSelectedIndex(2);
+                    fillToTablePTra();
+                }
+            }
         } else if (click.equalsIgnoreCase("Chưa Duyệt")) {
             XMgsbox.alert(this, "Phiếu Mượn phải được nhân viên phê duyệt mới được mượn sách");
             return;
@@ -631,6 +762,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 if (checkSoLuongMuonWithCTPM(txtMaPM.getText()) == true) {
                     daoKH.updateSLMuon(txtMaKH.getText());
                     insertCTPM();
+                    insertPTra();
                 } else {
                     XMgsbox.alert(this, "Mỗi Khách Hàng Chỉ Được Mượn Tối Đa 3 Quyển Sách");
                 }
@@ -645,6 +777,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             if (XCheck.checkMaNV(txtMaSach)
                     && XCheck.checkDate(txtNgayThucTra)) {
                 this.updateCTPM();
+                updatePTra();
             }
         }
     }//GEN-LAST:event_btnSuaCTPMActionPerformed
@@ -663,9 +796,6 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         txtNgayThucTra.setText(tblBangCTPM.getValueAt(selectedRow, 3).toString());
         cboTinhTrang.setSelectedItem(tblBangCTPM.getValueAt(selectedRow, 4).toString());
         txtTienPhat.setText(tblBangCTPM.getValueAt(selectedRow, 5).toString());
-        if (checkTienPhat(txtNgayTra, txtNgayThucTra)) {
-            txtTienPhat.setText(tienPhat + "");
-        }
     }//GEN-LAST:event_tblBangCTPMMouseClicked
 
     private void btnTraSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTraSachActionPerformed
@@ -676,6 +806,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             daoKH.updateTruSLMuon(txtMaKH.getText());
             if (tblBangCTPM.getRowCount() == 0) {
                 updateTrangThai();
+                tabs.setSelectedIndex(0);
             }
         } else {
             XMgsbox.alert(this, "Bạn phải chọn sách trươc khí trả");
@@ -701,7 +832,31 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
     private void cboTinhTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhTrangActionPerformed
         // TODO add your handling code here:
+        if (checkTienPhat(txtNgayTra, txtNgayThucTra)) {
+            if (cboTinhTrang.getSelectedItem().equals("Mất Sách")) {
+                tienPhat2 = 100000 + tienPhat;
+                txtTienPhat.setText(tienPhat2 + "");
+            } else if (cboTinhTrang.getSelectedItem().equals("Hư Hỏng")) {
+                tienPhat2 = 50000 + tienPhat;
+                txtTienPhat.setText(tienPhat2 + "");
+            } else {
+                tienPhat2 = 0 + tienPhat;
+                txtTienPhat.setText(tienPhat2 + "");
+            }
+        }
     }//GEN-LAST:event_cboTinhTrangActionPerformed
+
+    private void tblBangPhieuTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBangPhieuTraMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBangPhieuTraMouseClicked
+
+    private void txtNgayThucTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayThucTraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayThucTraActionPerformed
+
+    private void txtTienPhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienPhatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienPhatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -754,22 +909,27 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel panel;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblBangCTPM;
     private javax.swing.JTable tblBangPM;
+    private javax.swing.JTable tblBangPhieuTra;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaPM;
     private javax.swing.JTextField txtMaSach;
     private javax.swing.JTextField txtNgayThucTra;
     private javax.swing.JTextField txtNgayTra;
+    private javax.swing.JTextField txtSoTienCoc;
     private javax.swing.JTextField txtTienPhat;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
