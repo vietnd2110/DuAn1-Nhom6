@@ -3,11 +3,13 @@ package com.library.form.kh;
 import com.library.dao.CTPhieuMuonDAO;
 import com.library.dao.KhachHangDAO;
 import com.library.dao.PhieuMuonDAO;
+import com.library.dao.PhieuTraDAO;
 import com.library.dao.SachDAO;
 import com.library.dao.theLoaiDAO;
 import com.library.entity.CTPhieuMuon;
 import com.library.entity.KhachHang;
 import com.library.entity.PhieuMuon;
+import com.library.entity.PhieuTra;
 import com.library.entity.Sach;
 import com.library.entity.TheLoai;
 import com.library.helper.XAuther;
@@ -42,6 +44,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
     SachDAO daoSA = new SachDAO();
     PhieuMuonDAO daoPM = new PhieuMuonDAO();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
+    PhieuTraDAO daoPT = new PhieuTraDAO();
     theLoaiDAO daoTL = new theLoaiDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
     int tongMuon = 0;
@@ -681,6 +684,16 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                                         ctpm.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
                                         ctpm.setTinhTrangSach("Bình Thường");
                                         daoCTPM.insert(ctpm);
+                                    }
+//              Thêm các sách vào Phiếu Trả
+                                    String maPM3 = daoPM.selectTopMaPM();
+                                    for (int i = 0; i < rowCount; i++) {
+                                        PhieuTra pt = new PhieuTra();
+                                        pt.setMaPM(Integer.parseInt(maPM3));
+                                        pt.setMaSach(tblBangSachMuon.getValueAt(i, 0) + "");
+                                        pt.setSoTienCoc(0);
+                                        pt.setTienPhat(0);
+                                        daoPT.insert(pt);
                                     }
                                     updateSLMuon();
                                     gioiHan -= rowCount;
