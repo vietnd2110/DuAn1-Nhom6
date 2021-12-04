@@ -590,6 +590,44 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
             XMgsbox.alert(this, "Không để trống !");
             return false;
         }
+          //check for duplicate code
+        for(Sach x: sDao.selectAll()){
+            if (x.getMaSach().equalsIgnoreCase(txtMaSach.getText())) {
+                XMgsbox.alert(this, "Không để trùng Mã Sách !");
+                txtMaSach.requestFocus();
+                return false;
+            }
+        }
+//        String p_hoten = "[a-zA-Z ]+";
+       String rgxId = "[a-zA-Z0-9]{1,20}";
+       String rgx2 = "^[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝàáâãèéêìíòóôõùúýĂăĐđĨĩŨũƠơƯưẠ-ỹ ]{3,25}$";
+//        String rgxId7kyTu = "[a-zA-Z0-9]{7}";
+        if (txtMaSach.getText().matches(rgxId)==false) {
+            XMgsbox.alert(this, "Mã sách không được để kí tự đặc biệt");
+            txtMaSach.requestFocus();
+            return false;
+        }
+        if (txtTenSAch.getText().matches(rgx2)==false) { 
+            XMgsbox.alert(this, "Tên sách không được để kí tự đặc biệt"); 
+            txtTenSAch.requestFocus();
+            return false;
+        }
+        if (txtTacGia.getText().matches(rgx2)==false) { 
+            XMgsbox.alert(this, "Tác giả không được để kí tự đặc biệt"); 
+            txtTacGia.requestFocus();
+            return false;
+        }
+        
+        if (txtNhaXuatBan.getText().matches(rgx2)==false) { 
+            XMgsbox.alert(this, "NXB không được để kí tự đặc biệt"); 
+            txtNhaXuatBan.requestFocus();
+            return false;
+        }
+        if (txtNoiDat.getText().matches(rgx2)==false) { 
+            XMgsbox.alert(this, "Nơi đặt không được để kí tự đặc biệt"); 
+            txtNoiDat.requestFocus();
+            return false;
+        }
         //check price
         try {
             float money=Float.parseFloat(txtGiaTien.getText());
@@ -602,14 +640,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
             XMgsbox.alert(this, "Giá phải là số");
             return false;
         }
-        //check for duplicate code
-        for(Sach x: sDao.selectAll()){
-            if (x.getMaSach().equalsIgnoreCase(txtMaSach.getText())) {
-                XMgsbox.alert(this, "Không để trùng Mã Sách !");
-                txtMaSach.requestFocus();
-                return false;
-            }
-        }
+      
         Date date=new Date();
         String check=spd.format(date);
         if (txtNamXb.getText().length() ==check.length()) {
