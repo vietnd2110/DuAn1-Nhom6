@@ -79,7 +79,8 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblBangPhieuTra.getModel();
         model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
         try {
-            Integer pm = Integer.parseInt(txtMaPM.getText());
+            int index = tblBangPM.getSelectedRow();
+            Integer pm = Integer.parseInt(tblBangPM.getValueAt(index, 0).toString());
             if (pm != null) {
                 List<PhieuTra> list = daoPT.selectByPM(pm);
                 for (int i = 0; i < list.size(); i++) {
