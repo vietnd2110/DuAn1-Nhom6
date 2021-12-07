@@ -247,6 +247,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             XMgsbox.alert(this, "Cập nhật thành công!");
         } catch (Exception e) {
             XMgsbox.alert(this, "Cập nhật thất bại!");
+            e.printStackTrace();
         }
     }
 
@@ -347,6 +348,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblBangPM = new javax.swing.JTable();
         btnThemPM = new javax.swing.JButton();
+        btnLoadBang = new javax.swing.JButton();
         panel = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -458,6 +460,15 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             }
         });
 
+        btnLoadBang.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        btnLoadBang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Refresh.png"))); // NOI18N
+        btnLoadBang.setText("Load");
+        btnLoadBang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadBangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -469,6 +480,8 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLoadBang)
+                .addGap(59, 59, 59)
                 .addComponent(btnThemPM, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
@@ -479,7 +492,9 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnThemPM)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnThemPM)
+                    .addComponent(btnLoadBang))
                 .addGap(15, 15, 15))
         );
 
@@ -822,6 +837,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             XMgsbox.alert(this, "Bạn chưa nhập mã Phiếu Mượn cần tìm kiếm");
         } else {
             if (!listPM.isEmpty()) {
+                XMgsbox.alert(this, "Tìm Kiếm Thành Công");
                 loadTableTk();
                 txtTimKiem.setText("");
             } else {
@@ -858,6 +874,11 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     private void txtTienPhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienPhatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTienPhatActionPerformed
+
+    private void btnLoadBangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadBangActionPerformed
+        // TODO add your handling code here:
+        fillToTablePM();
+    }//GEN-LAST:event_btnLoadBangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -896,6 +917,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoadBang;
     private javax.swing.JButton btnSuaCTPM;
     private javax.swing.JButton btnThemCTPM;
     private javax.swing.JButton btnThemPM;

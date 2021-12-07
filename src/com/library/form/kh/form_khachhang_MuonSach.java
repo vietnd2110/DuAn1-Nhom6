@@ -125,6 +125,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 XMgsbox.alert(this, "Lỗi truy vấn dữ liệu!");
+                e.printStackTrace();
             }
         }
     }
