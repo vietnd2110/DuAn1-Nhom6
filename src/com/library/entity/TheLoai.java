@@ -32,7 +32,7 @@ public class TheLoai {
 
     @Override
     public String toString() {
-        return maTl;
+        return tenTl;
     }
     
     

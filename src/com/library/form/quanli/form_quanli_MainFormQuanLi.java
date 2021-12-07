@@ -429,10 +429,10 @@ public class form_quanli_MainFormQuanLi extends javax.swing.JFrame {
 
     private void mniTTphatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTTphatActionPerformed
         if (XAuther.isManager()) {
-            XMgsbox.alert(this, "Bạn không có quyền vào phần này");
-        } else {
             form_thongke_TienPhatTheoThang tkt = new form_thongke_TienPhatTheoThang();
             tkt.setVisible(true);
+        } else {     
+            XMgsbox.alert(this, "Bạn không có quyền vào phần này");
         }
     }//GEN-LAST:event_mniTTphatActionPerformed
 
