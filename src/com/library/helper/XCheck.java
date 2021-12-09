@@ -5,6 +5,7 @@
  */
 package com.library.helper;
 
+import java.awt.Color;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import java.text.ParseException;
@@ -105,11 +106,31 @@ public class XCheck {
             return true;
         } else {
             txt.setBackground(pink);
-            XMgsbox.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng dd/MM/yyyy");
+            XMgsbox.alert(txt.getRootPane(), txt.getName() + "Không đúng định dạng dd/MM/yyyy");
+          
             return false;
         }
     }
-
+     public static boolean checkDate2(JTextField txt) {
+        txt.setBackground(white);
+        String id = txt.getText();
+//        String rgx = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
+//        if (id.matches(rgx)) {
+//            return true;
+//        } else {
+//            txt.setBackground(pink);
+//            dialogHelper.alert(txt.getRootPane(), txt.getName() + " không đúng định dạng Date.");
+//            return false;
+//        }
+        if (isValidDate(id)) {
+            return true;
+        } else {
+            txt.setBackground(Color.RED);
+            XMgsbox.alert(null, "Không đúng định dạng dd/MM/yyyy");
+          
+            return false;
+        }
+    }
     //gồm các ký tự chữ đấu cách
     //từ 3-25 kí tự
     public static boolean checkName(JTextField txt) {

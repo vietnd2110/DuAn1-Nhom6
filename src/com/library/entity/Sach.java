@@ -11,11 +11,12 @@ public class Sach {
     private double giaTien;
     private String tacGia;
     private Date namXB;
+    private int soluong;
 
     public Sach() {
     }
 
-    public Sach(String maSach, TheLoai tl, String nXB, String tenSach, String noiDat, double giaTien, String tacGia, Date namXB) {
+    public Sach(String maSach, TheLoai tl, String nXB, String tenSach, String noiDat, double giaTien, String tacGia, Date namXB, int soluong) {
         this.maSach = maSach;
         this.tl = tl;
         this.nXB = nXB;
@@ -24,6 +25,7 @@ public class Sach {
         this.giaTien = giaTien;
         this.tacGia = tacGia;
         this.namXB = namXB;
+        this.soluong = soluong;
     }
 
     public String getMaSach() {
@@ -89,6 +91,15 @@ public class Sach {
     public void setNamXB(Date namXB) {
         this.namXB = namXB;
     }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+   
 
    
    

@@ -5,6 +5,7 @@ import com.library.dao.SachDAO;
 import com.library.dao.theLoaiDAO;
 import com.library.entity.TheLoai;
 import com.library.entity.Sach;
+import com.library.helper.XCheck;
 import com.library.helper.XImages;
 import com.library.helper.XJdbc;
 import com.library.helper.XMgsbox;
@@ -24,7 +25,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
 
     DefaultTableModel mol=new DefaultTableModel();
     DefaultComboBoxModel<TheLoai> cbo_model=new DefaultComboBoxModel<>();
-    SimpleDateFormat spd=new SimpleDateFormat("dd-MM-yyyy");//Đổi yyyy-MM-dd -> dd-MM-yyyy
+    SimpleDateFormat spd=new SimpleDateFormat("dd/MM/yyyy");//Đổi yyyy-MM-dd -> dd-MM-yyyy
     SachDAO sDao=new SachDAO();
     theLoaiDAO tlDao=new theLoaiDAO();
     int index;
@@ -36,7 +37,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         cbo_model=(DefaultComboBoxModel)cboMaTl.getModel();//Combo box
         
         mol=(DefaultTableModel)tblSach.getModel();
-        String []col={"Mã sách","Mã TL","Nhà XB","Tên sách","Nơi đặt","Giá tiền","Tác giả","Năm XB"};
+        String []col={"Mã sách","Mã TL","Nhà XB","Tên sách","Nơi đặt","Giá tiền","Tác giả","Năm XB","Số lượng"};
         for (String x : col) {
             mol.addColumn(x);
         }
@@ -86,6 +87,8 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         tblSach = new javax.swing.JTable();
         lblMatl = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtSL = new javax.swing.JTextField();
 
         jInternalFrame1.setVisible(true);
 
@@ -243,6 +246,9 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
         jLabel11.setText("Tên thể loại");
 
+        jLabel12.setFont(new java.awt.Font("Bahnschrift", 0, 13)); // NOI18N
+        jLabel12.setText("Số lượng");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -259,10 +265,8 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5))
-                                        .addGap(33, 33, 33))
+                                        .addComponent(jLabel5)
+                                        .addGap(62, 62, 62))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addGap(65, 65, 65)))
@@ -276,41 +280,43 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                             .addComponent(cboMaTl, 0, 189, Short.MAX_VALUE)
                             .addComponent(txtMaSach)
                             .addComponent(txtTenSAch)
-                            .addComponent(txtNamXb)
-                            .addComponent(lblMatl))))
+                            .addComponent(lblMatl)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(33, 33, 33)
+                        .addComponent(txtNamXb)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(232, 232, 232)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(43, 43, 43)
-                                    .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(79, 79, 79)
-                                    .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel12)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(334, 334, 334)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNoiDat, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(268, 268, 268))
+                                        .addComponent(jLabel7)
+                                        .addGap(88, 88, 88)
+                                        .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(31, 31, 31)
-                                        .addComponent(btnFix, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addGap(76, 76, 76)
-                                    .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                                        .addComponent(btnFix, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtSL, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                        .addComponent(txtGiaTien, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                        .addComponent(txtNoiDat, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
+                                .addGap(103, 103, 103))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,22 +329,17 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel1)))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(cboMaTl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(txtMaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cboMaTl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMatl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,25 +348,37 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtTenSAch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                            .addComponent(jLabel6)
+                            .addComponent(txtNamXb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtNoiDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtNamXb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                            .addComponent(txtTacGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtNhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtGiaTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(txtNoiDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel9)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel10)
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(txtSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFix, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -506,7 +519,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                 row=i;
             }
             mol.addRow(new Object[]{x.getMaSach(),x.getTl().getMaTl(),x.getnXB(),x.getTenSach(),x.getNoiDat(),
-            x.getGiaTien(),x.getTacGia(),formatDate(x.getNamXB())});
+            x.getGiaTien(),x.getTacGia(),formatDate(x.getNamXB()),x.getSoluong()});
            i++;
         }
         return row;
@@ -530,7 +543,8 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
                 float giaTien=rs.getFloat(6);
                 String tg=rs.getString(7);
                 Date namxb=rs.getDate(8);
-                mol.addRow(new Object[]{ms,mtl,nxb,tensach,noiDat,giaTien,tg,namxb});
+                int sl=rs.getInt(9);
+                mol.addRow(new Object[]{ms,mtl,nxb,tensach,noiDat,giaTien,tg,namxb,sl});
             }
             if (mol.getRowCount()>0) {
                 index=0;
@@ -553,6 +567,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         txtGiaTien.setText(mol.getValueAt(index, 5)+"");
         txtTacGia.setText(mol.getValueAt(index, 6)+"");
         txtNamXb.setText(mol.getValueAt(index, 7)+"");
+        txtSL.setText(mol.getValueAt(index, 8)+"");
     }
     void clickCbo(){
          try {
@@ -578,6 +593,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         s.setGiaTien(Float.parseFloat(txtGiaTien.getText()));
         s.setTacGia(txtTacGia.getText());
         s.setNamXB(spd.parse(txtNamXb.getText()));
+        s.setSoluong(Integer.parseInt(txtSL.getText()));
         return s;
     }
     //check for add
@@ -586,6 +602,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         if (txtMaSach.getText().isEmpty() || txtNhaXuatBan.getText().isEmpty() ||
             txtTenSAch.getText().isEmpty() || txtNoiDat.getText().isEmpty() || 
             txtGiaTien.getText().isEmpty() ||txtTacGia.getText().isEmpty() || txtNamXb.getText().isEmpty()
+            || txtSL.getText().isEmpty()
             ) {
             XMgsbox.alert(this, "Không để trống !");
             return false;
@@ -628,11 +645,24 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
             txtNoiDat.requestFocus();
             return false;
         }
+         try {
+            int sl=Integer.parseInt(txtSL.getText());
+            if (sl<0) {
+                XMgsbox.alert(this, "Số lượng phải lớn hơn 0 !");
+                txtSL.requestFocus();
+                return false;
+            }
+        } catch (Exception e) {
+            XMgsbox.alert(this, "Số lượng phải là số");
+            txtSL.requestFocus();
+            return false;
+        }
         //check price
         try {
             float money=Float.parseFloat(txtGiaTien.getText());
             if (money<0) {
-                XMgsbox.alert(this, "Giá phải lớn hơn 0 !");
+                XMgsbox.alert(this, "Giá phải "
+                        + "lớn hơn 0 !");
                 txtGiaTien.requestFocus();
                 return false;
             }
@@ -640,15 +670,21 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
             XMgsbox.alert(this, "Giá phải là số");
             return false;
         }
-      
-        Date date=new Date();
-        String check=spd.format(date);
-        if (txtNamXb.getText().length() ==check.length()) {
+        if (XCheck.checkDate2(txtNamXb)) {
             return true;
         }else{
-            XMgsbox.alert(this, "Năm Xuất Bản sai định dạng: dd-MM-yyyy hoặc yyyy-MM-dd");
+            txtNamXb.requestFocus();
             return false;
         }
+      
+//        Date date=new Date();
+//        String check=spd.format(date);
+//        if (txtNamXb.getText().length() ==check.length()) {
+//            return true;
+//        }else{
+//            XMgsbox.alert(this, "Năm Xuất Bản sai định dạng: dd/MM/yyyy");
+//            return false;
+//        }
     }
     //check for update
     boolean checkForUpdate(){
@@ -657,6 +693,17 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
             txtGiaTien.getText().isEmpty() ||txtTacGia.getText().isEmpty() || txtNamXb.getText().isEmpty()
             ) {
             XMgsbox.alert(this, "Không để trống !");
+            return false;
+        }
+        try {
+            int sl=Integer.parseInt(txtSL.getText());
+            if (sl<0) {
+                XMgsbox.alert(this, "Số lượng phải lớn hơn 0 !");
+                txtSL.requestFocus();
+                return false;
+            }
+        } catch (Exception e) {
+            XMgsbox.alert(this, "Số lượng phải là số");
             return false;
         }
         //check price
@@ -677,7 +724,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
         if (txtNamXb.getText().length() ==check.length()) {
             return true;
         }else{
-            XMgsbox.alert(this, "Năm Xuất Bản sai định dạng: dd-MM-yyyy hoặc yyyy-MM-dd");
+            XMgsbox.alert(this, "Năm Xuất Bản sai định dạng: dd/MM/yyyy");
             return false;
         }
     }
@@ -692,6 +739,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -712,6 +760,7 @@ public class form_quanli_QuanLiSachTaiLieu extends javax.swing.JFrame {
     private javax.swing.JTextField txtNamXb;
     private javax.swing.JTextField txtNhaXuatBan;
     private javax.swing.JTextField txtNoiDat;
+    private javax.swing.JTextField txtSL;
     private javax.swing.JTextField txtTacGia;
     private javax.swing.JTextField txtTenSAch;
     // End of variables declaration//GEN-END:variables
