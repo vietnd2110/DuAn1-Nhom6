@@ -12,8 +12,9 @@ import java.util.List;
 
 public class SachDAO extends LibraryDAO<Sach, String> {
 
-    final String insert_SQL = "insert into SACH (MaSach, MaTL, NXB, TenSach, NoiDat, GiaTien, TacGia, NamXB) values (?, ?, ?, ?, ?, ?, ?, ?)";
-    final String update_SQL = "update SACH set MaTL = ?, NXB = ?, TenSach = ?, NoiDat = ?, GiaTien = ?, TacGia = ?, NamXB = ? where MaSach = ?";
+    final String insert_SQL = "insert into SACH (MaSach, MaTL, NXB, TenSach, NoiDat, GiaTien, TacGia, NamXB,SOLUONG) values (?, ?, ?, ?, ?, ?, ?,?,?)";
+    final String update_SQL = "update SACH set MaTL = ?, NXB = ?, TenSach = ?, NoiDat = ?, GiaTien = ?,"
+            + " TacGia = ?, NamXB = ?, SOLUONG = ? where MaSach = ?";
     final String select_All_SQL = "select * from SACH";
     final String select_ByID_SQL = "select * from SACH where MaSach = ?";
     final String select_ByMaTL = "select * from SACH where MaTL = ?";
@@ -22,13 +23,13 @@ public class SachDAO extends LibraryDAO<Sach, String> {
     @Override
     public void insert(Sach entity) {
         XJdbc.update(insert_SQL, entity.getMaSach(), entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB());
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getSoluong());
     }
 
     @Override
     public void update(Sach entity) {
         XJdbc.update(update_SQL, entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(), entity.getMaSach());
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getSoluong(), entity.getMaSach());
     }
 
     @Override
@@ -59,7 +60,8 @@ public class SachDAO extends LibraryDAO<Sach, String> {
                 Double giaTien = rs.getDouble(6);
                 String tacGia = rs.getString(7);
                 Date namXB = rs.getDate(8);
-                listSach.add(new Sach(maSach, new TheLoai(maTL, ""), nXB, tenSach, noiDat, giaTien, tacGia, namXB));
+                int soluong=rs.getInt(9);
+                listSach.add(new Sach(maSach, new TheLoai(maTL, ""), nXB, tenSach, noiDat, giaTien, tacGia, namXB,soluong));
             }
         } catch (Exception e) {
         }
@@ -85,6 +87,7 @@ public class SachDAO extends LibraryDAO<Sach, String> {
                 s.setGiaTien(rs.getFloat(6));
                 s.setTacGia(rs.getString(7));
                 s.setNamXB(rs.getDate(8));
+                s.setSoluong(9);
                 return s;
             }
 
