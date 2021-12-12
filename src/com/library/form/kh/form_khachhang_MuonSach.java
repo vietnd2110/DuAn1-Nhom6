@@ -24,7 +24,6 @@ import static java.awt.Color.white;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -35,7 +34,6 @@ import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import javax.xml.crypto.Data;
 
 public class form_khachhang_MuonSach extends javax.swing.JFrame {
 
@@ -62,7 +60,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         // bảng 1
         mol.setColumnCount(0);
         mol = (DefaultTableModel) tblBangSach.getModel();
-        String col[] = {"Mã sách", "Tên sách", "Tác giả", "Thể loại", "Năm XB", "NXB", "Giá tiền", "Nơi đặt"};
+        String col[] = {"Mã sách", "Tên sách", "Tác giả", "Năm XB", "NXB", "Giá tiền", "Nơi đặt", "Số Lượng"};
         for (String x : col) {
             mol.addColumn(x);
         }
@@ -70,7 +68,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         //Bảng 2
         mol2.setColumnCount(0);
         mol2 = (DefaultTableModel) tblBangSachMuon.getModel();
-        String col2[] = {"Mã sách", "Tên sách", "Tác giả", "Thể loại", "Năm XB", "NXB", "Giá tiền", "Nơi đặt"};
+        String col2[] = {"Mã sách", "Tên sách", "Tác giả", "Năm XB", "NXB", "Giá tiền", "Nơi đặt"};
         for (String y : col2) {
             mol2.addColumn(y);
         }
@@ -115,11 +113,11 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                         sa.getMaSach(),
                         sa.getTenSach(),
                         sa.getTacGia(),
-                        sa.getTl(),
-                        sa.getNamXB(),
+                        XDate.toString(sa.getNamXB()),
                         sa.getnXB(),
                         sa.getGiaTien(),
-                        sa.getNoiDat()
+                        sa.getNoiDat(),
+                        sa.getSoluong()
                     };
                     model.addRow(row); //them 1 hang vao table
                 }
@@ -140,11 +138,11 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                     sa.getMaSach(),
                     sa.getTenSach(),
                     sa.getTacGia(),
-                    sa.getTl(),
                     XDate.toString(sa.getNamXB()),
                     sa.getnXB(),
                     sa.getGiaTien(),
-                    sa.getNoiDat()
+                    sa.getNoiDat(),
+                    sa.getSoluong()
                 };
                 model.addRow(row); //them 1 hang vao table
             }
@@ -185,7 +183,6 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                 sa.getMaSach(),
                 sa.getTenSach(),
                 sa.getTacGia(),
-                sa.getTl(),
                 XDate.toString(sa.getNamXB()),
                 sa.getnXB(),
                 sa.getGiaTien(),
@@ -244,6 +241,24 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         }
         return true;
     }
+    
+    public boolean checkSoLuongSach(String maSach) {
+        String sql = "select SOLUONG from SACH where MASACH like '%" + maSach + "%'";
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int result = Integer.parseInt(rs.getString("SOLUONG"));
+                if (result == 0) {
+                    return false;
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return true;
+    }
 
     KhachHang getForm() {
         KhachHang kh = new KhachHang();
@@ -272,7 +287,6 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                 sa.getMaSach(),
                 sa.getTenSach(),
                 sa.getTacGia(),
-                sa.getTl(),
                 XDate.toString(sa.getNamXB()),
                 sa.getnXB(),
                 sa.getGiaTien(),
@@ -281,7 +295,6 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -627,21 +640,33 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         sa.setMaSach(tblBangSach.getValueAt(index, 0) + "");
         sa.setTenSach(tblBangSach.getValueAt(index, 1) + "");
         sa.setTacGia(tblBangSach.getValueAt(index, 2) + "");
-        sa.setTl((TheLoai) tblBangSach.getValueAt(index, 3));
-        sa.setNamXB(XDate.toDate(tblBangSach.getValueAt(index, 4) + ""));
-        sa.setnXB(tblBangSach.getValueAt(index, 5) + "");
-        sa.setGiaTien(Float.parseFloat(tblBangSach.getValueAt(index, 6) + ""));
-        sa.setNoiDat(tblBangSach.getValueAt(index, 7) + "");
-        addDSMuon(sa);
+        sa.setNamXB(XDate.toDate(tblBangSach.getValueAt(index, 3) + ""));
+        sa.setnXB(tblBangSach.getValueAt(index, 4) + "");
+        sa.setGiaTien(Float.parseFloat(tblBangSach.getValueAt(index, 5) + ""));
+        sa.setNoiDat(tblBangSach.getValueAt(index, 6) + "");
+        
+        String maSach = tblBangSach.getValueAt(index, 0) + "";
+        if (checkSoLuongSach(maSach) == true) {
+            addDSMuon(sa);
+            daoSA.updateTruSLSach(maSach);
+            fillTableCboTL();
+        } else {
+            XMgsbox.alert(this, "Loại Sách Tài Liệu này hiện không còn trong thư viện!\n"
+                    + " Vui Lòng chọn các cuốn sách khác để mượn.");
+        }
+        
     }//GEN-LAST:event_btnMuonSachActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         int row = tblBangSachMuon.getSelectedRow();
+        String maSach = tblBangSachMuon.getValueAt(row, 0) + "";
         if (row == -1) {
             XMgsbox.alert(this, "Bạn Phải Chọn Một Cuốn Sách Để Xóa");
         } else {
             mol2.removeRow(row);
+            daoSA.updateSLSach(maSach);
+            fillTableCboTL();
         }
         setTongMuon();
     }//GEN-LAST:event_btnXoaActionPerformed
@@ -649,19 +674,23 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
         // TODO add your handling code here:
         if (tblBangSachMuon.getRowCount() == 0) {
-            XMgsbox.alert(this, "Bạng Sách Mượn Đang Trống! Vui lòng mượn sách để xác nhận mượn");
+            XMgsbox.alert(this, "Bảng Sách Mượn Đang Trống!\n"
+                    + " Vui lòng mượn sách để xác nhận mượn");
         } else {
             if (XCheck.checkNullText(txtNgayTra)) {
                 if (XCheck.checkDate(txtNgayTra)) {
                     if (check14Ngay(txtNgayMuon, txtNgayTra) == true) {
                         if (checkNgayTra(txtNgayMuon, txtNgayTra) == true) {
                             if (tongMuon == 0) {
-                                XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                                XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách!\n"
+                                        + " Vui Lòng Trả Sách Để Tiếp Tục Mượn");
                             } else if (tongMuon > gioiHan) {
                                 if (gioiHan == 0) {
-                                    XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách! Vui Lòng Trả Sách Để Tiếp Tục Mượn");
+                                    XMgsbox.alert(this, "Bạn Đã Hết Số Lượt Mượt Sách!\n"
+                                            + " Vui Lòng Trả Sách Để Tiếp Tục Mượn");
                                 } else {
-                                    XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép! Vui Lòng Xóa Bớt Sách Để Mượn");
+                                    XMgsbox.alert(this, "Số Sách Mượn Vượt Quá Số Lượt Cho Phép!\n"
+                                            + " Vui Lòng Xóa Bớt Sách Để Mượn");
                                 }
                             } else {
                                 String maPM = daoPM.selectTopMaPM();
@@ -699,7 +728,8 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
                                     updateSLMuon();
                                     gioiHan -= rowCount;
                                     lblGioiHan.setText(String.valueOf(gioiHan));
-                                    XMgsbox.alert(this, "Mượn Sách Thành Công! Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
+                                    XMgsbox.alert(this, "Mượn Sách Thành Công!\n"
+                                            + " Mời Bạn Đến Thư Viện Trong Thời Gian Sớm Nhất Để Được Mượn Sách");
                                     mol2.setRowCount(0);
                                     txtNgayTra.setText("");
                                     setTongMuon();
@@ -722,6 +752,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
             XMgsbox.alert(this, "Bạn chưa nhập tên Sách cần tìm kiếm");
         } else {
             if (!listPM.isEmpty()) {
+                XMgsbox.alert(this, "Tìm thành công!");
                 loadTableTk();
                 txtTimKiem.setText("");
             } else {

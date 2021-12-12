@@ -9,19 +9,19 @@ public class CTPhieuMuon {
     private Date ngayThucTra;
     private String tinhTrangSach;
     private float tienPhat;
+    private String ghiChu;
 
     public CTPhieuMuon() {
     }
 
-    public CTPhieuMuon(int maPM, String maSach, Date ngayThucTra, String tinhTrangSach, float tienPhat) {
+    public CTPhieuMuon(int maPM, String maSach, Date ngayThucTra, String tinhTrangSach, float tienPhat, String ghiChu) {
         this.maPM = maPM;
         this.maSach = maSach;
         this.ngayThucTra = ngayThucTra;
         this.tinhTrangSach = tinhTrangSach;
         this.tienPhat = tienPhat;
+        this.ghiChu = ghiChu;
     }
-
-    
 
     public int getMaPM() {
         return maPM;
@@ -62,4 +62,13 @@ public class CTPhieuMuon {
     public void setTienPhat(float tienPhat) {
         this.tienPhat = tienPhat;
     }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+    
 }

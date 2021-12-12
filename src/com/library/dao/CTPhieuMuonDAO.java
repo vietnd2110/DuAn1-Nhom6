@@ -11,8 +11,8 @@ import java.util.List;
 
 public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
 
-    final String INSERT_SQL = "insert into CTPHIEUMUON values(?,?,?,?,?)";
-    final String UPDATE_SQL = "update CTPHIEUMUON set TINHTRANGSACH=?, TIENPHAT=?,NGAYTHUCTRA=? where MAPM=? and MASACH=?";
+    final String INSERT_SQL = "insert into CTPHIEUMUON values(?,?,?,?,?,?)";
+    final String UPDATE_SQL = "update CTPHIEUMUON set TINHTRANGSACH=?, TIENPHAT=?,NGAYTHUCTRA=?, GHICHU=? where MAPM=? and MASACH=?";
     final String SELECT_ALL_SQL = "select *from CTPHIEUMUON";
     final String SELECT_BY_ID_SQL = "select *from CTPHIEUMUON where MAPM=?";
     final String delete_SQL = "delete from CTPHIEUMUON where MAPM=? and MASACH=?";
@@ -20,12 +20,12 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
 
     @Override
     public void insert(CTPhieuMuon ctpm) {
-        XJdbc.update(INSERT_SQL, ctpm.getMaPM(), ctpm.getMaSach(), ctpm.getTinhTrangSach(), ctpm.getTienPhat(), ctpm.getNgayThucTra());
+        XJdbc.update(INSERT_SQL, ctpm.getMaPM(), ctpm.getMaSach(), ctpm.getTinhTrangSach(), ctpm.getTienPhat(), ctpm.getNgayThucTra(), ctpm.getGhiChu());
     }
 
     @Override
     public void update(CTPhieuMuon ctpm) {
-        XJdbc.update(UPDATE_SQL, ctpm.getTinhTrangSach(), ctpm.getTienPhat(),ctpm.getNgayThucTra(),  ctpm.getMaPM(), ctpm.getMaSach());
+        XJdbc.update(UPDATE_SQL, ctpm.getTinhTrangSach(), ctpm.getTienPhat(),ctpm.getNgayThucTra(), ctpm.getGhiChu(), ctpm.getMaPM(), ctpm.getMaSach());
     }
 
     @Override
@@ -54,6 +54,7 @@ public class CTPhieuMuonDAO extends LibraryDAO<CTPhieuMuon, Integer>{
                 c.setTinhTrangSach(rs.getString(3));
                 c.setTienPhat(rs.getFloat(4));
                 c.setNgayThucTra(rs.getDate(5));
+                c.setGhiChu(rs.getString(6));
                 list.add(c);
             }
         } catch (Exception e) {
