@@ -19,17 +19,19 @@ public class SachDAO extends LibraryDAO<Sach, String> {
     final String select_ByID_SQL = "select * from SACH where MaSach = ?";
     final String select_ByMaTL = "select * from SACH where MaTL = ?";
     final String select_ByTenSach = "select * from SACH where TenSach = ?";
+    final String update_SoLuong = "update SACH set SOLUONG = SOLUONG + 1 where MASACH = ?";
+    final String update_TruSoLuong = "update SACH set SOLUONG = SOLUONG - 1 where MASACH = ?";  
 
     @Override
     public void insert(Sach entity) {
         XJdbc.update(insert_SQL, entity.getMaSach(), entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getSoluong());
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(), entity.getSoluong());
     }
 
     @Override
     public void update(Sach entity) {
         XJdbc.update(update_SQL, entity.getTl().getMaTl(), entity.getnXB(), entity.getTenSach(), entity.getNoiDat(),
-                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(),entity.getSoluong(), entity.getMaSach());
+                entity.getGiaTien(), entity.getTacGia(), entity.getNamXB(), entity.getSoluong(), entity.getMaSach());
     }
 
     @Override
@@ -60,8 +62,8 @@ public class SachDAO extends LibraryDAO<Sach, String> {
                 Double giaTien = rs.getDouble(6);
                 String tacGia = rs.getString(7);
                 Date namXB = rs.getDate(8);
-                int soluong=rs.getInt(9);
-                listSach.add(new Sach(maSach, new TheLoai(maTL, ""), nXB, tenSach, noiDat, giaTien, tacGia, namXB,soluong));
+                int soluong = rs.getInt(9);
+                listSach.add(new Sach(maSach, new TheLoai(maTL, ""), nXB, tenSach, noiDat, giaTien, tacGia, namXB, soluong));
             }
         } catch (Exception e) {
         }
@@ -103,5 +105,13 @@ public class SachDAO extends LibraryDAO<Sach, String> {
 
     public List<Sach> timKiemSach(String tenSach) {
         return selectBySQL(select_ByTenSach, tenSach);
+    }
+
+    public void updateSLSach(String maSach) {
+        XJdbc.update(update_SoLuong, maSach);
+    }
+
+    public void updateTruSLSach(String maSach) {
+        XJdbc.update(update_TruSoLuong, maSach);
     }
 }

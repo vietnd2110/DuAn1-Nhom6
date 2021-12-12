@@ -4,10 +4,10 @@ import com.library.dao.CTPhieuMuonDAO;
 import com.library.dao.KhachHangDAO;
 import com.library.dao.PhieuMuonDAO;
 import com.library.dao.PhieuTraDAO;
+import com.library.dao.SachDAO;
 import com.library.entity.CTPhieuMuon;
 import com.library.entity.PhieuMuon;
 import com.library.entity.PhieuTra;
-import com.library.entity.Sach;
 import com.library.helper.XCheck;
 import com.library.helper.XDate;
 import com.library.helper.XImages;
@@ -30,6 +30,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     DefaultTableModel mol3 = new DefaultTableModel();
     PhieuMuonDAO daoPM = new PhieuMuonDAO();
     PhieuTraDAO daoPT = new PhieuTraDAO();
+    SachDAO daoSA = new SachDAO();
     CTPhieuMuonDAO daoCTPM = new CTPhieuMuonDAO();
     KhachHangDAO daoKH = new KhachHangDAO();
     int index;
@@ -51,7 +52,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         //table 2
         mol_2.setColumnCount(0);
         mol_2 = (DefaultTableModel) tblBangCTPM.getModel();
-        String[] col2 = {"STT", "Mã PM", "Mã Sách", "Ngày thực trả", "Tình trạng sách", "Tiền phạt"};
+        String[] col2 = {"STT", "Mã PM", "Mã Sách", "Ngày thực trả", "Tình trạng sách", "Tiền phạt", "Ghi Chú"};
         for (String x : col2) {
             mol_2.addColumn(x);
         }
@@ -79,7 +80,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblBangPhieuTra.getModel();
         model.setRowCount(0);   //đưa số dòng về 0 (xóa bảng)
         try {
-            int index  = tblBangPM.getSelectedRow();
+            int index = tblBangPM.getSelectedRow();
             Integer pm = Integer.parseInt(tblBangPM.getValueAt(index, 0).toString());
             if (pm != null) {
                 List<PhieuTra> list = daoPT.selectByPM(pm);
@@ -118,7 +119,8 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                         ctpm.getMaSach(),
                         XDate.toString(ctpm.getNgayThucTra()),
                         ctpm.getTinhTrangSach(),
-                        ctpm.getTienPhat()
+                        ctpm.getTienPhat(),
+                        ctpm.getGhiChu()
                     };
                     model.addRow(row);
                 }
@@ -170,8 +172,17 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         ctpm.setMaPM(Integer.parseInt(txtMaPM.getText()));
         ctpm.setMaSach(txtMaSach.getText());
         ctpm.setTinhTrangSach(cboTinhTrang.getSelectedItem() + "");
+        return ctpm;
+    }
+    
+    CTPhieuMuon getFormUpdateCTPM() {
+        CTPhieuMuon ctpm = new CTPhieuMuon();
+        ctpm.setMaPM(Integer.parseInt(txtMaPM.getText()));
+        ctpm.setMaSach(txtMaSach.getText());
+        ctpm.setTinhTrangSach(cboTinhTrang.getSelectedItem() + "");
         ctpm.setNgayThucTra(XDate.toDate(txtNgayThucTra.getText()));
         ctpm.setTienPhat(Float.parseFloat(txtTienPhat.getText()));
+        ctpm.setGhiChu(txtGhiChu.getText());
         return ctpm;
     }
 
@@ -240,7 +251,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     }
 
     void updateCTPM() {
-        CTPhieuMuon ctpm = getFormCTPM();
+        CTPhieuMuon ctpm = getFormUpdateCTPM();
         try {
             daoCTPM.update(ctpm);
             this.fillToTableCTPM();    //cập nhật lại bảng pm
@@ -332,6 +343,24 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         }
     }
 
+    public boolean checkSoLuongSach(String maSach) {
+        String sql = "select SOLUONG from SACH where MASACH like '%" + maSach + "%'";
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int result = Integer.parseInt(rs.getString("SOLUONG"));
+                if (result == 0) {
+                    return false;
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return true;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -371,6 +400,8 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txtSoTienCoc = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtGhiChu = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblBangPhieuTra = new javax.swing.JTable();
@@ -597,6 +628,9 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
 
         txtSoTienCoc.setEnabled(false);
 
+        jLabel18.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel18.setText("Ghi Chú");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -638,14 +672,15 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel14)
-                                            .addComponent(jLabel13))
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel18))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtNgayThucTra, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cboTinhTrang, javax.swing.GroupLayout.Alignment.LEADING, 0, 229, Short.MAX_VALUE)))))))
+                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtTienPhat, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                                            .addComponent(txtNgayThucTra)
+                                            .addComponent(txtNgayTra)
+                                            .addComponent(cboTinhTrang, 0, 229, Short.MAX_VALUE)
+                                            .addComponent(txtGhiChu))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -676,7 +711,11 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                     .addComponent(txtTienPhat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
                     .addComponent(txtSoTienCoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThemCTPM)
                     .addComponent(btnSuaCTPM)
@@ -758,7 +797,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
                 }
             }
         } else if (click.equalsIgnoreCase("Chưa Duyệt")) {
-            XMgsbox.alert(this, "Phiếu Mượn phải được nhân viên phê duyệt mới được mượn sách");
+            XMgsbox.alert(this, "Phiếu Mượn Này Chưa Được Phê Duyệt");
             return;
         } else {
             if (evt.getClickCount() == 1) {
@@ -776,9 +815,15 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
         if (XCheck.checkNullText(txtMaSach)) {
             if (XCheck.checkMaNV(txtMaSach)) {
                 if (checkSoLuongMuonWithCTPM(txtMaPM.getText()) == true) {
-                    daoKH.updateSLMuon(txtMaKH.getText());
-                    insertCTPM();
-                    insertPTra();
+                    if (checkSoLuongSach(txtMaSach.getText()) == true) {
+                        daoKH.updateSLMuon(txtMaKH.getText());
+                        daoSA.updateTruSLSach(txtMaSach.getText());
+                        insertCTPM();
+                        insertPTra();
+                    }else {
+                        XMgsbox.alert(this, "Loại Sách, Tài Liệu này hiện không còn trong thư viện!\n"
+                    + " Vui Lòng chọn các cuốn sách khác để mượn.");
+                    }
                 } else {
                     XMgsbox.alert(this, "Mỗi Khách Hàng Chỉ Được Mượn Tối Đa 3 Quyển Sách");
                 }
@@ -789,7 +834,8 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     private void btnSuaCTPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCTPMActionPerformed
         // TODO add your handling code here:
         if (XCheck.checkNullText(txtMaSach)
-                && XCheck.checkNullText(txtNgayThucTra)) {
+                && XCheck.checkNullText(txtNgayThucTra)
+                && XCheck.checkNullText(txtGhiChu)) {
             if (XCheck.checkMaNV(txtMaSach)
                     && XCheck.checkDate(txtNgayThucTra)) {
                 this.updateCTPM();
@@ -822,6 +868,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
             daoKH.updateTruSLMuon(txtMaKH.getText());
             if (tblBangCTPM.getRowCount() == 0) {
                 updateTrangThai();
+                daoSA.updateSLSach(txtMaSach.getText());
                 tabs.setSelectedIndex(0);
             }
         } else {
@@ -933,6 +980,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -947,6 +995,7 @@ public class form_quanli_QuanLiMuonTraSach extends javax.swing.JFrame {
     private javax.swing.JTable tblBangCTPM;
     private javax.swing.JTable tblBangPM;
     private javax.swing.JTable tblBangPhieuTra;
+    private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaPM;
     private javax.swing.JTextField txtMaSach;

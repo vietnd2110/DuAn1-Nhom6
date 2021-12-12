@@ -17,7 +17,7 @@ import java.util.List;
  * @author Lenovo
  */
 public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
-    
+
     final String insert_SQL = "insert into KhachHang (maKH, tenKH, matKhau, gioiTinh, NgaySinh, SDT, email, diaChi, maNV, trangThai, SOLUONGMUON) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     final String update_SQL = "update KhachHang set tenKH = ?, matKhau = ?, gioiTinh = ?, NgaySinh = ?, SDT = ?, email = ?, diaChi = ?, maNV = ?, trangThai = ? where maKH = ?";
     final String select_All_SQL = "select * from KhachHang";
@@ -26,19 +26,20 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
     final String update_SoLuongMuon = "update KHACHHANG set SOLUONGMUON = SOLUONGMUON + 1 where MAKH = ?";
     final String update_TruSoLuongMuon = "update KHACHHANG set SOLUONGMUON = SOLUONGMUON - 1 where MAKH = ?";
     final String update_SoLuongMuon2 = "update KHACHHANG set SOLUONGMUON =  ? where MAKH = ?";
+    
 
     @Override
     public void insert(KhachHang entity) {
-        XJdbc.update(insert_SQL, entity.getMaKH(), entity.getTenKH(), entity.getMatKhau(), 
-                entity.getGioiTinh(), entity.getNgaySinh(), entity.getSdt(), entity.getEmail(), 
+        XJdbc.update(insert_SQL, entity.getMaKH(), entity.getTenKH(), entity.getMatKhau(),
+                entity.getGioiTinh(), entity.getNgaySinh(), entity.getSdt(), entity.getEmail(),
                 entity.getDiaChi(), entity.getMaNV(), entity.getTrangThai(), entity.getSoLuongMuon());
     }
 
     @Override
     public void update(KhachHang entity) {
-        XJdbc.update(update_SQL, entity.getTenKH(), entity.getMatKhau(), 
-                entity.getGioiTinh(), entity.getNgaySinh(), entity.getSdt(), entity.getEmail(), 
-                entity.getDiaChi(), entity.getMaNV(), entity.getTrangThai(),  entity.getMaKH());
+        XJdbc.update(update_SQL, entity.getTenKH(), entity.getMatKhau(),
+                entity.getGioiTinh(), entity.getNgaySinh(), entity.getSdt(), entity.getEmail(),
+                entity.getDiaChi(), entity.getMaNV(), entity.getTrangThai(), entity.getMaKH());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
         List<KhachHang> listKH = new ArrayList<>();
         try {
             ResultSet rs = XJdbc.query(sql, args);
-            while(rs.next()) {
+            while (rs.next()) {
                 String maKH = rs.getString(1);
                 String tenKH = rs.getString(2);
                 String matKhau = rs.getString(3);
@@ -72,33 +73,34 @@ public class KhachHangDAO extends LibraryDAO<KhachHang, String> {
                 String maNV = rs.getString(9);
                 boolean trangThai = rs.getBoolean(10);
                 int slMuon = rs.getInt(11);
-                
+
                 listKH.add(new KhachHang(maKH, tenKH, matKhau, gioiTinh, ngaySinh, sdt, email, diaChi, maNV, trangThai, slMuon));
             }
         } catch (Exception e) {
         }
         return listKH;
-    } 
-    public List<KhachHang> selectByMakh(String key){
+    }
+
+    public List<KhachHang> selectByMakh(String key) {
         return selectBySQL(select_ByID_SQL, key);
     }
-    
-    public KhachHang selectBySdt(String key){
+
+    public KhachHang selectBySdt(String key) {
         List<KhachHang> list = selectBySQL(select_BySdt, key);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
     }
-    
+
     public void updateSLMuon(String maKH) {
         XJdbc.update(update_SoLuongMuon, maKH);
     }
-    
+
     public void updateTruSLMuon(String maKH) {
         XJdbc.update(update_TruSoLuongMuon, maKH);
     }
-    
+
     public void updateSLMuon2(KhachHang kh) {
         XJdbc.update(update_SoLuongMuon2, kh.getSoLuongMuon(), kh.getMaKH());
     }
