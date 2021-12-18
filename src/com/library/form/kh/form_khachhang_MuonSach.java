@@ -176,21 +176,17 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
     }
 
     public void addDSMuon(Sach sa) {
-        if (ktDSMuon(sa.getMaSach())) {
-            XMgsbox.alert(this, "Sách này đã có trong danh mục sách mượn");
-        } else {
-            mol2.addRow(new Object[]{
-                sa.getMaSach(),
-                sa.getTenSach(),
-                sa.getTacGia(),
-                XDate.toString(sa.getNamXB()),
-                sa.getnXB(),
-                sa.getGiaTien(),
-                sa.getNoiDat()
-            });
-            setTongMuon();
-            XMgsbox.alert(this, "Mượn Sách thành công");
-        }
+        mol2.addRow(new Object[]{
+            sa.getMaSach(),
+            sa.getTenSach(),
+            sa.getTacGia(),
+            XDate.toString(sa.getNamXB()),
+            sa.getnXB(),
+            sa.getGiaTien(),
+            sa.getNoiDat()
+        });
+        setTongMuon();
+
     }
 
     public boolean check14Ngay(JTextField txt, JTextField txt2) {
@@ -241,7 +237,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     public boolean checkSoLuongSach(String maSach) {
         String sql = "select SOLUONG from SACH where MASACH like '%" + maSach + "%'";
         try {
@@ -295,6 +291,7 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
             model.addRow(row);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -644,17 +641,22 @@ public class form_khachhang_MuonSach extends javax.swing.JFrame {
         sa.setnXB(tblBangSach.getValueAt(index, 4) + "");
         sa.setGiaTien(Float.parseFloat(tblBangSach.getValueAt(index, 5) + ""));
         sa.setNoiDat(tblBangSach.getValueAt(index, 6) + "");
-        
+
         String maSach = tblBangSach.getValueAt(index, 0) + "";
         if (checkSoLuongSach(maSach) == true) {
-            addDSMuon(sa);
-            daoSA.updateTruSLSach(maSach);
-            fillTableCboTL();
+            if (ktDSMuon(sa.getMaSach())) {
+                XMgsbox.alert(this, "Sách này đã có trong danh mục sách mượn");
+            } else {
+                XMgsbox.alert(this, "Mượn Sách thành công");
+                addDSMuon(sa);
+                daoSA.updateTruSLSach(maSach);
+                fillTableCboTL();
+            }
         } else {
             XMgsbox.alert(this, "Loại Sách Tài Liệu này hiện không còn trong thư viện!\n"
                     + " Vui Lòng chọn các cuốn sách khác để mượn.");
         }
-        
+
     }//GEN-LAST:event_btnMuonSachActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
