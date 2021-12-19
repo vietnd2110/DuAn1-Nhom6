@@ -48,6 +48,7 @@ public class form_thongke_MuonTraSach extends javax.swing.JFrame {
         cbo_model.addElement("Chọn trạng thái");
         cbo_model.addElement("Chưa duyệt");
         cbo_model.addElement("Chưa trả");
+        cbo_model.addElement("Đã trả");
     }
 
     void fillTable(String index) {
